@@ -1,9 +1,17 @@
 :root {
-	--slidev-code-font-size: 18px;
+	--slidev-code-font-size: 16px;
 }
 
 .slidev-layout {
 	p {
 		font-size: 1.25rem;
+	}
+
+	.col-left {
+		padding-right: 1rem;
+	}
+
+	.col-right {
+		padding-left: 1rem;
 	}
 }
