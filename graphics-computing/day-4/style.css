@@ -1,0 +1,9 @@
+:root {
+	--slidev-code-font-size: 18px;
+}
+
+.slidev-layout {
+	p {
+		font-size: 1.25rem;
+	}
+}
