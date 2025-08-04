@@ -122,7 +122,7 @@ A program which does this is called an *interpreter*
 
 ::right::
 
-```java {*}{maxHeight:'500px'}
+```java {*}{maxHeight:'523px'}
 public class Interp {
     static int PC; // program counter holds address of next instr
     static int AC; // the accumulator, a register for doing arithmetic
@@ -177,7 +177,7 @@ But instruction compatibility requirements and rising cost of software developme
 
 ---
 layout: image-right
-image: ./images/fig3.webp
+image: ./images/img1.webp
 ---
 
 ## IBM and interpreters
@@ -189,19 +189,25 @@ And a family of computers, with different price points and speed that could be p
 This was because of interpretation introduced by Maurice Wilkes
 
 ---
+layout: image-right
+image: ./images/img1.webp
+---
 
 ## IBM and interpreters
 
 Other benefits of interpreted computers are
 
-1. the ability to *hotfix* issues on field which can possible make up for hardware design errors
+1. the ability to *hotfix* issues on field 
 2. the ability to add new instructions at a minimal cost, and 
-3. a better way of developing systems that allowed for easier development, testing, and documentation of complex instructions
+3. easier development, testing, and documentation of complex instructions
 
-This, combined with the increased demand for low-cost computers, complex instruction sets, and the development of faster and faster computers.
+And with the increased demand for low-cost computers, complex instruction sets, and the development of faster and faster computers.
 
 Created a world where the lost performance of an interpreter was negligible compared to the benefits it provided
 
+---
+layout: image-right
+image: ./images/img2.webp
 ---
 
 ## RISC versus CISC
@@ -210,6 +216,9 @@ Programmers and designers tend towards complexity and powerful solutions, and at
 
 But in 1980, a group led by David Patterson and Carlo Sequin began designing VLSI chips that didn't use interpretation. They called this a *Reduced Instruction Set Computer* (RISC), and produced the RISC I followed by the RISC II
 
+---
+layout: image-right
+image: ./images/img2.webp
 ---
 
 ## RISC versus CISC
@@ -234,11 +243,11 @@ Given the current state of hardware, computer designers have found a few design 
 
 1. All instructions are directly executed by the hardware
 
-For CISC computers, this means that instructions should be broken down into smaller steps that can be executed by the hardware
+    For CISC computers, this means that instructions should be broken down into smaller steps that can be executed by the hardware
 
 2. Maximize the rate at which instructions are issued
 
-Start as many instructions as possible
+    Start as many instructions as possible
 
 ---
 
@@ -246,42 +255,147 @@ Start as many instructions as possible
 
 3. Instructions should be easy to decode
 
-Decoding instructions to find what resources they need should be fast and simple
+    Decoding instructions to find what resources they need should be fast and simple
 
 <!-- this usually means fixed length and a small number of fields -->
 
 4. Only loads and stores should reference memory
 
-Every other instruction should operate on registers
+    Every other instruction should operate on registers
 
 5. Provide many registers
 
-Accessing memory is relatively slow, so have many registers
+    Accessing memory is relatively slow, so have many registers
 
+---
+layout: center
 ---
 
 ## Instruction Level Parallelism
+
+Making chips go faster has its limits, so computer designers have turned to parallelism
+
+It comes in two general forms
+1. instruction level parallelism (ILP)
+Where each instruction itself has parallel capabilities TODO
+
+2. process level parallelism (PLP)
+Where multiple CPUs work together on the same problem
 
 ---
 
 ## Pipelining
 
+One of the major bottlenecks in execution speed is fetching instructions from memory. So even from very early one, computers have had the ability to fetch instructions from memory in advance
+
+These were stored in a prefetch buffer, and when needed, would be taken from the buffer instead of memory
+
+Pipelining is this but taken further
+
+So instead of 2 parts, fetch and execute, we can have multiple
+
+<img class="mx-auto rounded" src="./images/fig4.png" alt="Pipelining" style="width: 400px;">
+
+---
+
+## Pipelining
+
+<img class="mx-auto mt-2 rounded" src="./images/fig4.png" alt="Pipelining" style="width: 500px;">
+
+Each of those parts is run by dedicated hardware and is often called *stages*
+
+And they can all run in parallel
+
+> Imagine a cake factory
+
 ---
 
 ## Super scalar architecture
 
+If one pipeline is good, then two should be better
+
+To do this, both instructions being pulled must not conflict over resource usage and must be independent
+
+<img class="mx-auto rounded" src="./images/fig5.png" alt="Super scalar architecture" style="width: 400px;">
+
+This works, and was an effective strategy for increasing performance
+
+But has it's limits, where going up to 4+ pipelines becomes impractical
+
+---
+
+## Super scalar architecture
+
+A *super scalar architecture* is one that has multiple pipelines
+
+And can take the form of multiple pipelines in a U shape
+
+Or machines that can issue multiple instructions per cycle, which is how modern systems generally do it
+
+<img class="mx-auto mt-2 rounded" src="./images/fig6.png" alt="Super scalar architecture" style="width: 500px;">
+
+---
+layout: image-left
+image: ./images/img3.jpg
 ---
 
 ## Processor Level Parallelism
 
+The demand for speed continues to grow, and the speed of CPUs themselves have also been getting faster
+
+To the point where the speed of light and heat becomes their major limiting factor
+
+So a way to design significantly faster computers is to just use multiple CPUs
+
+---
+layout: float-right
+image: ./images/fig7.png
 ---
 
 ## Data parallel computers
 
+Many computational problems can be solved through loops, arrays, and similar calculations performed repeatedly on many different sets of data
+
+So a method called SIMD (Single Instruction Multiple Data) was developed
+
+Where a single instruction is applied to multiple data items in parallel, 
+
+A popular example of a SIMD processor is the GPU, which can perform many operations in parallel
+
+---
+layout: float-right
+image: ./images/fig8.png
 ---
 
 ## Multiprocessors
 
+Data parallel processors are not independent, since there's only one control unit active
+
+The first real parallel system with multiple CPUs is the *multiprocessor*
+
+Where multiple CPUs share the same memory and I/O devices
+
+Here we have 2 ways of implementing a multiprocessor
+
+1. having a single bus connecting all CPUs
+
+2. each CPU having local memory
+
+With multiprocessors having the main advantage of being easy to work with
+
+---
+layout: image-right
+image: ./images/img4.webp
 ---
 
 ## Multicomputers
+
+Finally, we have the *multicomputer*
+
+There is a limit with how many cores you can fit in a single processor
+
+So a multicomputer, multiple computers that communicate over a network was created
+
+They're considered to be *loosely coupled* systems unlike multiprocessors which are *tightly coupled*
+
+While they're limited to the speed of the network, you can scale them to up to 250,000 CPUs which makes up for it
