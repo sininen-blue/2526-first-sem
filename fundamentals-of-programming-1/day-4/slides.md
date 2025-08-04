@@ -358,6 +358,12 @@ else:
         print("This program does not support negative numbers")
 ```
 
+<style>
+code {
+    font-size: 16px;
+}
+</style>
+
 ---
 layout: center
 ---
