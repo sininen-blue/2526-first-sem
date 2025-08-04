@@ -82,7 +82,7 @@ layout: float-right
 image: ./images/fig2.png
 ---
 
-## memory-memory and memory-register instructions
+## Memory-memory and Memory-register instructions
 
 There are two main categories of instructions when talking about registers
 
@@ -122,7 +122,7 @@ A program which does this is called an *interpreter*
 
 ::right::
 
-```java
+```java {*}{maxHeight:'500px'}
 public class Interp {
     static int PC; // program counter holds address of next instr
     static int AC; // the accumulator, a register for doing arithmetic
@@ -152,8 +152,8 @@ public class Interp {
 ```
 
 <style>
-:root {
-	--slidev-code-font-size: 12px;
+code {
+	font-size: 12px !important;
 }
 
 .grid-cols-2 {
@@ -264,10 +264,24 @@ Accessing memory is relatively slow, so have many registers
 
 ---
 
-# Processor Level Parallelism
+## Pipelining
 
 ---
 
-# Multiprocessors
+## Super scalar architecture
 
 ---
+
+## Processor Level Parallelism
+
+---
+
+## Data parallel computers
+
+---
+
+## Multiprocessors
+
+---
+
+## Multicomputers
