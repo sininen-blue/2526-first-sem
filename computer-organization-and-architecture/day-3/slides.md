@@ -277,10 +277,10 @@ Making chips go faster has its limits, so computer designers have turned to para
 
 It comes in two general forms
 1. instruction level parallelism (ILP)
-Where each instruction itself has parallel capabilities TODO
+    Where the processor has the ability to execute multiple instructions at the same time
 
 2. process level parallelism (PLP)
-Where multiple CPUs work together on the same problem
+    Where multiple CPUs work together on the same problem
 
 ---
 
@@ -424,7 +424,7 @@ While they're limited to the speed of the network, you can scale them to up to 2
 4. Which statement best distinguishes RISC from CISC architectures?
     A. RISC uses variable-length instructions; CISC uses fixed-length
     B. RISC executes one instruction per cycle; CISC executes multiple
-    C. RISC has runs primarily in hardwar; CISC uses interpreters
+    C. RISC has runs primarily in hardware; CISC uses interpreters
     D. RISC requires interpreters for each instruction; CISC always implements instructions directly in hardware
 
 5. In the context of ILP vs. PLP, which of these is an example of process-level parallelism (PLP)?
