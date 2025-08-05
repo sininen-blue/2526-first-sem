@@ -86,9 +86,9 @@ image: ./images/fig2.png
 
 There are two main categories of instructions when talking about registers
 
-Register-memory instructions, where they allow memory *words* to be pulled into the register to be operated upon, and stored back into memory
+*Register-memory* instructions, where they allow memory *words* to be pulled into the register to be operated upon, and stored back into memory
 
-While register-register instructions fetches 2 (typically) operands from the registers, performs an operation on them, and then stores the result back into a register
+While *register-register* instructions fetches 2 (typically) operands from the registers, performs an operation on them, and then stores the result back into a register
 
 Most modern machines have multiples of this data cycle, and the speed they run normally determines the speed of the computer itself
 
@@ -122,7 +122,7 @@ A program which does this is called an *interpreter*
 
 ::right::
 
-```java {*}{maxHeight:'523px'}
+```java {*}{maxHeight:'500px'}
 public class Interp {
     static int PC; // program counter holds address of next instr
     static int AC; // the accumulator, a register for doing arithmetic
@@ -153,11 +153,11 @@ public class Interp {
 
 <style>
 code {
-	font-size: 12px !important;
+	font-size: 10px !important;
 }
 
 .grid-cols-2 {
-    grid-template-columns: minmax(0,.4fr) minmax(0,1fr)
+    grid-template-columns: minmax(0,.3fr) minmax(0,1fr)
 }
 </style>
 
@@ -233,7 +233,7 @@ RISC machines were so much better that even CISC machines adopted RISC design, a
 layout: center
 ---
 
-## So why isn't risk the main computing platform of today?
+## So why isn't RISC the main computing platform of today?
 
 ---
 
@@ -399,3 +399,69 @@ So a multicomputer, multiple computers that communicate over a network was creat
 They're considered to be *loosely coupled* systems unlike multiprocessors which are *tightly coupled*
 
 While they're limited to the speed of the network, you can scale them to up to 250,000 CPUs which makes up for it
+
+--- 
+
+## Quiz
+1. Which of the fololwing is *not* one of the five componenets of the Von NEumann architecture?
+    A. Control Unit
+    B. Arithmetic Logic Unit
+    C. Registers
+    D. Cache
+
+2. Which register holds the address of the next instruction to be executed?
+    A. Instruction Register (IR)
+    B. Program Counter (PC)
+    C. Accumulator (AC)
+    D. Data Register (DR)
+
+3. What is the primary benefit of writing an interpreter for a new instruction set instead of building hardware?
+    A. It executes instructions faster than hardware
+    B. It eliminates the need for any hardware implementation
+    C. It breaks complex instructions into simpler, cheaper-to-build steps
+    D. It guarantees backward compatibility with all existing ISAs
+
+4. Which statement best distinguishes RISC from CISC architectures?
+    A. RISC uses variable-length instructions; CISC uses fixed-length
+    B. RISC executes one instruction per cycle; CISC executes multiple
+    C. RISC has runs primarily in hardwar; CISC uses interpreters
+    D. RISC requires interpreters for each instruction; CISC always implements instructions directly in hardware
+
+5. In the context of ILP vs. PLP, which of these is an example of process-level parallelism (PLP)?
+    A. Multiple pipelines within one CPU
+    B. SIMD operations on a GPU
+    C. Multiple CPUs
+    D. Out-of-order execution within a core
+
+---
+
+## Fill in the blanks
+
+- A) If the instruction uses a word in memory, determine where it is
+- B) Fetch instructions
+- C) Change the program counter to point to the next counter
+- D) Execute the instruction
+- E) Determine the type of instruction fetched
+- F) Fetch the word, if needed, into a CPU register
+
+<div class="w-max h-10"></div>
+
+```mermaid
+flowchart LR
+    1[1 ]-->2
+    2[2 ]-->3
+    3[3 ]-->4
+    4[4 ]-->5
+    5[5 ]-->6
+    6[6 ]-->1
+```
+
+---
+
+## Essay
+
+1. From your understanding, what are the main benefits of using an interpreter?
+
+## Bonus question
+- Tbd
+
