@@ -1,5 +1,5 @@
 ---
-title: 4 Programming with graphics
+title: 4 WebGl prep
 transition: slide-left
 lineNumbers: true
 ---
@@ -211,9 +211,9 @@ Later, we'll learn to specify coordinates better, then transform those object co
 
 ---
 
-## Let's start
+## Defining a point
 
-to define a point we can theoretically use
+To define a vertex we can theoretically use
 
 ```javascript
 var p = [x, y];
@@ -223,7 +223,7 @@ But a JavaScript array isn't just an ordered set of numbers like in C, it's an o
 
 This is important because a GPU expects a simple 32-bit IEEE floating point number
 
-There are ways to convert this to a Float32Array, such as
+There are ways to convert this to a `Float32Array`, such as
 
 ```javascript
 var p = new Float32Array([x, y]);
@@ -234,40 +234,9 @@ But it's easier to create an object that has what we need
 We'll be using `MV.js` which is provided with the book
 
 ---
-layout: center
----
-
-# https://ishortn.ink/day4graphics
-Github link
-
-1. Make a folder somewhere
-2. add a the `gasket.html` file
-3. add the `MV.js` file
-4. add the `initShaders.js` file
-5. add the `gasket.js` file
-
-5. don't add the `gasketFromBook.js`
-
----
-
-# MV.js
-a library for simple primitives
-
-```javascript
-var a = vec2(1.0, 0.0);
-var b = vec2(3.0, 4.0);
-var c = add(a, b);
-```
-
-`MV.js` is a library provided by 'Interactive Computer Graphics' by Edward Angel and Dave Shreiner
-
-It gives us some useful functions and objects to work with like the above
-
-And `flatten()` which let's us convert multiple vertices in an array to what the GPU wants
-
----
 
 ## Sample Code
+
 ```javascript {all|1-2|3-7|9-12|14-18|15|16-17|all}
 const numPositions = 5000;
 var positions = [];
@@ -288,61 +257,10 @@ for (var i = 0; i < numPositions - 1; ++i) {
     positions.push(p);
 } 
 ```
----
-
-Considering we only want to generate the positions once then place it on the GPU, we can make the creation part, part of the `init()` function
-
-We can also fairly easily specify them in 3 dimensions by adding a z coordinate which is always zero, by using `vec3()`
-
-````md magic-move {at:4-6}
-```javascript {*}{maxHeight: '300px'}
-const numPositions = 5000;
-var positions = [];
-var vertices = [
-    vec2(-1.0, -1.0),
-    vec2(0.0, 1.0),
-    vec2(1.0, -1.0)
-];
-
-var u = mult(0.5, add(vertices[0], vertices[1]));
-var v = mult(0.5, add(vertices[0], vertices[2]));
-var p = mult(0.5, add(u, v));
-positions.push(p);
-
-for (var i = 0; i < numPositions - 1; ++i) {
-    var j = Math.floor(Math.random() * 3);
-    p = mult(0.5, add(positions[i], vertices[j]));
-    positions.push(p);
-} 
-```
-
-```javascript {*}{maxHeight: '300px'}
-const numPositions = 5000;
-var positions = [];
-var vertices = [
-    vec3(-1.0, -1.0, 0.0),
-    vec3(0.0, 1.0, 0.0),
-    vec3(1.0, -1.0, 0.0)
-];
-
-var u = mult(0.5, add(vertices[0], vertices[1]));
-var v = mult(0.5, add(vertices[0], vertices[2]));
-var p = mult(0.5, add(u, v));
-positions.push(p);
-
-for (var i = 0; i < numPositions - 1; ++i) {
-    var j = Math.floor(Math.random() * 3);
-    p = mult(0.5, add(positions[i], vertices[j]));
-    positions.push(p);
-}
-```
-````
 
 ---
 
 ## Some questions
-
-This program doesn't send any data to the GPU yet
 
 But before we start thinking about WebGl, let's answer a few questions
 
@@ -353,4 +271,201 @@ But before we start thinking about WebGl, let's answer a few questions
 5. How much of our infinite drawing surface will appear on the display
 6. How long will the image remain on the display?
 
-All of the code we'll be writing in the `gasket.js` file will be answering these questions
+All of the code we'll be writing file will be answering these questions
+
+---
+
+# A look into WebGl
+A few functions
+
+Our model of a graphics system is something called a *black box*, a term used to say that a system is only described by its inputs and outputs
+
+<img class="mx-auto" src="./images/fig4.png" alt="WebGL black box" style="width: 500px;">
+
+Some of the basic function calls we'll be using are the following
+
+---
+
+## Primitive functions
+
+This lets us specify low-level objects or atomic entities that we can display
+
+WebGl like most low-level APIs only support things like points, lines, and triangles
+
+More complex shapes that aren't supported require either creating it from scratch or using a library
+
+If the primitives are our *what* then the attributes are our *how*
+
+For example, `vertices` have an *attribute* of `position`.
+
+Other attributes are `color`, `normal` `vector`, `texture coordinates`, etc
+
+---
+
+# Other functions
+There are also other functions in Webgl we'll be using
+
+### Viewing functions 
+
+Allow us to specify the attributes of our camera (viewer)
+
+It let's us change the position, orientation, and even objects clip out of view
+
+### Transformation functions
+
+WebGl also provides many transformation functions 
+
+In our case, we'll be using the transformations in `MV.js`
+
+### Input functions
+
+Allow us to take in input from many types of devices, and because WebGl is a web-based API, we can usually input we get through HTML5 or JavaScript
+
+---
+
+## Working with WebGl in abstract
+
+WebGl is a fairly organized system, and we can think of it as a *state machine*
+
+Where our inputs (functions and inputs) change the state of the system, or cause it to produce a visible output
+
+From the perspective of the API, there are only tow types of functions
+1. Functions that change the flow of data inside the state machine
+2. Functions that change the state of the machine itself
+
+In our case, we'll likely only ever use one render function, and all other functions will be changing the state of the machine
+
+---
+
+## Coordinate systems
+
+What units are our coordinates in? In our case, those numbers mean whatever we want them to mean
+
+In graphics, we've separated the coordinate systems into several types called *device-independent graphics*
+
+The users system is known as the *world coordinate system* or *application coordinate system*, on OpenGl, the term *object coordinate system* is preffered
+
+We then need to convert our coordinates into *device coordinates*. Usually we call these *window coordinates*
+
+<img class="mx-auto" src="./images/fig5.png" alt="Coordinate systems" style="width: 300px;">
+
+---
+layout: center
+---
+
+# Primitives and attributes
+
+---
+
+## Primitives
+
+Most GPUs can render only triangles and possible quads
+
+In WebGl, we can separate primitives into two classes: 
+- geometric primitives
+- image primitives
+
+And these primitives pass through a pipeline
+
+<img class="mx-auto" src="./images/fig6.png" alt="Graphics pipeline" style="width: 500px;">
+
+Note that image primitives don't have geometric properties and can't be manipulated in space the same way
+
+---
+layout: two-cols
+---
+
+## Displaying
+
+In WebGl, if we want to display some geometry, we execute functions whose parameters specify how the vertices are to be interpreted
+
+For example, we can display the vertices in `numPositions` using
+
+
+There are also many other primitives we can use
+
+
+::right::
+
+<img src="./images/fig7.png" alt="WebGL primitives" style="width: 500px;">
+
+And we can adjust those primitives through
+
+```javascript
+gl.drawArrays(gl.POINTS, 0, numPositions);
+```
+
+```javascript
+#gl.pointSize(10.0);
+gl.lineWidth(2.0);
+```
+
+<style>
+.grid-cols-2 {
+    grid-template-columns: minmax(0, .7fr) minmax(0, 1fr);
+}
+</style>
+
+---
+
+## Polygons
+
+To display the exterior of three dimensional objects, we can use polygons, which is defined as a sequence of vertices
+
+Polygons play a special role in computer graphics because we can display them quickly and use them to approximate any surface
+
+<img class="mx-auto" src="./images/fig8.png" alt="Polygons" style="width: 300px;">
+
+---
+layout: two-cols
+---
+
+## Polygons
+
+To make sure a polygon renders well, it needs to be simple and convex
+
+*Simple* meaning no two edges of a polygon cross each other
+
+<img class="mx-auto" src="./images/fig9.png" alt="Simple polygon" style="width: 200px;">
+
+::right::
+
+And *convex* meaning all points on the line segment between any two points inside the object are inside the object
+
+<img class="mx-auto" src="./images/fig10.png" alt="Convex polygon" style="width: 200px;">
+
+---
+
+## Polygons in WebGl
+
+The only polygons WebGl supports are triangles
+
+<img class="mx-auto" src="./images/fig11.png" alt="Triangles in WebGL" style="width: 500px;">
+
+And from this, you can approximate any polygon
+
+<img class="mx-auto" src="./images/fig12.png" alt="Polygons in WebGL" style="width: 500px;">
+
+---
+
+## Triangulation
+
+In order to display polygons, we need to *triangulate* them, converting any arbitrary polygon into a set of triangles
+
+And while there are many types of triangulation algorithms
+
+<img class="mx-auto" src="./images/fig13.png" alt="Triangulation" style="width: 500px;">
+
+---
+
+## Vertex Attributes
+
+Considering the fact that there are many different ways to render a line or polygon
+
+<img class="mx-auto" src="./images/fig14.png" alt="Vertex attributes" style="width: 500px;">
+
+We need to make use of *vertex attributes*
+
+Vertex attributes, like color, are locked or bound to vertices and thus to the geometric object they specify
+
+
