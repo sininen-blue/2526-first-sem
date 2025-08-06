@@ -27,7 +27,7 @@ image: images/fig2.jpg
 ## Imagine we start with three points in space
 
 As long as the points are 
-- non collinear, meaning they don't all lie on a straight line
+- non-collinear, meaning they don't all lie on a straight line
 - they are the vertices of a unique triangle, 
 - and also define a unique plane
 
@@ -56,7 +56,7 @@ image: images/fig2.jpg
 3. find the point $q$ halfway between $p$ and the randomly selected vertex
 4. display $q$ by putting some sort of marker, like a circle
 5. replace $p$ with $q$
-6. repeat steps 2-5 a large number of times
+6. repeat steps 2-5, a number of times
 
 ---
 layout: center
@@ -105,7 +105,7 @@ If we want to be able to display the points again without doing that we can use 
 
 1st we compute all the points, then we put them into the GPU
 
-And because we know where all the points are, we can redisplay the points significantly faster, unless we change the position of the points
+And because we know where all the points are, we can re-display the points significantly faster, unless we change the position of the points
 
 <!-- But this means that if we want to move the objects in a new position, we need to recompute all the points and send them again to the GPU -->
 
@@ -174,9 +174,9 @@ For our purposes, we'll regard 2d applications as a special case of 3d
 
 Where we'll view the two-dimensional plane as a subspace of the three-dimensional space
 
-We'll represent a point in the plane $z = 0$ as $p = (x, y, 0)$ in the three dimensional world or simply $p = (x, y)$
+We'll represent a point in the plane $z = 0$ as $p = (x, y, 0)$ in the three-dimensional world or simply $p = (x, y)$
 
-In WebGL, either represetation is valid and will use the same representation regardless
+In WebGL, either representation is valid and will use the same representation regardless
 
 ---
 
@@ -184,7 +184,7 @@ In WebGL, either represetation is valid and will use the same representation reg
 
 We use the terms *vertex* and *point* slightly differently in computer graphics compared to other fields.
 
-A **vertex** is an object, whose *attributes* is its position in space, and we use them to specify the atomic (smallest) geometric primitives that we can draw
+A **vertex** is an object, whose *attributes* is its positiof in space, and we use them to specify the atomic (smallest) geometric primitives that we can draw
 
 The simplest being a point in space, 
 - which is specified by a single vertex
@@ -329,7 +329,7 @@ WebGl is a fairly organized system, and we can think of it as a *state machine*
 
 Where our inputs (functions and inputs) change the state of the system, or cause it to produce a visible output
 
-From the perspective of the API, there are only tow types of functions
+From the perspective of the API, there are only two types of functions: 
 1. Functions that change the flow of data inside the state machine
 2. Functions that change the state of the machine itself
 
@@ -343,7 +343,7 @@ What units are our coordinates in? In our case, those numbers mean whatever we w
 
 In graphics, we've separated the coordinate systems into several types called *device-independent graphics*
 
-The users system is known as the *world coordinate system* or *application coordinate system*, on OpenGl, the term *object coordinate system* is preffered
+The user's system is known as the *world coordinate system* or *application coordinate system*, on OpenGl, the term *object coordinate system* is preferred
 
 We then need to convert our coordinates into *device coordinates*. Usually we call these *window coordinates*
 
@@ -395,6 +395,8 @@ And we can adjust those primitives through
 gl.drawArrays(gl.POINTS, 0, numPositions);
 ```
 
+And set their attributes through
+
 ```javascript
 #gl.pointSize(10.0);
 gl.lineWidth(2.0);
@@ -410,7 +412,7 @@ gl.lineWidth(2.0);
 
 ## Polygons
 
-To display the exterior of three dimensional objects, we can use polygons, which is defined as a sequence of vertices
+To display the exterior of three-dimensional objects, we can use polygons, which is defined as a sequence of vertices
 
 Polygons play a special role in computer graphics because we can display them quickly and use them to approximate any surface
 
@@ -456,11 +458,13 @@ And while there are many types of triangulation algorithms
 
 <img class="mx-auto" src="./images/fig13.png" alt="Triangulation" style="width: 500px;">
 
+We won't be discussing them too deeply, but each triangulation method does have its strengths and weaknesses
+
 ---
 
 ## Vertex Attributes
 
-Considering the fact that there are many different ways to render a line or polygon
+Consider the fact that there are many different ways to render a line or polygon
 
 <img class="mx-auto" src="./images/fig14.png" alt="Vertex attributes" style="width: 500px;">
 
