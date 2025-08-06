@@ -1,6 +1,7 @@
 ---
 title: 4 Programming with graphics
 transition: slide-left
+lineNumbers: true
 ---
 
 # Graphics Computing
@@ -14,7 +15,7 @@ image: images/sierpinski_triangle.png
 
 ## The Sierpinski Triangle
 
-The sierpinski trinagle is an object that can be defined recursively and randomly, with proporties that aren't themselves random
+The Sierpinski triangle is an object that can be defined recursively and randomly, with proporties that aren't themselves random
 
 It's an interesting shape, and we'll start trying to create a 2D version of it
 
@@ -39,7 +40,7 @@ image: images/fig2.jpg
 
 For now, we'll assume ignore the z coordinate and assume $z = 0$
 
-So when specifiend in some coordinate system, our three points are:
+So when specified in some coordinate system, our three points are:
 1. $(x_0, y_0, 0)$
 2. $(x_1, y_1, 0)$
 3. $(x_2, y_2, 0)$
@@ -104,7 +105,7 @@ If we want to be able to display the points again without doing that we can use 
 
 1st we compute all the points, then we put them into the GPU
 
-And because we know where all the points are, we can redsiplay the points significanltly faster, unless we change the position of the points
+And because we know where all the points are, we can redisplay the points significantly faster, unless we change the position of the points
 
 <!-- But this means that if we want to move the objects in a new position, we need to recompute all the points and send them again to the GPU -->
 
@@ -181,7 +182,7 @@ In WebGL, either represetation is valid and will use the same representation reg
 
 ## A side note on vertices and points
 
-We use the terrms *vertex* and *point* slightly differently in computer graphics compared to other fields.
+We use the terms *vertex* and *point* slightly differently in computer graphics compared to other fields.
 
 A **vertex** is an object, whose *attributes* is its position in space, and we use them to specify the atomic (smallest) geometric primitives that we can draw
 
@@ -202,9 +203,9 @@ To turn our third program into a WebGL program, we will ignore a few things for 
 
 For one, we'll delay the discussion of coordinate systems and how to represent them in WebGL
 
-And instead we'll use somthing called clip coordinates, where everything outside the clip coordinates will be ignored
+And instead we'll use something called clip coordinates, where everything outside the clip coordinates will be ignored
 
-This is a cube where its principal diagnonal is from $(-1, -1, -1)$ to $(1, 1, 1)$
+This is a cube where its principal diagonal is from $(-1, -1, -1)$ to $(1, 1, 1)$
 
 Later, we'll learn to specify coordinates better, then transform those object coordinates into clip coordinates
 
@@ -212,13 +213,13 @@ Later, we'll learn to specify coordinates better, then transform those object co
 
 ## Let's start
 
-to define a point we can theortically use
+to define a point we can theoretically use
 
 ```javascript
 var p = [x, y];
 ```
 
-But a Javascript array isn't just an ordered set of numbers like in C, it's an object with methods and properties, like length
+But a JavaScript array isn't just an ordered set of numbers like in C, it's an object with methods and properties, like length
 
 This is important because a GPU expects a simple 32-bit IEEE floating point number
 
@@ -233,14 +234,41 @@ But it's easier to create an object that has what we need
 We'll be using `MV.js` which is provided with the book
 
 ---
+layout: center
+---
 
-github link
+# https://ishortn.ink/day4graphics
+Github link
 
-setup instructions
+1. Make a folder somewhere
+2. add a the `gasket.html` file
+3. add the `MV.js` file
+4. add the `initShaders.js` file
+5. add the `gasket.js` file
+
+5. don't add the `gasketFromBook.js`
 
 ---
-TODO: animate this
+
+# MV.js
+a library for simple primitives
+
 ```javascript
+var a = vec2(1.0, 0.0);
+var b = vec2(3.0, 4.0);
+var c = add(a, b);
+```
+
+`MV.js` is a library provided by 'Interactive Computer Graphics' by Edward Angel and Dave Shreiner
+
+It gives us some useful functions and objects to work with like the above
+
+And `flatten()` which let's us convert multiple vertices in an array to what the GPU wants
+
+---
+
+## Sample Code
+```javascript {all|1-2|3-7|9-12|14-18|15|16-17|all}
 const numPositions = 5000;
 var positions = [];
 var vertices = [
@@ -261,3 +289,68 @@ for (var i = 0; i < numPositions - 1; ++i) {
 } 
 ```
 ---
+
+Considering we only want to generate the positions once then place it on the GPU, we can make the creation part, part of the `init()` function
+
+We can also fairly easily specify them in 3 dimensions by adding a z coordinate which is always zero, by using `vec3()`
+
+````md magic-move {at:4-6}
+```javascript {*}{maxHeight: '300px'}
+const numPositions = 5000;
+var positions = [];
+var vertices = [
+    vec2(-1.0, -1.0),
+    vec2(0.0, 1.0),
+    vec2(1.0, -1.0)
+];
+
+var u = mult(0.5, add(vertices[0], vertices[1]));
+var v = mult(0.5, add(vertices[0], vertices[2]));
+var p = mult(0.5, add(u, v));
+positions.push(p);
+
+for (var i = 0; i < numPositions - 1; ++i) {
+    var j = Math.floor(Math.random() * 3);
+    p = mult(0.5, add(positions[i], vertices[j]));
+    positions.push(p);
+} 
+```
+
+```javascript {*}{maxHeight: '300px'}
+const numPositions = 5000;
+var positions = [];
+var vertices = [
+    vec3(-1.0, -1.0, 0.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(1.0, -1.0, 0.0)
+];
+
+var u = mult(0.5, add(vertices[0], vertices[1]));
+var v = mult(0.5, add(vertices[0], vertices[2]));
+var p = mult(0.5, add(u, v));
+positions.push(p);
+
+for (var i = 0; i < numPositions - 1; ++i) {
+    var j = Math.floor(Math.random() * 3);
+    p = mult(0.5, add(positions[i], vertices[j]));
+    positions.push(p);
+}
+```
+````
+
+---
+
+## Some questions
+
+This program doesn't send any data to the GPU yet
+
+But before we start thinking about WebGl, let's answer a few questions
+
+1. In what colors are we drawing?
+2. Where on the display does our image appear?
+3. How large will the image be?
+4. How do we create an area of the display -a window- for our image?
+5. How much of our infinite drawing surface will appear on the display
+6. How long will the image remain on the display?
+
+All of the code we'll be writing in the `gasket.js` file will be answering these questions
