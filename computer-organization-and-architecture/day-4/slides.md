@@ -31,7 +31,7 @@ You can store any value in any form of memory, but the way you store it will aff
 
 ## BCD
 
-Some computers like old IBM mainframes are advertised to have decimel as well as binary arithmetic.
+Some computers like old IBM mainframes are advertised to have decimal as well as binary arithmetic.
 
 They do this by using 4 bits to store one decimal digit using a code called BCD (Binary Coded Decimal)
 
@@ -55,7 +55,7 @@ If a cell consists of $k$ bists, then it can hold any one of $2^k$ bit combinati
 
 Assuming you have 96-bit memory, you can make a storage system:
 
-<img class="mx-auto" src="./images/fig2.png" alt="memory addresses" width="400">
+<img class="mx-auto" src="./images/fig2.png" alt="memory addresses" width="350">
 
 ---
 
@@ -69,7 +69,7 @@ For example to represent 11 addresses, you need at least 4 bits, because $2^4 = 
 
 And it's independent of the size of the cells
 
-A memory system with $2^12$ cells, with 8 bits each, and a memory of $2^12$ cells with 64 bits each would both need 12-bit addresses
+A memory system with $2^{12}$ cells, with 8 bits each, and a memory of $2^{12}$ cells with 64 bits each would both need 12-bit addresses
 
 ---
 
@@ -162,10 +162,11 @@ A simple example of an error-detecting code is the *parity bit*, which is a sing
 Historically, CPUs have always been faster than memories
 
 There are two main ways to deal with this imbalance. The simplest way is to just start memory reads when they are encountered but continue executing and stall the CPU if an instruction tries to read the memory word before it arrives
+- the slower the memory, the longer the stall
 
 The other solution is to have machines that do not stall but instead require the compilers not to generate code to use words before they have arrived
-
-Both of these stall the PC
+- the problem with this approach is that it's harder and inconsistent
+- after a `load` operation, there tends to be nothing to do until it loads so you just `nop`
 
 ---
 
@@ -175,16 +176,19 @@ The problem is economics, we can build faster memory, but for it to run as fast 
 
 So we have a compromise, we have a small amount of fast memory on the CPU chip, and a larger amount of slower memory off the chip
 
-<img class="mx-auto" src="./images/fig5.png" alt="cache memory" width="300">
+<img class="mx-auto" src="./images/fig5.png" alt="cache memory" width="250">
 
 ---
 
 ## The small but fast memory is called *cache*
 
-The cache is given the most heavily used memory words, and if the CPU needs a word, it checks the cache first, 
-- if the word is in the cache, it can be read quickly, if not, it has to be read from the slower memory
+The cache is given the most heavily used memory words, 
+- and if the CPU needs a word, it checks the cache first, 
+- if the word is in the cache, 
+- it can be read quickly, 
+- if not, it has to be read from the slower memory
 
-The way the computer chooses which items to put in cache is called the *locality principle* which is the basis for all forms of caching algorithms
+The way the computer chooses which items to put in cache is called the *locality principle* which is the basis for all forms of caching algorithms. This principle is from the observation that memory references tend to only use a small fraction of the total memory at a time
 
 Where data like data in loops, data next to other data, instructions next to other instructions, are sent to cache memory ahead of time
 
@@ -198,6 +202,8 @@ SIMM (Single Inline Memory Module) and DIMM (Dual Inline Memory Module) are the 
 
 Then there's SO-DIMM(Small Outline DIMM) for laptops and other small devices
 
+Also ECC memory
+
 ---
 layout: center
 ---
@@ -206,12 +212,13 @@ layout: center
 The main memory is always too small
 
 ---
+layout: float-right
+image: ./images/fig7.png
+---
 
 ## Memory Hierarchies
 
 To store a large amount of data, a memory hierarchy is used, which is a set of storage devices with different speeds and sizes
-
-<img class="mx-auto" src="./images/fig7.png" alt="memory hierarchy" width="400">
 
 First is registers, second is cache, etc
 
@@ -221,6 +228,7 @@ As you go lower down the hierarchy, three key parameters increase.
 - The number of bits per dollar increase
 
 [Demo](https://planetscale.com/blog/io-devices-and-latency)
+
 [Demo2](https://x.com/i/status/1847310000735330344)
 
 ---
@@ -236,6 +244,9 @@ If a positive or negative current passes through the head, it magnetizes the sur
 And when the head passes over a magnetized area, it induces a current on the head, which is converted into data.
 
 ---
+layout: float-right
+image: ./images/fig9.png
+---
 
 ## Magnetic Disks
 
@@ -248,12 +259,13 @@ It's usually called a *hard disk* to differentiate it from a *floppy disk*
 
 And most disks have multiple platters
 
-<img class="mx-auto" src="./images/fig9.png" alt="stacked disks" width="200">
 
 ---
 
 ## RAID
 Redundant Array of Inexpensive/Independent Disks
+
+Like computers, to increase the speed of disks, people realized you could just have more of them
 
 striping
 
