@@ -2,7 +2,7 @@
 title: 4 WebGl prep
 transition: slide-left
 lineNumbers: true
-exportFilename: 4 webgl prep
+exportFilename: 4 Sierpinski Gasket
 ---
 
 # Graphics Computing
@@ -600,3 +600,12 @@ Or we can directly transfer that plane into the camera's coordinate system, othe
 - Vertex Attributes: Vertices carry data like position and color.
 - Color: We use RGB values like vec3(1.0, 0.0, 0.0) for red.
 - Viewing: For now, we draw directly in the clip space without complex camera setup.
+
+---
+layout: center
+---
+
+# Quiz
+I'll be sending the link to your group chat
+
+https://forms.gle/ffsKA7aQKGaf1ZsF7
