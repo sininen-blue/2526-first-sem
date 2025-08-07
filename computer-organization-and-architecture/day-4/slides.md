@@ -136,6 +136,16 @@ This is called the *Hamming distance* between the two codewords
 
 ---
 
+## Hamming Distance and Error Correcting Codes
+
+This Hamming distance is used to for the error-detecting and error-correcting properties of a code
+
+The check bits are chosen so that the Hamming distance between any two codewords is at least $d$ bits
+
+To detect $d$ single bit errors, you need a Hamming distance of $d + 1$
+
+---
+
 ## Error correcting codes
 
 Given that two codwewords have a hamming distance of $d$, it will require $d$ single bit errors to convert one into another
@@ -146,6 +156,112 @@ A simple error detecting code is the *parity bit*
 
 Consider a code in which a single *parity bit* is appended to data, it's chosen so that the number of 1 bits in the codeword is even
 
-TODO
 ---
 
+## Cache Memory
+
+Historically, CPUs have always been faster than memories
+
+There are two main ways to deal with this imbalance. The simplest way is to just start memory reads when they are encountered but continue executing and stall the CPU if an instruction tries to read the memory word before it arrives
+
+The other solution is to have machines that do not stall but instead require the compilers not to generate code to use words before they have arrived
+
+Both of these stall the PC
+
+---
+
+## Cache Memory
+
+The problem is economics, we can build faster memory, but for it to run as fast as the CPU, it would need to be on the CPU itself. Putting memory on a CPU chip makes it bigger, and that makes it more expensive, so we have to keep that memory small
+
+So we have a compromise, we have a small amount of fast memory on the CPU chip, and a larger amount of slower memory off the chip
+
+<img class="mx-auto" src="./images/fig5.png" alt="cache memory" width="300">
+
+---
+
+## The small but fast memory is called *cache*
+
+The cache is given the most heavily used memory words, and if the CPU needs a word, it checks the cache first, 
+- if the word is in the cache, it can be read quickly, if not, it has to be read from the slower memory
+
+The way the computer chooses which items to put in cache is called the *locality principle* which is the basis for all forms of caching algorithms
+
+Where data like data in loops, data next to other data, instructions next to other instructions, are sent to cache memory ahead of time
+
+TODO: hit ration and miss ratio
+TODO: find that demo
+
+---
+
+## Memory Packaging and Types
+
+---
+layout: center
+---
+
+# Secondary Memory
+The main memory is always too small
+
+---
+
+## Memory Hierarchies
+
+to store a large amount of data
+
+---
+
+## Magnetic Disks
+
+Aluminum platters with a magnetized coating, which is read by a head that floats above the surface
+
+img here
+
+An interesting feature about magnetic disks is that they spin in a circle, because of that and physics, we know that the outer tracks are longer than the inner tracks
+
+something something sectors and disk controllers
+
+---
+
+## IDE Disks
+
+---
+
+## SCSI Disks
+
+---
+
+## RAID
+Redundant Array of Inexpensive/Independent Disks
+
+striping
+
+raid 0-5
+
+---
+
+## Solid State Disks
+
+Flash memory, harnessed from failing transistors
+
+---
+
+## CD-ROMS
+
+lasers
+
+---
+
+## CD-Recordables
+
+--
+
+## CD-Rewritables
+
+---
+
+## DVD
+
+---
+
+## Blu-Ray
