@@ -121,40 +121,39 @@ The big endians 0 goes to the little endians 0, the big endians 1 goes to the li
 
 Computer memories aren't perfect, voltage spikes, cosmic rays, and other factors can cause bits to flip
 
-- To detect and correct errors, we can use *error correcting codes*
-- Extra bits are added to each memory word to allow the computer to detect and correct errors
+So we need to be able to detect and correct errors, using error-detecting and error-correcting codes
 
-Suppose that a memory word consists of $m$ data bits, and we'll add $r$ redundant, or check bits. Given that the total length would be $n = m + r$.
+## What is an error?
 
-- An $n$-bit unit containing $m$ data and $r$ check bits is often called a *codeword*
+Imagine a memory word that has $m$ data bits with an added $r$ data bits called redundant/check bits. With the total number of bits being $n = m + r$. This is called a `codeword`
 
-- Given any two *codewords*
+And given any two `codewords` like $100001001$ and $10110001$ it's possible to determine how many corresponding bits differ by using an XOR bitwise operation and counting the ones
 
-- $10001001$ and $101100001$ it's possible to determine how many corresponding bits differ, in our case it's 3
-
-This is called the *Hamming distance* between the two codewords
+This is called the *Hamming distance* between two `codewords`
 
 ---
 
-## Hamming Distance and Error Correcting Codes
+## Hamming Distance
 
-This Hamming distance is used to for the error-detecting and error-correcting properties of a code
+This hamming distance means that if two objects are $d$ distance apart, then they need $d$ amount of errors to happen to convert one into the other
 
-The check bits are chosen so that the Hamming distance between any two codewords is at least $d$ bits
+With an $m$-bit memory word, all $2^m$ possible combinations are valid, but only $2^m$ of the $2^n$ `codewords` are actually valid
 
-To detect $d$ single bit errors, you need a Hamming distance of $d + 1$
+And if the read turns up an invalid `codeword`, the computer knows that a memory error has occurred, because given the algorithm for computing the check bits, it's possible to construct a complete list of the legal `codewords`.
+
+Then find the `codeword` that is closest to the read codeword, and the distance between those two is the Hamming distance of the complete code
 
 ---
 
-## Error correcting codes
+## Error Detection and Correction
 
-Given that two codwewords have a hamming distance of $d$, it will require $d$ single bit errors to convert one into another
+To do error detecting and correction, we rely on the Hamming distance
 
-So it would take 3 errors to convert $10001001$ into $10110000$
+To detect $d$ single-bit errors, you need a distance of $d+1$
 
-A simple error detecting code is the *parity bit*
+And to correct $d$ single-bit errors, you need a distance of $2d + 1$
 
-Consider a code in which a single *parity bit* is appended to data, it's chosen so that the number of 1 bits in the codeword is even
+A simple example of an error-detecting code is the *parity bit*, which is a single bit that is added to a word to make the number of ones even or odd
 
 ---
 
@@ -189,12 +188,15 @@ The way the computer chooses which items to put in cache is called the *locality
 
 Where data like data in loops, data next to other data, instructions next to other instructions, are sent to cache memory ahead of time
 
-TODO: hit ration and miss ratio
-TODO: find that demo
-
 ---
 
 ## Memory Packaging and Types
+
+SIMM (Single Inline Memory Module) and DIMM (Dual Inline Memory Module) are the two main types of memory packaging
+
+<img class="mx-auto" src="./images/fig6.png" alt="memory packaging" width="400">
+
+Then there's SO-DIMM(Small Outline DIMM) for laptops and other small devices
 
 ---
 layout: center
@@ -207,27 +209,46 @@ The main memory is always too small
 
 ## Memory Hierarchies
 
-to store a large amount of data
+To store a large amount of data, a memory hierarchy is used, which is a set of storage devices with different speeds and sizes
+
+<img class="mx-auto" src="./images/fig7.png" alt="memory hierarchy" width="400">
+
+First is registers, second is cache, etc
+
+As you go lower down the hierarchy, three key parameters increase.
+- Access time gets longer
+- The storage capacity increases
+- The number of bits per dollar increase
+
+[Demo](https://planetscale.com/blog/io-devices-and-latency)
+[Demo2](https://x.com/i/status/1847310000735330344)
 
 ---
 
 ## Magnetic Disks
 
-Aluminum platters with a magnetized coating, which is read by a head that floats above the surface
+Aluminum platters with a magnetizable coating, which is read by a head that floats above the surface
 
-img here
+<img class="mx-auto" src="./images/fig8.png" alt="magnetic disk" width="400">
 
-An interesting feature about magnetic disks is that they spin in a circle, because of that and physics, we know that the outer tracks are longer than the inner tracks
+If a positive or negative current passes through the head, it magnetizes the surface just beneath it. Aligning the magnetic particles on that area.
 
-something something sectors and disk controllers
-
----
-
-## IDE Disks
+And when the head passes over a magnetized area, it induces a current on the head, which is converted into data.
 
 ---
 
-## SCSI Disks
+## Magnetic Disks
+
+- A circular sequence of bits that complete a rotation is called a `track`
+- each track is divided up into `sectors`
+- each sector starts with a `preamble` to help sync the head and the data
+- at the end of the sector is some error correcting code
+
+It's usually called a *hard disk* to differentiate it from a *floppy disk*
+
+And most disks have multiple platters
+
+<img class="mx-auto" src="./images/fig9.png" alt="stacked disks" width="200">
 
 ---
 
@@ -252,16 +273,4 @@ lasers
 
 ---
 
-## CD-Recordables
-
---
-
-## CD-Rewritables
-
----
-
 ## DVD
-
----
-
-## Blu-Ray
