@@ -4,7 +4,7 @@
       <slot />
     </div>
 	<div class="flex items-center justify-center">
-      <img :src="image" class="w-full max-w-md rounded-xl shadow-lg object-contain" />
+      <img :src="image" class="h-full max-w-md rounded-xl shadow-lg object-contain" />
     </div>
   </div>
 </template>

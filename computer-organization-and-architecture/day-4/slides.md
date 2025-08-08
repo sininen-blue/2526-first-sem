@@ -257,32 +257,153 @@ image: ./images/fig9.png
 
 It's usually called a *hard disk* to differentiate it from a *floppy disk*
 
-And most disks have multiple platters
-
+And most disks have multiple platters, each with its own head glued together
 
 ---
 
-## RAID
+# RAID
 Redundant Array of Inexpensive/Independent Disks
+
+CPU performance has been increasing, but not as fast as the speed of secondary memory.
 
 Like computers, to increase the speed of disks, people realized you could just have more of them
 
-striping
+In 1988, Patterson and others suggesting six ways to organize disks to improve performance, which was then called RAID
 
-raid 0-5
+The idea was to get multiple disks and replace the controller with a single RAID controller. And it acts like a single disk to the computer
 
+The way to do this is to organize them in different ways, Level 0 to 6
+
+*note that levels don't mean better, they just mean different*
+
+---
+layout: float-right
+image: ./images/fig10.png
+---
+
+## RAID 0
+
+This is called *striping*
+
+Where you distribute data over multiple disks, so that when a call for a large amount of data with a single read happens, we can pull that data in parallel
+
+This is the simplest with the clearest disadvantages. It's also less reliable
+
+---
+layout: float-right
+image: ./images/fig11.png
+---
+
+## RAID 1
+
+Is considered a *true* RAID, and it duplicates all the disks
+
+In any read, either copy can be used, and it has significantly better reliability where if a drive crashes, the other drive can be used, and then recovered
+
+---
+layout: float-right
+image: ./images/fig12.png
+---
+
+## Other RAIDS
+
+Levels 2-5 aren't as common, but they are used in some extreme systems
+
+2. RAID 2 is a bit-level striping with Hamming code error correction
+3. RAID 3 is byte-level striping with a dedicated parity disk
+4. RAID 4 is block-level striping with a dedicated parity disk
+5. RAID 5 is block-level striping with distributed parity
+
+All these attempt to increase performance while maintaining reliability, at the cost of complexity and loss of raw storage space
+
+
+---
+layout: float-right
+image: ./images/fig13.png
 ---
 
 ## Solid State Disks
 
-Flash memory, harnessed from failing transistors
+Transistors can fail over time as it's used. One way it can fail is called "hot carrier injection" where an electron charge gets embedded inside a once-working transistor, where it's permanently on or off
+
+Flash disks are made of many solid-state flash memory cells made of a special type of transistor.
+
+
+---
+layout: float-right
+image: ./images/fig13.png
+---
+
+## Solid State Disks
+
+By default, this acts like a transistor, but by pushing a high voltage to the control gate, we can trap electrons in the floating gate, which changes the threshold voltage of the transistor
+
+This means the internals get a negative charge, which means it takes more voltage to turn the transistor on
+
+And by testing how much voltage it takes to turn the transistor on, we can determine if it's a `0` or a `1`
+
+This also means that an SSD is *non-volatile*, because even if it loses power, the electrons are still trapped in the floating gate
+
+---
+layout: float-right
+image: ./images/fig13.png
+---
+
+## Solid State Disks
+
+Because SSDs are essentially memory chips, they have significantly faster access times than magnetic disks since they don't have to *seek* or *spin*
+
+It's also more reliable since there are no moving parts
+
+The main problem is cost per bit, and their failure rate
+
+Typical flash cells can only be written to about 100,00 times before it loses functions
+
+This is counteracted by *wear leveling* which distributes writes evenly across the disk
+
+---
+layout: float-right
+image: ./images/fig14.png
+---
+
+## CD-ROMs
+
+CDS were used primary for distribution of software and media, as well as backups because of their low cost and large capacity
+
+At around the 1980s, Sony developed the CD (Compact Disc) which quickly replaced vinyl records for music.
+
+Then the precise technical details for the CD were published in an official International Standard (ISO 10149) popularly known as the Red Book
+
+This allowed other manufacturers of both CDs and CD players to be made in a way that was compatible
+
+---
+layout: float-right
+image: ./images/fig15.png
+---
+
+## CD-ROMs
+
+The way a CD is made by using a high power infrared laser to burn small hols in the glass master disk. Then a mold is made from that master disk, with bumps instead of holes.
+
+The depressions in the disk are called *pits* and unburned areas in between are called *lands*
+
+And the CD is played by pointing a laser at the surface, and depending on whether the laser is reflected or not, it reads a `0` or a `1`
 
 ---
 
-## CD-ROMS
+## Developments of the CD
 
-lasers
+1. `CD-R (Recordable)` were developed to allow users to write data to a CD, but only once
+2. `CD-RW (Rewritable)` were developed to allow users to write and erase data multiple times, but with a limited number of write cycles
+3. `DVD (Digital Versatile Disc)` was developed to store larger amounts of data, up to 4.7 GB for single-layer discs and 8.5 GB for dual-layer discs
+4. `Blu-ray Disc` was developed to store even larger amounts of data, up to 25 GB for single-layer discs and 50 GB for dual-layer discs, using a blue laser instead of a red one
 
 ---
+layout: center
+---
 
-## DVD
+# Quiz
+https://ishortn.ink/ComOrgQ4
+
+<img class="mx-auto" src="./images/fig17.png" alt="qr" width="200">
+
