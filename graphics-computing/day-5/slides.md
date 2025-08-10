@@ -96,3 +96,23 @@ init
 canvas context
 
 ---
+
+---
+
+# future lesson
+
+# v2 use polygons
+
+---
+
+# v3 in 3 dimensions
+
+---
+
+# v3 in 3 dimensions
+
+---
+
+# v3 with view port clipping
+
+
