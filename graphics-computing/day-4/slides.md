@@ -2,6 +2,7 @@
 title: 4 WebGl prep
 transition: slide-left
 lineNumbers: true
+exportFilename: 4 Sierpinski Gasket
 ---
 
 # Graphics Computing
@@ -274,6 +275,12 @@ But before we start thinking about WebGl, let's answer a few questions
 All of the code we'll be writing file will be answering these questions
 
 ---
+layout: center
+---
+
+# WebGl And Graphics pipelines
+
+---
 
 # A look into WebGl
 A few functions
@@ -367,7 +374,7 @@ In WebGl, we can separate primitives into two classes:
 
 And these primitives pass through a pipeline
 
-<img class="mx-auto" src="./images/fig6.png" alt="Graphics pipeline" style="width: 500px;">
+<img class="mx-auto" src="./images/fig6.png" alt="Graphics pipeline" style="width: 400px;">
 
 Note that image primitives don't have geometric properties and can't be manipulated in space the same way
 
@@ -426,27 +433,31 @@ layout: two-cols
 
 To make sure a polygon renders well, it needs to be simple and convex
 
+## Simple
+
 *Simple* meaning no two edges of a polygon cross each other
 
-<img class="mx-auto" src="./images/fig9.png" alt="Simple polygon" style="width: 200px;">
+<img class="mx-auto" src="./images/fig9.png" alt="Simple polygon" style="width: 150px;">
 
 ::right::
 
+## Convex
+
 And *convex* meaning all points on the line segment between any two points inside the object are inside the object
 
-<img class="mx-auto" src="./images/fig10.png" alt="Convex polygon" style="width: 200px;">
+<img class="mx-auto" src="./images/fig10.png" alt="Convex polygon" style="width: 150px;">
 
 ---
 
 ## Polygons in WebGl
 
-The only polygons WebGl supports are triangles
+The only polygons WebGl supports are triangles, along with the primitives points and lines
 
-<img class="mx-auto" src="./images/fig11.png" alt="Triangles in WebGL" style="width: 500px;">
+<img class="mx-auto" src="./images/fig11.png" alt="Triangles in WebGL" style="width: 300px;">
 
 And from this, you can approximate any polygon
 
-<img class="mx-auto" src="./images/fig12.png" alt="Polygons in WebGL" style="width: 500px;">
+<img class="mx-auto" src="./images/fig12.png" alt="Polygons in WebGL" style="width: 400px;">
 
 ---
 
@@ -472,4 +483,129 @@ We need to make use of *vertex attributes*
 
 Vertex attributes, like color, are locked or bound to vertices and thus to the geometric object they specify
 
+---
+layout: center
+---
 
+# Color
+
+---
+
+## Color
+
+A visible color can be characterized by the function $C(\lambda)$ defined for wavelengths from about 350 to 780 nm
+
+<img class="mx-auto" src="./images/fig15.png" alt="Color wave" style="width: 200px;">
+
+This is accurate for physical color, but not for perceived color
+
+---
+
+## Color
+
+The human visual system has three cones responsible for vision. So our brains can't get the entiretiy of $C(\lambda)$
+
+We only get a tristimulus value, and if two colors produce the same tristimulus value, they are indistinguishable to us
+
+Because of this, when displaying colors, we need to produce the tristimulus value needed for a human observer
+
+We can go about this either through *additive* means or *subtractive* means
+
+<img class="mx-auto" src="./images/fig16.png" alt="Additive and subtractive color" style="width: 300px;">
+
+---
+
+## In WebGl
+
+In graphics systems, there are two different ways to represent colors
+
+1. *RGB*: Red, Green, Blue, where each color is represented by a number between 0 and 255
+2. *Index color model*: where each color is represented by an index into a color table
+
+We'll only be talking about the RGB model, as it's the most common in modern graphics systems today
+
+---
+
+## RGB
+
+Conceptually, in an additive RGB system, there are separate buffers for red, green and blue
+
+In a `1280x1024` array of pixels, and each pixel having ~`24 bits`, it might be a problem to store and display those colors in the frame buffer
+
+With modern GPUs, having at minimum `4GB` of memory, this isn't a problem
+
+And to define those colors, we can use a vector of three numbers, each between 0 and 1, to avoid having to specify specific amounts of bits
+
+```javascript
+var vertexColors = [
+    vec3(1.0, 0.0, 0.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(0.0, 0.0, 1.0)
+];
+```
+
+---
+
+If we wanted to add colors to our Sierpinski triangle, we could do something like
+
+```javascript
+var colors = [];
+
+for (var i = 0; i < numPositions - 1; ++i) {
+    // determine the vertexColor[i] to assign to vertex at positions[i]
+
+    colors.push(vertexColors[i]);
+}
+```
+
+Or just us a single array that has both colors and vertex locations
+
+---
+layout: center
+---
+
+# Viewing
+
+---
+
+## Viewing
+
+Assuming that we have specified both the scene and the camera, we can display the scene
+
+Usually this means projecting our view in one way or another, but because our triangle is currently only in 2d, we'll skip this for now
+
+<img class="mx-auto" src="./images/fig17.png" alt="Viewing" style="width: 300px;">
+
+And because we're in 2d, our viewing area is simply a plane with $z = 0$
+
+---
+
+## Viewing
+
+Or we can directly transfer that plane into the camera's coordinate system, otherwise known as the *viewing rectangle* or the *clipping rectangle*
+
+<img class="mx-auto" src="./images/fig18.png" alt="Viewing rectangle" style="height: 300px;">
+
+---
+
+## Summary
+- Sierpinski Triangle: A recursive pattern generated by repeatedly choosing midpoints between a point and triangle vertices.
+- Graphics Modes:
+    - Immediate Mode: draw each point directly (slow).
+    - Retained Mode: store points first, draw later.
+    - Modern: store points in GPU memory for fast redraws.
+- 2D in 3D: We treat 2D as the plane z = 0 in 3D space.
+- Clip Coordinates: A cube from (-1, -1, -1) to (1, 1, 1) — the visible region in WebGL.
+- Primitives: WebGL uses points, lines, and triangles; complex shapes must be triangulated.
+- Vertex Attributes: Vertices carry data like position and color.
+- Color: We use RGB values like vec3(1.0, 0.0, 0.0) for red.
+- Viewing: For now, we draw directly in the clip space without complex camera setup.
+
+---
+layout: center
+---
+
+# Quiz
+I'll be sending the link to your group chat
+
+https://forms.gle/ffsKA7aQKGaf1ZsF7
