@@ -1,52 +1,52 @@
 Day 1
 
 Which level in the multilevel machine model deals directly with transistors and logic gates?
-A. L0
-B. L1
-C. L2
-D. L4
+ L0
+ L1
+ L2
+ L4
 Answer: A
 
 Which of the following best describes machine language?
-A. A symbolic language for humans to read
-B. The primitive instruction set directly executed by hardware
-C. A set of high-level abstractions used to bridge the gap between hardware and software
-D. A collection of OS commands
+ A symbolic language for humans to read
+ The primitive instruction set directly executed by hardware
+ A set of high-level abstractions used to bridge the gap between hardware and software
+ A collection of OS commands
 Answer: B
 
 Who proposed the concept of microprogramming in 1951?
-A. Alan Turing
-B. Maurice Wilkes
-C. John von Neumann
-D. Donald Knuth
+ Alan Turing
+ Maurice Wilkes
+ John von Neumann
+ Donald Knuth
 Answer: B
 
 The assembler’s primary role is to:
-A. Interpret machine code to turn it into electrical signals
-B. Convert assembly language to machine-level code
-C. Compile high-level code into bytecode
-D. Manage cache memory
+ Interpret machine code to turn it into electrical signals
+ Convert assembly language to machine-level code
+ Compile high-level code into bytecode
+ Manage cache memory
 Answer: B
 
 Which early computing practice required programmers to personally operate the computer and manually load programs?
-A. Batch processing
-B. Open shop programming
-C. Timesharing
-D. Client-server computing
+ Batch processing
+ Open shop programming
+ Timesharing
+ Client-server computing
 Answer: B
 
 In the 1960s, operating systems were introduced primarily to:
-A. Replace machine language with high-level languages
-B. Reduce hardware costs
-C. Simplify and speed up program execution
-D. Replace interpreters with compilers
+ Replace machine language with high-level languages
+ Reduce hardware costs
+ Simplify and speed up program execution
+ Replace interpreters with compilers
 Answer: C
 
 Why did some architectures eventually remove microprogramming?
-A. It was too expensive to store the microcode
-B. It slowed down execution compared to direct hardware execution
-C. It made compilers unnecessary
-D. It increased instruction set size which added lots of complexity
+ It was too expensive to store the microcode
+ It slowed down execution compared to direct hardware execution
+ It made compilers unnecessary
+ It increased instruction set size which added lots of complexity
 Answer: B
 
 Levels and Abstractions – Explain the concept of a multilevel machine. Why are multiple abstraction layers useful for both hardware designers and programmers?
@@ -71,66 +71,66 @@ Day 2
 Multiple Choice ( items)
 
 Who built the first mechanical computer in 1642?
-A. Charles Babbage
-B. Blaise Pascal
-C. Gottfried Wilhelm von Leibniz
-D. Augusta Ada Lovelace
+ Charles Babbage
+ Blaise Pascal
+ Gottfried Wilhelm von Leibniz
+ Augusta Ada Lovelace
 Answer: B
 
 What was the main limitation of Babbage’s Difference Engine?
-A. It could only multiply and divide
-B. It could only run a single algorithm
-C. It had no input device
-D. It used binary arithmetic
+ It could only multiply and divide
+ It could only run a single algorithm
+ It had no input device
+ It used binary arithmetic
 Answer: B
 
 The Analytical Engine’s “mill” is most similar to which modern computer component?
-A. RAM
-B. CPU/ALU
-C. Hard drive
-D. Graphics card
+ RAM
+ CPU/ALU
+ Hard drive
+ Graphics card
 Answer: B
 
 Which WWII computer was built to break German codes?
-A. ENIAC
-B. Colossus
-C. EDSAC
-D. JOHNNIAC
+ ENIAC
+ Colossus
+ EDSAC
+ JOHNNIAC
 Answer: B
 
 Which of the following is a key feature of the von Neumann architecture?
-A. Separate storage for data and instructions
-B. Mechanical computation using gears
-C. Memory storing both instructions and data in binary
-D. Direct execution of high-level languages
+ Separate storage for data and instructions
+ Mechanical computation using gears
+ Memory storing both instructions and data in binary
+ Direct execution of high-level languages
 Answer: C
 
 Which invention replaced vacuum tubes in the second generation of computers?
-A. Relays
-B. Transistors
-C. Integrated circuits
-D. Microprocessors
+ Relays
+ Transistors
+ Integrated circuits
+ Microprocessors
 Answer: B
 
 What was the major innovation of the integrated circuits generation?
-A. GUI interfaces
-B. Multiprogramming
-C. Cloud computing
-D. Wearable devices
+ GUI interfaces
+ Multiprogramming
+ Cloud computing
+ Wearable devices
 Answer: B
 
 Which company popularized selling fully assembled personal computers to consumers?
-A. IBM
-B. Microsoft
-C. Apple
-D. Intel
+ IBM
+ Microsoft
+ Apple
+ Intel
 Answer: C
 
 Which ISA is most commonly used in mobile devices today?
-A. x
-B. ARM
-C. AVR
-D. MIPS
+ x
+ ARM
+ AVR
+ MIPS
 Answer: B
 
 Short Answer ( items)
@@ -152,66 +152,66 @@ Day 3
 Multiple Choice ( items)
 
 What is the main function of the Control Unit (CU) in a processor?
-A. Store large amounts of data
-B. Perform arithmetic and logic operations
-C. Fetch and decode instructions from memory
-D. Connect the CPU to external devices
+ Store large amounts of data
+ Perform arithmetic and logic operations
+ Fetch and decode instructions from memory
+ Connect the CPU to external devices
 Answer: C
 
 Which register holds the address of the next instruction to be executed?
-A. IR
-B. PC
-C. MAR
-D. MDR
+ IR
+ PC
+ MAR
+ MDR
 Answer: B
 
 In Von Neumann architecture, which of the following is NOT a typical component of the data path cycle?
-A. ALU
-B. Registers
-C. Prefetch Buffer
-D. GPU
+ ALU
+ Registers
+ Prefetch Buffer
+ GPU
 Answer: D
 
 The fetch-decode-execute cycle begins with:
-A. Executing the instruction
-B. Fetching the instruction from memory
-C. Incrementing the program counter
-D. Loading data from registers
+ Executing the instruction
+ Fetching the instruction from memory
+ Incrementing the program counter
+ Loading data from registers
 Answer: B
 
 What is an interpreter in the context of CPU design?
-A. A device that converts analog signals to digital
-B. A hardware unit that translates high-level code into binary
-C. A program that imitates the function of a CPU
-D. A part of the operating system that handles I/O
+ A device that converts analog signals to digital
+ A hardware unit that translates high-level code into binary
+ A program that imitates the function of a CPU
+ A part of the operating system that handles I/O
 Answer: C
 
 Which of the following was a design goal of RISC computers?
-A. Maintain backward compatibility with older architectures
-B. Minimize instruction count but maximize execution speed
-C. Emulate CISC instructions for compatibility
-D. Increase semantic gap between hardware and high-level languages
+ Maintain backward compatibility with older architectures
+ Minimize instruction count but maximize execution speed
+ Emulate CISC instructions for compatibility
+ Increase semantic gap between hardware and high-level languages
 Answer: B
 
 Pipelining improves performance by:
-A. Increasing clock speed
-B. Executing multiple instructions in different stages simultaneously
-C. Reducing register usage
-D. Allowing the CPU to skip decoding steps
+ Increasing clock speed
+ Executing multiple instructions in different stages simultaneously
+ Reducing register usage
+ Allowing the CPU to skip decoding steps
 Answer: B
 
 In SIMD (Single Instruction Multiple Data),
-A. Each core executes different instructions on the same data
-B. One instruction is applied to multiple data items in parallel
-C. Multiple programs run on a single processor
-D. Each processor has its own control unit
+ Each core executes different instructions on the same data
+ One instruction is applied to multiple data items in parallel
+ Multiple programs run on a single processor
+ Each processor has its own control unit
 Answer: B
 
 Which is loosely coupled:
-A. Multiprocessors
-B. Multicomputers
-C. Superscalar processors
-D. RISC cores in CISC CPUs
+ Multiprocessors
+ Multicomputers
+ Superscalar processors
+ RISC cores in CISC CPUs
 Answer: B
 
 Essay / Short-Answer ( items)
@@ -239,66 +239,66 @@ day 4
 Multiple Choice ( items)
 
 What is the smallest unit of memory in a computer?
-A. Byte
-B. Bit
-C. Word
-D. Register
+ Byte
+ Bit
+ Word
+ Register
 Answer: B
 
 In Binary Coded Decimal (BCD), how many bits are used to store one decimal digit?
-A. 2
-B. 4
-C. 8
-D. 
+ 2
+ 4
+ 8
+ 
 Answer: B
 
 A memory with $2^{12}$ cells will require how many bits for addressing?
-A. 8
-B. 
-C. 
-D. 
+ 8
+ 
+ 
+ 
 Answer: C
 
 Which byte ordering method stores the most significant byte first?
-A. Little-endian
-B. Big-endian
-C. Mid-endian
-D. Reverse-endian
+ Little-endian
+ Big-endian
+ Mid-endian
+ Reverse-endian
 Answer: B
 
 The Hamming distance between two codewords tells us:
-A. How many bits differ between them
-B. How many memory cells are faulty
-C. The number of words per block
-D. The location of the error in cache
+ How many bits differ between them
+ How many memory cells are faulty
+ The number of words per block
+ The location of the error in cache
 Answer: A
 
 Which cache concept is based on the observation that programs tend to access a small portion of memory at a time?
-A. Paging principle
-B. Temporal locality
-C. Locality principle
-D. Redundancy principle
+ Paging principle
+ Temporal locality
+ Locality principle
+ Redundancy principle
 Answer: C
 
 In a magnetic disk, what is the name of the smallest physical unit of storage that begins with a preamble and ends with error correction code?
-A. Track
-B. Sector
-C. Cluster
-D. Block
+ Track
+ Sector
+ Cluster
+ Block
 Answer: B
 
 Which RAID level duplicates all data across two disks?
-A. RAID 0
-B. RAID 1
-C. RAID 3
-D. RAID 5
+ RAID 0
+ RAID 1
+ RAID 3
+ RAID 5
 Answer: B
 
 Which optical disc format uses a blue laser for higher capacity?
-A. DVD
-B. Blu-ray
-C. CD-RW
-D. CD-ROM
+ DVD
+ Blu-ray
+ CD-RW
+ CD-ROM
 Answer: B
 
 Short Answer / Essay ( items)

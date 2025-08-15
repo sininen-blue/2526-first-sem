@@ -1,0 +1,116 @@
+1. Primitive Questions
+What are primitive data types in programming? Give two examples.
+Which primitive type would you use to store:
+- a whole number?
+- a single character?
+- a true/false value?
+True or False: A primitive type can store multiple values at the same time.
+Name the primitive data type in Python for storing decimal numbers.
+In your own words, explain the difference between an integer and a floating-point number.
+
+2. Aspect of Language Questions
+What is syntax in a programming language?
+What is semantics in a programming language?
+Why is indentation important in Python?
+# Define “reserved keyword” and give an example 
+# Explain the difference between compile-time error and runtime error.
+
+3. Define Object
+What is an object in programming?
+# How does an object differ from a primitive value?
+# Give an example of a real-world object and list at least two attributes it could have.
+In Python, how would you check the type of an object?
+True or False: In Python, even strings are objects.
+
+4. Operation Questions
+What is the difference between = and == in Python?
+Write an expression that adds 10 to a variable x.
+What is the output of 5 % 2? Explain.
+What operator is used for exponentiation in Python?
+If a = 5 and b = 2, what is the result of a / b in Python 3?
+
+5. Variable Questions
+What is a variable in programming?
+True or False: A variable’s name can start with a number.
+Why do we assign values to variables instead of using numbers directly everywhere?
+What is the output of the following?
+```python
+x = 7
+x = x + 3
+print(x)
+```
+How do you name a variable so that it is easy to understand for future readers?
+
+6. What Are Strings
+What is a string in programming?
+Give two ways to create a string in Python.
+How would you get the length of a string in Python?
+True or False: Strings can store numbers without converting them.
+What will this print?
+```python
+print("Hello" "World")
+```
+
+7. Input and Output Questions
+What Python function is used to display text to the user?
+What Python function is used to receive input from the user?
+Why is input from the input() function always a string?
+How do you convert a user’s input into an integer?
+Write code to ask the user for their name and greet them.
+
+8. Branching Questions
+What is the purpose of an if statement?
+Write an example of an if statement that checks if a number is positive.
+What is the difference between if and if-else?
+What keyword is used to add more conditions after an if?
+Explain what the following code does:
+```python
+if temperature > 30:
+    print("Hot")
+else:
+    print("Cold")
+```
+
+9. Loop Questions
+What is a loop in programming?
+Name two types of loops in Python.
+Why are loops useful?
+How do you prevent an infinite loop?
+Explain what this loop does:
+```python
+for i in range(5):
+    print(i)
+```
+
+10. While Loop Questions
+What keyword starts a while loop in Python?
+When does a while loop stop running?
+What’s the risk if the condition in a while loop is never false?
+Write a while loop that counts from 1 to 5.
+True or False: A while loop can run zero times.
+
+11. For Loop Questions
+What is a for loop used for?
+Write a for loop that prints each letter in "cat".
+What function is often used with a for loop to generate a sequence of numbers?
+How many times will this loop run?
+```python
+for i in range(3):
+	print("Hello")
+```
+How many times will this loop run?
+
+12. Break Questions
+What is the purpose of the break statement?
+What happens to the rest of the loop when break is executed?
+Write a loop that stops when the user enters "stop".
+True or False: break can only be used in while loops.
+Explain the output:
+```python
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+```
+
+
