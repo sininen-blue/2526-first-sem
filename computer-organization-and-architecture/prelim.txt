@@ -1,0 +1,310 @@
+Day 1
+
+Which level in the multilevel machine model deals directly with transistors and logic gates?
+A. L0
+B. L1
+C. L2
+D. L4
+Answer: A
+
+Which of the following best describes machine language?
+A. A symbolic language for humans to read
+B. The primitive instruction set directly executed by hardware
+C. A set of high-level abstractions used to bridge the gap between hardware and software
+D. A collection of OS commands
+Answer: B
+
+Who proposed the concept of microprogramming in 1951?
+A. Alan Turing
+B. Maurice Wilkes
+C. John von Neumann
+D. Donald Knuth
+Answer: B
+
+The assembler’s primary role is to:
+A. Interpret machine code to turn it into electrical signals
+B. Convert assembly language to machine-level code
+C. Compile high-level code into bytecode
+D. Manage cache memory
+Answer: B
+
+Which early computing practice required programmers to personally operate the computer and manually load programs?
+A. Batch processing
+B. Open shop programming
+C. Timesharing
+D. Client-server computing
+Answer: B
+
+In the 1960s, operating systems were introduced primarily to:
+A. Replace machine language with high-level languages
+B. Reduce hardware costs
+C. Simplify and speed up program execution
+D. Replace interpreters with compilers
+Answer: C
+
+Why did some architectures eventually remove microprogramming?
+A. It was too expensive to store the microcode
+B. It slowed down execution compared to direct hardware execution
+C. It made compilers unnecessary
+D. It increased instruction set size which added lots of complexity
+Answer: B
+
+Levels and Abstractions – Explain the concept of a multilevel machine. Why are multiple abstraction layers useful for both hardware designers and programmers?
+
+Translation vs. Interpretation – Compare translation and interpretation in terms of performance, control flow, and practicality. Give an example scenario for each.
+
+Microprogramming Benefits – Explain why microprogramming was considered a major innovation in the 50s.
+
+Drawbacks of Early Programming Practices – Discuss the challenges of “open shop” programming before operating systems existed.
+
+Virtual Machines – Describe how a virtual machine is related to the concept of a "level" in computer architecture. Include an example from the notes.
+
+Elimination of Microprogramming – Why did some architectures later remove microprogramming? What were the trade-offs?
+
+Hardware-Software Equivalence – Explain the statement “hardware and software are logically equivalent.” Give an example of something that can be implemented either way.
+
+
+---
+
+Day 2
+
+Multiple Choice ( items)
+
+Who built the first mechanical computer in 1642?
+A. Charles Babbage
+B. Blaise Pascal
+C. Gottfried Wilhelm von Leibniz
+D. Augusta Ada Lovelace
+Answer: B
+
+What was the main limitation of Babbage’s Difference Engine?
+A. It could only multiply and divide
+B. It could only run a single algorithm
+C. It had no input device
+D. It used binary arithmetic
+Answer: B
+
+The Analytical Engine’s “mill” is most similar to which modern computer component?
+A. RAM
+B. CPU/ALU
+C. Hard drive
+D. Graphics card
+Answer: B
+
+Which WWII computer was built to break German codes?
+A. ENIAC
+B. Colossus
+C. EDSAC
+D. JOHNNIAC
+Answer: B
+
+Which of the following is a key feature of the von Neumann architecture?
+A. Separate storage for data and instructions
+B. Mechanical computation using gears
+C. Memory storing both instructions and data in binary
+D. Direct execution of high-level languages
+Answer: C
+
+Which invention replaced vacuum tubes in the second generation of computers?
+A. Relays
+B. Transistors
+C. Integrated circuits
+D. Microprocessors
+Answer: B
+
+What was the major innovation of the integrated circuits generation?
+A. GUI interfaces
+B. Multiprogramming
+C. Cloud computing
+D. Wearable devices
+Answer: B
+
+Which company popularized selling fully assembled personal computers to consumers?
+A. IBM
+B. Microsoft
+C. Apple
+D. Intel
+Answer: C
+
+Which ISA is most commonly used in mobile devices today?
+A. x
+B. ARM
+C. AVR
+D. MIPS
+Answer: B
+
+Short Answer ( items)
+
+Name the four main components of Babbage’s Analytical Engine.
+
+Who is recognized as the first computer programmer and what did they work on?
+
+What are the five main components of the von Neumann architecture?
+
+Name one major advantage of transistors over vacuum tubes.
+
+Give one reason ARM chips became popular again in personal computing in recent years.
+
+---
+
+Day 3
+
+Multiple Choice ( items)
+
+What is the main function of the Control Unit (CU) in a processor?
+A. Store large amounts of data
+B. Perform arithmetic and logic operations
+C. Fetch and decode instructions from memory
+D. Connect the CPU to external devices
+Answer: C
+
+Which register holds the address of the next instruction to be executed?
+A. IR
+B. PC
+C. MAR
+D. MDR
+Answer: B
+
+In Von Neumann architecture, which of the following is NOT a typical component of the data path cycle?
+A. ALU
+B. Registers
+C. Prefetch Buffer
+D. GPU
+Answer: D
+
+The fetch-decode-execute cycle begins with:
+A. Executing the instruction
+B. Fetching the instruction from memory
+C. Incrementing the program counter
+D. Loading data from registers
+Answer: B
+
+What is an interpreter in the context of CPU design?
+A. A device that converts analog signals to digital
+B. A hardware unit that translates high-level code into binary
+C. A program that imitates the function of a CPU
+D. A part of the operating system that handles I/O
+Answer: C
+
+Which of the following was a design goal of RISC computers?
+A. Maintain backward compatibility with older architectures
+B. Minimize instruction count but maximize execution speed
+C. Emulate CISC instructions for compatibility
+D. Increase semantic gap between hardware and high-level languages
+Answer: B
+
+Pipelining improves performance by:
+A. Increasing clock speed
+B. Executing multiple instructions in different stages simultaneously
+C. Reducing register usage
+D. Allowing the CPU to skip decoding steps
+Answer: B
+
+In SIMD (Single Instruction Multiple Data),
+A. Each core executes different instructions on the same data
+B. One instruction is applied to multiple data items in parallel
+C. Multiple programs run on a single processor
+D. Each processor has its own control unit
+Answer: B
+
+Which is loosely coupled:
+A. Multiprocessors
+B. Multicomputers
+C. Superscalar processors
+D. RISC cores in CISC CPUs
+Answer: B
+
+Essay / Short-Answer ( items)
+
+Outline the seven main steps of the fetch-decode-execute cycle. # diagram
+
+What is instruction-level parallelism (ILP) and how does it differ from process-level parallelism (PLP)?
+
+Define pipelining and describe how it can be compared to an assembly line in manufacturing.
+
+Explain why GPUs are considered a type of SIMD processor and describe one example of a task they are well-suited for.
+
+Discuss one historical reason why IBM adopted interpretation for its computer architectures.
+
+Compare and contrast RISC and CISC in terms of instruction complexity and performance.
+
+Differentiate between multiprocessors and multicomputers, including how they are coupled and their scalability.
+
+
+---
+
+
+day 4
+
+Multiple Choice ( items)
+
+What is the smallest unit of memory in a computer?
+A. Byte
+B. Bit
+C. Word
+D. Register
+Answer: B
+
+In Binary Coded Decimal (BCD), how many bits are used to store one decimal digit?
+A. 2
+B. 4
+C. 8
+D. 
+Answer: B
+
+A memory with $2^{12}$ cells will require how many bits for addressing?
+A. 8
+B. 
+C. 
+D. 
+Answer: C
+
+Which byte ordering method stores the most significant byte first?
+A. Little-endian
+B. Big-endian
+C. Mid-endian
+D. Reverse-endian
+Answer: B
+
+The Hamming distance between two codewords tells us:
+A. How many bits differ between them
+B. How many memory cells are faulty
+C. The number of words per block
+D. The location of the error in cache
+Answer: A
+
+Which cache concept is based on the observation that programs tend to access a small portion of memory at a time?
+A. Paging principle
+B. Temporal locality
+C. Locality principle
+D. Redundancy principle
+Answer: C
+
+In a magnetic disk, what is the name of the smallest physical unit of storage that begins with a preamble and ends with error correction code?
+A. Track
+B. Sector
+C. Cluster
+D. Block
+Answer: B
+
+Which RAID level duplicates all data across two disks?
+A. RAID 0
+B. RAID 1
+C. RAID 3
+D. RAID 5
+Answer: B
+
+Which optical disc format uses a blue laser for higher capacity?
+A. DVD
+B. Blu-ray
+C. CD-RW
+D. CD-ROM
+Answer: B
+
+Short Answer / Essay ( items)
+
+What is the Hamming distance, and how is it used in error detection and correction?
+
+Differentiate between error detection and error correction, giving the required Hamming distances for each.
+
+Explain how a floating-gate transistor in an SSD stores a bit of information and why it is non-volatile.
