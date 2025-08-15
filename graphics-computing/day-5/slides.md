@@ -1,5 +1,5 @@
 ---
-title: 4 WebGl prep
+title: 5 WebGl 
 lineNumbers: true
 exportFilename: 5 Finishing up the Gasket
 ---
@@ -60,7 +60,7 @@ text file can't load
 
 ---
 
- sending data to the gpu
+sending data to the gpu
 
 buffer
 
@@ -116,3 +116,9 @@ canvas context
 # v3 with view port clipping
 
 
+
+---
+
+# Worksheet
+
+Your goal is to use what you've learned to create a WebGL program that 
