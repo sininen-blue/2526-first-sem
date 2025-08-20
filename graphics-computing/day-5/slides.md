@@ -4,6 +4,10 @@ lineNumbers: true
 exportFilename: 5 Finishing up the Gasket
 ---
 
+# Actually implementing the Gasket
+
+---
+
 ## Canvas
 
 Html5 has a canvas element built to be able to draw, usually this is used for 2d drawings in a pen-plotter model, but is now also used for WebGl
@@ -35,7 +39,7 @@ The ratio of a rectangle's width to its height
 
 If the camera's parameters are different from the canvas, distortion may occur
 
-<img src="./images/fig1.png" alt="Aspect Ratio Distortion" width="400">
+<img class="mx-auto" src="./images/fig1.png" alt="Aspect Ratio Distortion" width="400">
 
 Because the entire clipping rectangle is mapped to the canvas
 
@@ -61,22 +65,28 @@ Where `(x, y)` is the lower left corner of the viewport (relative to the lower l
 And `w` and `h` give the width and height of that viewport
 
 ---
+layout: center
+---
 
 ## Application execution
 
-What we want is to have a data structure that contains all the geometry and attributes we need
+What we want is to have a data structure that contains *all* the geometry and attributes we need
 
-Then send that to the shaders
+> Then send that to the shaders
 
 Which will then process and display the result
 
+---
+
+## Application execution
+
 So we have a program that gets the points of the triangle, then displays it, what next?
 - one thing that could happen is that it exists after finished the execution
-- which could close the image the moment it renders
+    - which could close the image the moment it renders
 
 The mechanism employed by most graphics systems is to use *event processing* 
 
-Which we'll use later on for interactive graphics programs, but in our case, we don't process any events so the image stays
+Which we'll use later on for interactive graphics programs, but in our case, we don't process any events so the image just stays
 
 ---
 layout: center
@@ -87,10 +97,12 @@ layout: center
 ---
 
 # The html file
+Our starting point will *always* be HTML, 
 
-Our starting point will always be HTML, it does
-1. gather the resources we need, like the js, the packages, the shaders, etc
-2. describes the page we will display, in our case, just the canvas and it's size
+It:
+
+1. Gather the resources we need, like the js, the packages, the shaders, etc
+2. Describes the page we will display, in our case, just the canvas and it's size
     - It can also include buttons, sliders, and other interactive elements
 
 ---
@@ -110,14 +122,6 @@ Our starting point will always be HTML, it does
     </body>
 </html>
 ```
-
----
-
-## Approaches
-
-We can use different approaches to organize the code for a webgl program
-
-But for the sake of simplicity, we'll put the shaders in html and the javascript code somewhere else
 
 ---
 
@@ -179,17 +183,24 @@ layout: center
 
 # But we can't render yet
 
-<img src="./images/fig3.png" alt="No shaders" width="400">
+<img class="mx-auto" src="./images/fig3.png" alt="No shaders" width="400">
 
-The pipeline consists of the vertex shader, the rasterizer, and the fragment shader in order to display the points inthe framebuffer
+The pipeline consists of the `vertex shader`, the `rasterizer`, and the `fragment shader` in order to display the points inthe framebuffer
 
 ---
+layout: center
+---
 
-## Vertex shader
+# Vertex shader
+Transformations and projection steps
 
 A vertex shader is a program that processes each vertex and figures out what to do with it
 
 That could mean rotating it, scaling it, or just passing it through
+
+---
+
+## Vertex shader
 
 ```glsl
 #version 300 es
@@ -200,21 +211,28 @@ void main() {
 }
 ```
 
-if leave the color picking to the fragment shader, we can just pass the position through in our vertex shader
+If leave the *color picking* to the `fragment shader`, we can just pass the position through in our vertex shader
 
 - The `#version 300 es` line indicates version
 - The `in vec4 aPosition;` line declares an input variable from the buffer
 - The `gl_Position` variable is a built-in variable that tells the GPU where to place the vertex in clip space
 
-In general, a vertex shader takes in items in object space and outputs them in clip space, but since we declared our points in clip space, we can just pass them through
+In general, a `vertex shader` takes in items in *object space* and outputs them in *clip space*, but since we declared our points in clip space, we can just pass them through
 
 ---
+layout: center
+---
 
-## fragment shader
+# Fragment shader
+Per pixel operations
 
 Those vertices, after going through the vertex shader then go through primitive assembly and clipping before it reaches the rasterizer
 
 The rasterizer then converts the vertices into fragments, for each primitive inside the clipping volume
+
+---
+
+## Fragment shader
 
 Each fragment invokes an execution of the fragment shader, at minimum, each execution should output a color
 
@@ -235,11 +253,9 @@ We can then output different colors for different fragments, which is useful for
 
 ---
 
-# final
+Add the shaders to the *HTML* file
 
-Add the shaders to the HTML file
-
-Inside the head
+Inside the `<head></head>`
 
 ```html 
 <script id="fragment-shader" type="x-shader/x-fragment">
@@ -260,6 +276,12 @@ Inside the head
     }
 </script>
 ```
+
+<style>
+    code {
+        font-size: 15px;
+    }
+</style>
 ---
 
 ## Adding the shaders
@@ -268,9 +290,13 @@ Inside the head
 <script src="./initShaders.js"></script>
 ```
 
-Make sure you include the `initShaders.js` utility
+Make sure you include the `initShaders.js` utility (I'll provide this later)
+> it contains the code to compile and link the shaders
 
-Then in your `gasket.js` file, you can initialize the shaders
+
+Then,
+
+In your `gasket.js` file, you can initialize the shaders
 
 ```javascript
 program = initShaders(gl, "vertex-shader", "fragment-shader");
@@ -282,12 +308,18 @@ Which returns a program object that contains the compiled shaders and links them
 And you can then use with `gl.useProgram(program)`
 
 ---
+layout: center
+---
 
 ## Getting the attribute location
 
 And when we link the program object and the shaders, the names of shader variables are bound to indices in tables that are created in the linking process
 
 So we can use `gl.getAttribLocation` to find those index, and then once we know the index, we need to enable the vertex attributes, and describe the form of the data in the buffer
+
+---
+
+## Getting the attribute location
 
 ```javascript
 var positionLoc = gl.getAttribLocation(program, "aPosition");
@@ -298,16 +330,21 @@ render();
 ```
 
 `gl.vertexAttribPointer` tells the GPU how to interpret the data in the buffer
-- The first parameter is the index of the attribute
-- The second parameter is the number of numbers per vertex (in this case, 2 for x and y coordinates)
-- The third parameter is the type of the data (in this case, `gl.FLOAT` for 32-bit floating point numbers)
-- The fourth parameter is whether the data should be normalized to a set range (0.0, 1.0)
-- The fifth parameter is the stride, which is the number of bytes between the start of one vertex and the next (0 means tightly packed)
-- The last parameter is the offset in the buffer where the data starts (0 means start at the beginning)
+1. is the *index* of the attribute
+2. is the number of *things* per vertex (in this case, 2 for x and y coordinates)
+3. is the *type* of the data (in this case, `gl.FLOAT` for 32-bit floating point numbers)
+4. is whether the data should be *normalized* to a set range (0.0, 1.0)
+5. is the stride, step, offset, which is the number of bytes between the start of one vertex and the next (0 means tightly packed)
+6. is the offset in the buffer where the data starts (0 means start at the beginning)
 
 ---
+layout: center
+---
 
-Separate files
+# Putting it all together
+https://ishortn.ink/day4graphics
+
+<img class="mx-auto rounded" src="./images/qr.png" alt="Gasket Program" width="200">
 
 ---
 
