@@ -111,7 +111,14 @@ layout: center
 ---
 
 # Encapsulation
-data hiding
+Bundling data and methods into a single unit
+
+For better organization and access control
+
+> Again, this is done through classes
+
+1. Data hiding
+2. Separation of concerns
 
 ---
 
