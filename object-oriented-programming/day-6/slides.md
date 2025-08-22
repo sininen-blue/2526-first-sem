@@ -58,6 +58,8 @@ Each object is *ideally* a self-contained unit that has its own state and behavi
 And as long as its interactions with other objects are well-defined, we can reason about it in isolation.
 
 ---
+layout: two-col
+---
 
 ## Objects
 
@@ -79,6 +81,23 @@ class Dog:
         else:
             print(f"{self.name} is too tired to run.")
 ```
+
+::right::
+
+Where the class is a *template* to actually creaate objects
+
+```python
+powder = Dog()
+```
+
+Where powder is an *instance* of the class `Dog()`, and that instance is an *object*
+
+
+---
+
+## Objects
+
+<img class="mx-auto" src="./images/fig1.png" width="600">
 
 ---
 
@@ -107,11 +126,48 @@ Like
 - eating
 
 ---
+
+## Object Messages
+
+Another important part of object oriented programming is *messages*
+
+```python
+dog_handler = DogHandler()
+dog = Dog()
+
+dog_handler.walk(dog)
+```
+
+Any time an object is interacting with another object, it's called a message
+
+1. When `object A` calls a method from `object B`
+2. `object A` *sends* a message to `object B`
+3. `object B` *replies* through a `return` value
+
+---
 layout: center
 ---
 
 # Encapsulation
-data hiding
+Bundling data and methods into a single unit
+
+For better organization and access control
+
+> Again, this is done through classes
+
+1. Data hiding
+2. Separation of concerns
 
 ---
 
+## Encapsulation
+
+### Data Hiding
+
+One of the primary advantages of OOP is that objects don't need to reveal all of it's attributes and behaviors
+
+In a good OO design, an object will only  
+
+
+
+---
