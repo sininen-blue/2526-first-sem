@@ -348,26 +348,221 @@ https://ishortn.ink/day4graphics
 
 ---
 
+## Step by step
+
+1. Make your own `[program name].html`
+
+```html
+<html>
+    <body>
+        <canvas id="gl-canvas" width="512" height="512"></canvas>
+
+        <script src="initShaders.js"></script>
+        <script src="MV.js"></script>
+        <script src="gasket.js"></script>
+    </body>
+</html>
+```
+
+---
+
+## Step by Step
+
+2. Copy and source the `initShaders.js` and `MV.js` files
+3. make a `gasket.js` file
+
+---
+
+## Step by step
+
+4. On your `gasket.js`
+
+```javascript {all|1-3|4|6-8|7|10-13|all}
+var gl;
+var positions = [];
+var numPositions = 5000;
+init()
+
+function init() {
+    render();
+}
+
+function render() {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.POINTS, 0, numPositions);
+}
+```
+
+---
+
+## Step by step
+
+5. Add the shaders to the HTML file
+
+```html
+<body>
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es
+precision mediump float;
+
+out vec4 fColor;
+
+void
+main()
+{
+    fColor = vec4(1.0, 0.0, 0.0, 1.0);
+}
+</script>
+```
+
+---
+
+## Step by step
+
+
+5. Add the shaders to the HTML file
+```html
+<script id="vertex-shader" type="x-shader/x-vertex">
+#version 300 es
+in vec4 aPosition;
+
+void
+main()
+{
+    gl_PointSize = 1.0;
+    gl_Position = aPosition;
+}
+</script>
+</body>
+```
+
+---
+
+## Step by step
+
+6. Make sure your js file is using WebGL 2.0
+```javascript
+functin init() {
+    var canvas = document.getElementById("gl-canvas");
+    gl = canvas.getContext("webgl2");
+    if (!gl) {
+        alert("WebGL 2.0 isn't available");
+    }
+}
+```
+
+---
+
+## Step by step
+
+7. initialize your triangle, and pick the first point
+
+```javascript
+function init() {
+    ...
+
+    var vertices = [
+        vec2(-1, -1),
+        vec2(0, 1),
+        vec2(1, -1),
+    ]
+
+    var u = add(vertices[0], vertices[1]);
+    var v = add(vertices[0], vertices[2]);
+    var p = mult(0.25, add(u, v));
+
+    positions.push(p);
+}
+```
+
+---
+
+## Step by step
+
+8. Generate the rest of the points
+
+```javascript
+function init() {
+    ...
+
+    for (var i = 0; positions.length < numPositions; ++i) {
+        var j = Math.floor(3 * Math.random());
+
+        p = add(positions[i], vertices[j]);
+        p = mult(0.5, p);
+        positions.push(p);
+    }
+}
+```
+
+Describe what this is doing line by line (Participation points)
+
+---
+
+## Step by step
+
+9. Configure webgl
+
+```javascript
+function init() {
+    ...
+
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.clearColor(1.0, 1.0, 1.0, 1.0); // change this  
+}
+```
+
+---
+
+## Step by step
+
+10. load and initialize the shaders and load the data into the gpu
+
+```javascript
+function init() {
+...
+
+    var program = initShaders(gl, "vertex-shader", "fragment-shader");
+    gl.useProgram(program);
+
+    var bufferId = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(positions), gl.STATIC_DRAW);
+}
+```
+
+---
+
+## Step by step
+
+111. Get the attribute location and enable it, then render
+
+```javascript
+function init() {
+    ...
+
+    var positionLoc = gl.getAttribLocation(program, "aPosition");
+    gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLoc);
+
+    render();
+}
+```
+
+---
+
+## Step by step
+
+Run the program, by opening the HTML file in a browser
+
+---
+
 # future lesson
 
 # v2 use polygons
-
----
-
 # v3 in 3 dimensions
-
----
-
 # v3 in 3 dimensions
-
----
-
 # v3 with view port clipping
-
-
-
----
-
 # Worksheet
 
 Your goal is to use what you've learned to create a WebGL program that 
