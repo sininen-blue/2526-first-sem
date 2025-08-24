@@ -15,6 +15,8 @@ Object Oriented Programming
 3. what does that have to do with programming
 
 ---
+layout: two-cols
+---
 
 ## Key concepts of OOP
 
@@ -25,6 +27,8 @@ But also:
 2. Polymorphism,
 3. Inheritance,
 4. Composition
+
+::right::
 
 And:
 1. interfaces,
@@ -39,11 +43,13 @@ Also:
 1. Test driven development
 
 ---
+layout: center
+---
 
 # Objects
 A bundling of attributes and behavior
 
-> Is that familiar? (participation points)
+*Is that familiar?* (participation points)
 
 ---
 
@@ -155,8 +161,8 @@ For better organization and access control
 
 > Again, this is done through classes
 
-1. Data hiding
-2. Separation of concerns
+1. Separation of concerns
+2. Data hiding
 
 ---
 
@@ -166,8 +172,104 @@ For better organization and access control
 
 One of the primary advantages of OOP is that objects don't need to reveal all of it's attributes and behaviors
 
-In a good OO design, an object will only  
-
-
+In a good OO design, an object will only show *interfaces* that are necessary for *other* object to interact with it and nothing more
 
 ---
+
+# Interfaces and implementation
+Means of communication between objects
+
+<img class="mx-auto" src="./images/fig2.png" width="400">
+
+An interface is how one object can *message* another object, the method which other objects are meant to access
+
+And as long as the `interface` stays the same, the implementation can change and the *user* won't notice
+
+---
+
+## Note on terminology
+
+- Interface means something completely different than *graphical user interface*.
+
+- *User* just means another programmer, another object, or another actual user which is interacting with the user
+
+---
+
+## Interfaces and implementation
+
+````md magic-move
+```python {all|3-4|6-9|11-13|8-9}
+class IntSquare():
+    def __init__(self) -> None:
+        # private attribute
+        self._square_value = None
+
+    # public interface
+    def int_get_square(self, x: int) -> int:
+        self._square_value = self._int_calc_square(x)
+        return self._square_value
+
+    # private implementation
+    def _int_calc_square(self, x: int) -> int:
+        return x * x
+```
+```python {all|12-13|7-8}
+class IntSquare():
+    def __init__(self) -> None:
+        # private attribute
+        self._square_value = None
+
+    # public interface
+    def int_get_square(self, x: int) -> int:
+        self._square_value = self._int_calc_square(x)
+        return self._square_value
+
+    # private implementation
+    def _int_calc_square(self, x: int) -> int:
+        return math.pow(x, 2)
+```
+````
+---
+
+# Polymorphism
+From the greek word that means "many shapes"
+
+One of the most powerful advantages of object oriented design
+
+1. Imagine a bunch of different shape objects `circle`, `square`, `triangle`
+2. Each of these objects are *subclasses* of a `shape` object, meaning they all have the same `draw()` function
+3. Your program could then have
+
+```python
+# where shapes is a list of `shape` class instances
+for shape in shapes: 
+    shape.draw()
+```
+
+You don't need to know what shape it is, only that it's a subclass of a shape object
+
+It allows a single interface to be used for different underlying data types or objects
+
+---
+
+# Inheritance
+One of the ways to do polymorphism
+
+Is a way of *abstracting* common elements of classes into a higher class a `superclass` and then extending that superclass to its `subclass`es
+
+Often called an *is-a* relationship
+
+Each `subclass` has to implement the same interfaces the `superclass` implements
+
+The most common example for this would be the `mammal example`
+
+---
+
+# Composition
+Another way of doing polymorphism
+
+Instead of having a `superclass` and `subclass` classes to create objects, you instead use object to build/*compose* a bigger object
+
+Often calld a *has-a* relationship
+
+THe most common example for this would be the `car example`
