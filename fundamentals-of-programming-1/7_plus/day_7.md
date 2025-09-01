@@ -342,8 +342,42 @@ print(guess, 'is close to the square root of', x)
 ```
 
 ---
-Assume a given integer is between 0 and 1000, write a piece of python code that uses bisection search to guess that number
 
-Remember
-- set your bounds, your `low` and `high`
-- 
+## Log growth is better than linear
+
+- the regular brute force search for 54321 took over 23M guesses
+- the bisection search reduced it to 30 guesses
+- We'll talk more about this later, but we say that the brute force search is in *linear in size of problem*, bucaesu the number of steps grows linearly as we increase problem size
+- and bisection search is *logarithmic in size of problem*  because the number of steps grows logarithmically as we increase problem size
+
+---
+
+## Some observations
+
+- bisection search radically *reduces computation time*
+- the search space always gets *smaller quickly at the beginning* and then more slowly
+- works only on problems that have an inherent order
+
+---
+
+## Exercise
+
+Write code to do bisection to find a number between 0 and 1000. Print out the number of guesses you need to get the answer. 
+
+Then output the count and guess
+
+```python
+n = input("Enter a number between 0 and 1000: ")
+n = int(n)
+
+low = 0
+high = 1000
+guess = (high + low) / 2.0
+count = 0
+```
+
+```
+Enter a nummber between 0 and 1000: 24
+count: 56
+guess: 24.0
+```
