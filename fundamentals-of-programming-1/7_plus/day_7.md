@@ -109,7 +109,7 @@ Steps:
 ## Log growth
 
 - Cutting the number of things to check in half at each step is usually called logarithmic growth
-<img class="mx-auto" src="./images/fig1.png" alt="log growth" width="400"/>
+<img class="mx-auto" src="./images/day_7/fig1.png" alt="log growth" width="400"/>
 
 - Compared to linear growth which is how the guess and check algorithm works
 
@@ -130,7 +130,7 @@ layout: center
 - Assume we know that the answer lies between 0 and x
 - Rather than exhaustively trying things starting at 0, suppose instead we pick a number in the middle of this range
 
-<img class="mx-auto" src="./images/fig2.png" alt="bisection search" width="400"/>
+<img class="mx-auto" src="./images/day_7/fig2.png" alt="bisection search" width="400"/>
 
 - If you're lucky, that's the correct answer
 
@@ -141,7 +141,7 @@ layout: center
 - if it's not close enough, check if it's too big or too small
 - if `guess ** 2 > x`, then we know `guess` is too big, so now search 
 
-<img class="mx-auto" src="./images/fig3.png" alt="bisection search" width="400"/>
+<img class="mx-auto" src="./images/day_7/fig3.png" alt="bisection search" width="400"/>
 
 ---
 
@@ -149,7 +149,7 @@ layout: center
 
 - and if, for example,  this new `guess` is such that `guess ** 2 < x`, then we know that `guess` is too small
 
-<img class="mx-auto" src="./images/fig4.png" alt="bisection search" width="400"/>
+<img class="mx-auto" src="./images/day_7/fig4.png" alt="bisection search" width="400"/>
 
 - at each stage, reduce the range of values to search by half
 
@@ -159,7 +159,7 @@ layout: center
 
 Keep doing this
 
-<img class="mx-auto" src="./images/fig5.png" alt="bisection search" width="400"/>
+<img class="mx-auto" src="./images/day_7/fig5.png" alt="bisection search" width="400"/>
 
 ---
 layout: center
