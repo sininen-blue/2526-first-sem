@@ -33,7 +33,7 @@ const indexHtml = `
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Slides Index</title>
+  <title>CS170 Fundamentals of Programming</title>
   <style>
     body { font-family: sans-serif; padding: 2rem; max-width: 700px; margin: auto; }
     h1 { margin-bottom: 1rem; }
@@ -44,7 +44,10 @@ const indexHtml = `
   </style>
 </head>
 <body>
-  <h1>Slides for ${path.basename(subjectDir)}</h1>
+  <hgroup>
+    <h1>Slides for CS170</h1>
+    <p>Fundamentals of Programming</p>
+  </hgroup>
   <ul>
     ${links}
   </ul>
