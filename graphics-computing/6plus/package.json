@@ -5,7 +5,7 @@
   "scripts": {
     "build": "slidev build day6.md",
     "dev": "slidev --open day6.md",
-    "export": "slidev export day6.md",
+    "export": "slidev export day6.md"
   },
   "dependencies": {
     "@slidev/cli": "^52.1.0",
