@@ -11,9 +11,10 @@ for (const file of files) {
 
 	const baseName = path.basename(file, ".md");
 	const basePath = `/${baseName}/`;
+	const outDir = path.join("dist", baseName);
 
 	console.log(`\n📦 Building ${baseName} -> ${basePath}`);
-	execSync(`npx slidev build "${file}" --base ${basePath}`, {
+	execSync(`npx slidev build "${file}" --base ${basePath} --out ${outDir}`, {
 		stdio: "inherit"
 	});
 }
