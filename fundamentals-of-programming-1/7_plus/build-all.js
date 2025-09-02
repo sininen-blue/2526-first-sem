@@ -23,9 +23,14 @@ for (const file of files) {
 	builtDays.push(baseName);
 }
 
+const titleDict = {
+	day_7: "Bisection search",
+	day_8: "Decomposition and abstraction",
+}
+
 // --- generate index.html ---
 const links = builtDays
-	.map((day) => `<li><a href="./${day}/">${day}</a></li>`)
+	.map((day) => `<li><a href="./${day}/">Day ${day.split("_")[1]} - ${titleDict[day]}</a></li>`)
 	.join("\n");
 
 const indexHtml = `
@@ -35,11 +40,11 @@ const indexHtml = `
   <meta charset="UTF-8" />
   <title>CS170 Fundamentals of Programming</title>
   <style>
-    body { font-family: sans-serif; padding: 2rem; max-width: 700px; margin: auto; }
+    body { background-color: #141414; color: #cecabe; font-family: sans-serif; padding: 2rem; max-width: 700px; margin: auto; }
     h1 { margin-bottom: 1rem; }
     ul { list-style: none; padding: 0; }
     li { margin: 0.5rem 0; }
-    a { text-decoration: none; color: #0366d6; }
+    a { text-decoration: none; font-weight: 700; color: #4b978e; }
     a:hover { text-decoration: underline; }
   </style>
 </head>
