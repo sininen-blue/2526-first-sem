@@ -212,6 +212,57 @@ void main()
 
 ---
 
-We can also do cool things like change the color in application, and then send it to the shaders
+- We can also do cool things like change the color in application, and then send it to the shaders
+- We just need to set up a `colors` variable, bind it to a buffer, and then send it to the shader
+- In the same way we sent the `positions` variable, created a buffer, and bound that data to the buffer
+- We can do the same for colors
 
-We just need to set up a `colors` variable, bind it to a buffer, and then send it to the shader
+---
+
+```js
+var colors = [];
+
+// inside for loop
+colors.push(vec4(
+    (1.0 + positions[i][0]) / 2.0,
+    (1.0 + positions[i][1]) / 2.0,
+    (1.0 + positions[i][2]) / 2.0,
+    1.0
+))
+```
+
+---
+
+Then bind it
+
+```js
+// creates a buffer and sends the data
+var cBufferId = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, cBufferId);
+gl.bufferData(gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW);
+
+// tells webgl how to interpret the data, then "enables" it
+// enabling in this case means that the shader will constantly get updated values from the buffer
+var colorLoc = gl.getAttribLocation(program, "aColor");
+gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(colorLoc);
+```
+
+---
+
+## Reminder
+
+```js
+gl.vertexAttribPointer(
+    index,        // attribute location in the shader
+    size,         // number of components per attribute (1–4)
+    type,         // data type (e.g., gl.FLOAT)
+    normalized,   // whether to normalize (e.g., 0–255 → 0.0–1.0)
+    stride,       // byte offset between consecutive attributes
+    offset        // byte offset of the first attribute
+);
+```
+
+---
+
+## In implementation
