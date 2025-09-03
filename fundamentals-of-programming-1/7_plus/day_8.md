@@ -216,7 +216,7 @@ def abs(x):
 
 ## Function definition
 
-```python {all|1|2-5|7-11|all}
+```python {all|1|2-5|7-11|8,10|all}
 def is_even(i):
     """
     Input: i, a positive int
