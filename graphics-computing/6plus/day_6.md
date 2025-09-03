@@ -7,7 +7,7 @@ exportFilename: 6 expanding the gasket
 
 ---
 layout: float-right
-image: /images/day6/fig1.png
+image: /public/day6/fig1.png
 ---
 
 - While the gasket with points is random, the more iterations we do, the more that randomness disappears
@@ -16,7 +16,7 @@ image: /images/day6/fig1.png
 
 ---
 layout: float-right
-image: /images/day6/fig2.png
+image: /public/day6/fig2.png
 ---
 
 - this produces ___ upright triangles
