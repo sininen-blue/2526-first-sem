@@ -6,22 +6,26 @@ exportFilename: 6 expanding the gasket
 # Expanding the gasket
 
 ---
-layout: float-right
-image: /public/day6/fig1.png
+layout: two-cols
 ---
 
 - While the gasket with points is random, the more iterations we do, the more that randomness disappears
 - Regardless of how many points we generate, the middle point is always empty
 - and if we draw line segments between mid points, and connect it to other midpoints, we get a sierpinski triangle
 
+::right::
+<img src="./public/day6/fig1.png" width="300">
+
 ---
-layout: float-right
-image: /public/day6/fig2.png
+layout: two-cols
 ---
 
 - this produces ___ upright triangles
 - we can then repeat this process for each one
 - then do it again
+
+::right::
+<img src="./public/day6/fig2.png" width="300">
 
 ---
 
