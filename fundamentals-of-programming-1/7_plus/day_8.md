@@ -667,13 +667,15 @@ print(sum_odd(2, 4))
 ```
 
 ---
+layout: center
+---
 
 # We now have code that adds all numbers
 
 Now figure out how to do the odd part
 
 ---
-layout: center
+layout: two-cols
 ---
 
 `for`
