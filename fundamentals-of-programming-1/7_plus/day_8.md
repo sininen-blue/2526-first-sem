@@ -369,3 +369,359 @@ def is_even(i):
 True
 ```
 ````
+
+---
+
+## How to invoke a function
+
+False by itself isn't very useful
+
+It only becomes useful when we do something with it
+
+````md magic-move
+```python
+def is_even(i):
+    return i % 2 == 0
+
+for number in range(20):
+    if is_even(number):
+        print(number, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(i):
+    return i % 2 == 0
+
+for 0 in range(20):
+    if is_even(number):
+        print(number, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(i):
+    return i % 2 == 0
+
+for 0 in range(20):
+    if is_even(0):
+        print(0, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(0):
+    return 0 % 2 == 0
+
+for 0 in range(20):
+    if is_even(0):
+        print(0, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(0):
+    return 0 == 0
+
+for 0 in range(20):
+    if is_even(0):
+        print(0, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(0):
+    return True
+
+for 0 in range(20):
+    if is_even(0):
+        print(0, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(i):
+    return i % 2 == 0
+
+for 0 in range(20):
+    if True:
+        print(0, "is even")
+    else:
+        print("something else")
+```
+```python
+def is_even(i):
+    return i % 2 == 0
+
+for 0 in range(20):
+    if True:
+        None
+    else:
+        print("something else")
+```
+````
+
+---
+
+## How to invoke a function
+
+False by itself isn't very useful
+
+It only becomes useful when we do something with it
+
+```python
+def is_even(i):
+    return i % 2 == 0
+
+for number in range(20):
+    if is_even(number):
+        print(number, "is even")
+    else:
+        print("something else")
+```
+
+---
+
+## Exercise
+
+Write code that satisfies the following specs
+
+```python
+def div_by(n, d):
+    """
+    n and d are integers > 0
+    Returns True if d divides n evenly, and False otherwise
+    i.e. n=4, and d=2 returns True because 4/2 = even number, 
+    and n=5, and d=2 returns False because 5/2 = not even number
+    """
+```
+
+---
+layout: center
+---
+
+# Don't write code right away
+
+---
+layout: center
+---
+
+## Example
+
+Say we want to add all the odd integers between and including a and b
+
+1. What is the input (what are the values for a and b)
+2. what is the output (what do we give back)
+
+With that we can know that 
+
+```python
+def sum_odd(a, b):
+    # some code here
+    return sum_of_odds
+```
+
+---
+
+To actually write the program
+
+## Start on paper first
+
+
+Imagine the scenario with a set input and output
+
+Let's say `a = 2` and `b = 4`
+
+<!-- sum should be 3 -->
+
+---
+
+To actually write the program
+
+## Start on paper first
+
+What if `a = 2` and `b = 7`
+
+<!-- sum should be 15 -->
+
+---
+
+## Solve a similar problem
+
+The next step, after figuring it out on paper, is to look for a similar problem that you know how to solve in code
+
+For example:
+- Add all numbers between and including a and b
+- and start with that
+
+---
+
+## Solve a similar problem
+
+- We know that that's a loop
+- for or while, either works
+- We'll be using a both
+
+---
+layout: two-cols
+---
+
+`for`
+```python {all|2|3-4|5|7|all}
+def sum_odd(a, b):
+    sum_of_odds = 0
+    for i in range(a, b):
+        sum_of_odds += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+::right::
+
+`while`
+```python {all|2|3-6|7|9|all}
+def sum_odd(a, b):
+    sum_of_odds = 0
+    i = a
+    while i <= b:
+        sum_of_odds += 1
+        i += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+---
+layout: center
+---
+
+## Solve a similar problem
+
+But we don't get the results we want
+
+---
+layout: two-cols
+---
+
+## DEBUG!
+add print statements to see what's happening in your code
+
+`for`
+```python 
+def sum_odd(a, b):
+    sum_of_odds = 0
+    for i in range(a, b):
+        sum_of_odds += 1
+        print(i, sum_of_odds)
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+::right::
+
+`while`
+```python 
+def sum_odd(a, b):
+    sum_of_odds = 0
+    i = a
+    while i <= b:
+        sum_of_odds += 1
+        print(i, sum_of_odds)
+        i += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+---
+
+## DEBUG!
+Fix the problem in the for loop
+
+`for`
+```python 
+def sum_odd(a, b):
+    sum_of_odds = 0
+    for i in range(a, b+1):
+        sum_of_odds += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+::right::
+
+`while`
+```python 
+def sum_odd(a, b):
+    sum_of_odds = 0
+    i = a
+    while i <= b:
+        sum_of_odds += 1
+        i += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+---
+
+# We now have code that adds all numbers
+
+Now figure out how to do the odd part
+
+---
+layout: center
+---
+
+`for`
+```python 
+def sum_odd(a, b):
+    sum_of_odds = 0
+    for i in range(a, b+1):
+        if i % 2 == 1:
+            sum_of_odds += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+::right::
+
+`while`
+```python 
+def sum_odd(a, b):
+    sum_of_odds = 0
+    i = a
+    while i <= b:
+        if i % 2 == 1:
+            sum_of_odds += 1
+        i += 1
+    return sum_of_odds
+
+print(sum_odd(2, 4))
+```
+
+---
+
+# Observations
+
+1. Do the problem on paper first
+2. solve a similar problem if possible first
+3. test code often, using print statements 
+4. You can also test code with thonny, going line by line
+
+---
+
+# Summary
+
+1. functions allow us to `suppress detail` from a user
+2. functions capture computation within a `black box`
+3. A programmer writes functions with
+- 0 or more `inputs`
+- something to `return` (sometimes)
+4. a function `only runs when it is called`
+5. the entire function call is replaced with the return value
+
