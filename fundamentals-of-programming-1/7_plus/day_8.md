@@ -185,32 +185,40 @@ def abs(x):
 - maybe `classes` later, depending on how far we can get
 
 ---
+layout: center
+---
 
 # Functions
 
 - reusable pieces of code
 - capture steps of a computation so that we can use with any input
-- a function is just regular *code written in a special reusable*
+- a function is just regular *code written in a special way* that makes them reusable
 
 ---
 
 ## Functions
 
 - defining a function tells python some code now exists in memory
-- functions are only useful when they are *run* or *called* or *invoked* (same thing)
-- you write a function once but you can then use it many times
-- it's like code inside a file, it only runs when you hit the run button
+- functions are only useful when they are `run` or `called` or `invoked` (same thing)
+- you can write a function once but you can then use it many times
+
+
+Think of a file in your computer
+- you create/download it once
+- it only runs if you open the file itself
+- and you can run it many times
 
 ---
 
 ## Function characteristics
 
-- a name
-- inputs which can be 0 or more, usually called *parameters* or *arguments*
-- a *docstring* (optional but recommended)
-    - a commend that's started and ended by `"""` (triple double quotes) that provide the specifications for the function
-- a body (code to be executed)
-- a return (optional)
+1. a name
+2. 0 or more inputs, usually called *parameters* or *arguments*
+3. a *docstring* (optional but recommended)
+    - a comment that's started and ended by `"""` (triple double quotes) that provide the specifications for the function
+4. a body (code to be executed)
+5. a return (optional)
+    - the shape of the what the function will evaluate to
 
 ---
 
@@ -237,3 +245,127 @@ def is_even(i):
 
 ---
 
+## How to think about writing a function
+
+1. The first step in creating a function is to understand *what* the problem is
+
+In our example, what was the problem it was trying to solve? 
+
+---
+
+## How to think about writing a function
+
+```python
+def is_even(i):
+    """
+        Input: i, a positive int
+        Returns True if i is even, otherwise False
+    """
+```
+
+---
+
+## Exercise
+
+Given the problem: I want to get the absolute value of a number
+
+1. What is the name of the function?
+2. What are the inputs?
+
+```
+def _______( ________ ):
+    """
+        Input: __________
+        Returns __________
+    """
+```
+
+---
+
+## How to think about writing a function
+
+2. How would you solve the problem *without* writing a function?
+
+This is just regular programming
+
+```python
+def is_even(i):
+    if ________:
+        _________
+    else:
+        _________
+```
+
+---
+
+# We only have a function object at this point
+Like how numbers are objects, strings are objects
+
+Functions are also objects, and until we call them, they just sit in memory
+
+---
+
+## How to invoke a function
+
+```python
+is_even(4)
+```
+
+That's it
+
+---
+
+## How to invoke a function
+
+That line of code does the following
+1. Python looks for a function named `is_even` in memory
+2. It then runs the code inside the function body, using `4` as the value for `i`
+3. When the function hits a `return` statement the function gives that data back to the caller
+4. The function call `is_even(4)` evaluates to the value that was returned
+
+A function is just a bundle of expressions
+
+Because it's an expression, it evaluates to something
+
+---
+
+## How to invoke a function
+
+````md magic-move
+```python {all|7}
+def is_even(i):
+    if i % 2 == 0:
+        return True
+    else:
+        return False
+
+is_even(4)
+```
+```python {7,1|1|all}
+def is_even(i = 4): # I becomes what the caller provides
+    if i % 2 == 0:
+        return True
+    else:
+        return False
+
+is_even(4)
+```
+```python {3|7}
+def is_even(i):
+    if i % 2 == 0:
+        return True
+    else:
+        return False
+
+is_even(4)
+```
+```python {7}
+def is_even(i):
+    if i % 2 == 0:
+        return True
+    else:
+        return False
+
+True
+```
+````
