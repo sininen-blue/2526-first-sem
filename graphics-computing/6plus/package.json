@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "node build-all.js",
-    "dev": "slidev --open day6.md",
-    "export": "slidev export day6.md"
+    "dev": "slidev --open",
+    "export": "slidev export"
   },
   "dependencies": {
     "@slidev/cli": "^52.1.0",
