@@ -374,4 +374,4 @@ Take your point rendering assignment and
 
 Reference code
 
-[webgl github](https:/webgl github/github.com/sininen-blue/webgl-2526/blob/main/7_1/square.js)
+[ishortn.ink/graphicsGit](https://ishortn.ink/graphicsGit)
