@@ -218,14 +218,14 @@ Imagine a monitor, this monitor has
 
 Historically, monitors refreshed at 60Hz, or 60 times a second
 - this was because of the AC frequency in the US
+- were old TV's used the power lines as a timing reference
+- and monitors followed suit
 
 ---
 
 ## Display Process
 
-Now consider a browser window. Even though this is being redrawn, the contents are unchanged unless some action takes place that changes the pixels
-
-Note that a browser runs *asynchronously*
+Now consider a browser window. Even though this is being redrawn, the contents are *unchanged* unless some *action* takes place that changes the pixels. We call these actions `events`
 
 And in our code, it loads all our `html`, `css`, and `js` files, then runs our code when the `onload` event occurs.
 
@@ -294,8 +294,12 @@ Because WebGL is embedded in a browser, the browser controls the buffer swap.
 The buffer will continue to refresh the display at a constant rate, and won't replace the part of the display corresponding to the framebuffer until the application signals that it can do so
 
 So the main ways we can control when the browser redisplays the framebuffer are:
-1. timers
+1. `timers`
 2. `requestAnimationFrame`
+
+These strategies don't solve all the problems of animation. If the display is too complex, we might still need multiple frames to render a single frame
+
+It only ensures that the user *never* sees a partial display
 
 ---
 
@@ -367,3 +371,7 @@ Take your point rendering assignment and
 3. make your application change the point size over time to create an animation effect
 
 [ishortn.ink/animationAssignmentSubmit](https://ishortn.ink/animationAssignmentSubmit)
+
+Reference code
+
+[webgl github](https:/webgl github/github.com/sininen-blue/webgl-2526/blob/main/7_1/square.js)
