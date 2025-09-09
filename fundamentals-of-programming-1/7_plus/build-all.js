@@ -26,6 +26,8 @@ for (const file of files) {
 const titleDict = {
 	day_7: "Bisection search",
 	day_8: "Decomposition and abstraction",
+	day_9: "Functions as objects",
+	day_10: "Tuples and lists"
 }
 
 // --- generate index.html ---
