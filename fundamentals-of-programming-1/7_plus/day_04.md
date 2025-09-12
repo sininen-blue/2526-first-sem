@@ -258,8 +258,7 @@ layout: center
 What is an algorithm?
 
 ---
-layout: float-right
-image: images/fig1.png
+layout: two-cols
 ---
 
 ## What's a Guess and check algorithm
@@ -272,6 +271,9 @@ image: images/fig1.png
     - Find the correct solution
     - Run out of guesses
 
+::right::
+<img src="./images/day_4//fig1.png" alt="coords" width="400">
+
 ---
 
 ## Guess and check square root
@@ -282,7 +284,7 @@ Here's a simple example of a guess and check algorithm
 
 1. start with a guess, and check if it's the correct answer
 
-<img src="./images/fig2.png" alt="coords" width="900">
+<img src="./images/day_4/fig2.png" alt="coords" width="900">
 
 - Is `0 x 0 = 7`?
 - Is `2 * 2 = 7`?
@@ -296,7 +298,7 @@ Here's a simple example of a guess and check algorithm
 
 And if `x` is a perfect square, then you will eventually find the answer
 
-<img src="./images/fig3.png" alt="coords" width="900">
+<img src="./images/day_4/fig3.png" alt="coords" width="900">
 
 ---
 
@@ -306,7 +308,7 @@ And if `x` doesn't have a perfect square root, then we'll need to know when to s
 
 Here we can use algebra, if `guess` squared is bigger than `x`, then we know that the guess is too big, and we can stop guessing
 
-<img src="./images/fig4.png" alt="coords" width="900">
+<img src="./images/day_4/fig4.png" alt="coords" width="900">
 
 ---
 
@@ -331,7 +333,7 @@ else:
 - Does this work for any integer value of `x`?
 - What happens if `x` is negative?
 
-<img src="./images/fig5.png" alt="coords" width="900">
+<img src="./images/day_4//fig5.png" alt="coords" width="900">
 
 ---
 
@@ -370,7 +372,7 @@ layout: center
 
 ## Comparison between a while loop and a for loop
 
-<img src="./images/fig6.png" alt="coords" width="900">
+<img src="./images/day_4//fig6.png" alt="coords" width="900">
 
 ---
 
