@@ -24,6 +24,9 @@ for (const file of files) {
 }
 
 const titleDict = {
+	day_04: "Loops and guess and check",
+	day_05: "Binary",
+	day_06: "Approximation",
 	day_07: "Bisection search",
 	day_08: "Decomposition and abstraction",
 	day_09: "Functions as objects",
