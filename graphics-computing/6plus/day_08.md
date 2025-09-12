@@ -395,7 +395,7 @@ g[wait for next render frame]
 
 subgraph interaction
     direction LR
-    a --click event--> b --> c --> d
+    a --click event--> b --event--> c --> d
     c --query events --> b
 end
 
