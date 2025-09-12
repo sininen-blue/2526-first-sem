@@ -24,7 +24,9 @@ for (const file of files) {
 }
 
 const titleDict = {
-	day_6: "Exapanding the gasket",
+	day_06: "Exapanding the gasket",
+	day_07: "animation",
+	day_08: "interaction"
 }
 
 // --- generate index.html ---
