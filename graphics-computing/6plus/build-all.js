@@ -29,10 +29,30 @@ const titleDict = {
 	day_08: "interaction"
 }
 
+const resources = {
+	public_resources: "https://ishortn.ink/graphicsSlides",
+	github: "https://ishortn.ink/graphicsGit",
+}
+
+const assignments = {
+	gasket: "https://ishortn.ink/gasketSource",
+	point_rendering: "https://ishortn.ink/graphicsAssignmentSubmit",
+	animation: "https://ishortn.ink/animationAssignmentSubmit",
+}
+
 // --- generate index.html ---
 const links = builtDays
 	.map((day) => `<li><a href="./${day}/">Day ${day.split("_")[1]} - ${titleDict[day]}</a></li>`)
 	.join("\n");
+
+const resourcesLinks = Object.entries(resources)
+	.map(([key, url]) => `<li><a href="${url}">${key.replaceAll("_", " ")}</a></li>`)
+	.join("\n");
+
+const assignmentsLinks = Object.entries(assignments)
+	.map(([key, url]) => `<li><a href="${url}">${key.replaceAll("_", " ")}</a></li>`)
+	.join("\n");
+
 
 const indexHtml = `
 <!DOCTYPE html>
@@ -57,6 +77,20 @@ const indexHtml = `
   <ul>
     ${links}
   </ul>
+
+<section>
+<h2>Resources</h2>
+<ul>
+${resourcesLinks}
+</ul>
+</section>
+
+<section>
+<h2>Assignments</h2>
+<ul>
+${assignmentsLinks}
+</ul>
+</section>
 </body>
 </html>
 `;
