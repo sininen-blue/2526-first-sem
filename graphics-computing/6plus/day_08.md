@@ -26,14 +26,33 @@ a --> b --> c --> d --> a
 His model of how interaction worked was deceptively simple, but so generalized that it's still being used today
 
 ---
+layout: two-cols
+---
 
 ## Interaction
 
-Because rendering is the primary concern of OpenGL, and thus WebGL, interaction is not directly supported
+Most rendering APIs do not handle interaction directly.
 
-The main reason for this is *portability*, because OpenGL and WebGL don't have standard APIs for handling events and user input, it can be placed in any environment without modification.
+Mostly for *portability* reasons.
 
-This means that interaction must be *handled* by the application or the environment, usually through a third party library in the case of OpenGL, where the library changes depending on the system it's on. Both for input and also window handling.
+This means that interaction must be *handled* by the application or the environment
+
+::right::
+
+```mermaid
+graph TD;
+subgraph os
+    a[window handling]
+
+    subgraph window/browser
+        b[event handling]
+
+        subgraph webgl/opengl
+            c[application]
+        end
+    end
+end
+```
 
 ---
 
@@ -41,7 +60,13 @@ This means that interaction must be *handled* by the application or the environm
 
 Because WebGL is embedded in a browser, we can both use the browser's built in event and window handling, as well as the variety of third party libraries available for the web.
 
-We will mainly be using vanilla JavaScript to handle interaction without using any higher level packages.
+We will mainly be using *vanilla* JavaScript to handle interaction without using any higher level packages.
+
+---
+layout: center
+---
+
+# Input Devices
 
 ---
 
@@ -49,7 +74,7 @@ We will mainly be using vanilla JavaScript to handle interaction without using a
 
 Before handling interaction, we need to understand the different types of input devices
 
-There are two main ways of understanding input devices:
+There are two main ways of *understanding* input devices:
 1. Physical
 2. Logical
 
@@ -57,7 +82,7 @@ There are two main ways of understanding input devices:
 
 ## Physical Model
 
-In the physical model, we think of an input device in terms of it's physical properties
+In the physical model, we think of an input device in terms of its physical properties
 
 - A mouse has a laser, two buttons, and a scroll wheel.
 - A trackball mouse has a ball, and two buttons, and sometimes a wheel.
@@ -69,9 +94,9 @@ All these devices have different physical properties, and thus different ways of
 
 ## Logical Model
 
-In the logical model, we think of an input device in terms of the *events* it generates
+In the logical model, we think of an input device in terms of the `events` it generates
 
-A black box with an input and output
+A *black box* with an input and output
 
 In terms of computer graphics, we *prefer* the logical model
 
@@ -79,7 +104,13 @@ In terms of computer graphics, we *prefer* the logical model
 - A trackball mouse has `mousemove`, `mousedown`, and `mouseup` events
 - and a keyboard has ______
 
-This allows us to use the same physical device in multiple ways, but also lets the program work without modification if the physical device changes, as long as the logical events are the same
+This allows us to use the same physical device in multiple ways, but also lets the program work *without modification* if the physical device changes, as long as the logical events are the same
+
+---
+layout: center
+---
+
+# Physical Input Devices
 
 ---
 
@@ -88,39 +119,43 @@ This allows us to use the same physical device in multiple ways, but also lets t
 From a physical perspective, each input device has properties that make it better for certain tasks for others
 
 Historically, however, there are two main categories of input device
-1. *pointing* devices, to indicate position
-2. *keyboard* devices, to return character codes
+1. *keyboard* devices, to return character codes,
+2. *pointing* devices, to indicate position
 
+Where every other input device is a variation or combination of these two main types
 
+---
+layout: two-cols
 ---
 
 ## Keyboards and keyboard codes
 
-A mouse, from a logical perspective, can be thought of as a keyboard as long as at least one of its buttons generates and sends a character code
+A keyboard is just a set of buttons that generate and send character codes
 
-A keyboard, from a logical perspective, is just a set of buttons that generate and send character codes
+- The standard for character codes was **ASCII**, American Standard Code for Information Interchange. 
+- It was expanded to an 8-bit character set known as **Latin-1** which can represent most European languages
+- Then **Unicode** was developed as a 16-bit code that's capable of supporting almost every written language 
 
-For many years, the standard for character codes was ASCII, American Standard Code for Information Interchange. And it contained only 127 codes, which was then expanded to a larger 8-bit character set known as Latin 1 which can represent most European languages
-
-Then Unicode was developed as a 16-bit code that's capable of supporting almost every written language 
-
+::right::
 ```mermaid
 graph LR;
-a[ASCII]
-b[Latin 1]
-c[Unicode]
-a --> b --> c
+subgraph UNICODE
+    subgraph LATIN-1
+        ASCII
+    end
+end
 ```
 
+All of these are cross compatible
+
 Note that Unicode is a superset of Latin 1, which is a superset of ASCII
+
 
 ---
 
 ## Mouse and Trackball
 
-A mouse is a physical device that turns the motion of a ball or the feedback of a laser, into a vector of motion which is then translated into a change in position of a pointer on the screen
-
-This usually takes the form of an optical sensor or a mechanical motion sensor
+A mouse is a physical device that turns the motion of a ball (or the feedback of a laser), into a *vector of motion* which is then translated into a change in position of a pointer on the screen
 
 Motion, usually in two independent axes, is the primary output of a mouse, and is interpreted by a decoder which is then sent to the computer
 
@@ -130,9 +165,12 @@ In most cases, this means that they provide *relative positioning*, where the mo
 
 ## Tablets, touch pads, and touch screens
 
-Data tablets provide *absolute positioning*, where rows and columns of wires or a capacitive layer can determine the exact position of a stylus or finger on the surface of the tablet
+Data tablets provide *absolute positioning*, 
+- Where rows and columns of wires or a capacitive layer can determine the exact position of a stylus or finger on the surface of the tablet
 
-Touch pads in particular are a common feature on laptops, and provide a small surface for relative positioning, but through the lens of a logical model, they can be treated as an absolute positioning device
+Touch pads in particular are a common feature on laptops, and provide 
+- A small surface for relative positioning, 
+- But through the lens of a logical model, they can be treated as an absolute positioning device
 
 These devices also allow for more complex gestures, such as *multi-touch*, pinching, and swiping, which while still under the purview of a pointing device, can be thought of as a completely different class of input
 
@@ -153,6 +191,12 @@ Examples of this include
 - phones
 
 ---
+layout: center
+---
+
+# Logical Input Devices
+
+---
 
 ## Logical devices
 
@@ -160,29 +204,22 @@ From a logical point of view, an input device has two main characteristics
 1. the *measurements* the device returns to the user program
 2. the *time* when the device returns those measurements
 
-Historically, APIs defined six classes of logical input device, like a `locator device` which would provide a position in object coordinates, a `pick device` would provide an identifier for an object, etc
-
----
-
-## Logical devices
-
-However, because modern window systems cannot always be disassociated completely from the properties of the physical device, most systems no longer use these classes.
-
-Instead they use a layer in between, usually in a display such as a pop-up menu or a button, also known as a `widget`
+Usually, input handling APIs use a layer in between, usually in a display such as a pop-up menu or a button, also known as a `widget`
 
 ```mermaid
 graph LR;
 a[physical device] --> b[logical device] --> c[widget] --> d[application]
 ```
 
+To take accept measurements and time
+
 ---
 
 ## Input modes
 
-From a device to an application we have two main entities
-
-1. the measure, which is what the device returns
-2. the trigger, which is what the device uses to send the measure
+Device to application interaction has two main entities
+1. the *measure*, which is what the device returns
+2. the *trigger*, which is what the device uses to send the measure
 
 For example
 > A keyboard has a measure (a character code) and a trigger (a key press)
@@ -199,17 +236,18 @@ In this mode, the measure is not given to the program until the device is trigge
 
 in a C program that requires user input, we use the function _____
 
-This stops the program, and lets the user type,
+This *stops* the program, and lets the user type,
 
 We can take as long as we like, and that data is placed in a buffer, and only when a specific trigger is given, such as pressing the `enter` key, is the data sent to the program
 
 ```mermaid
 graph LR;
-a[trigger]
+x[device]
 b[measure]
 c[program]
 
-a --trigger--> b --measure--> c
+x --input--> b
+x --trigger--> b --measure--> c
 c --request--> b
 ```
 
@@ -219,9 +257,16 @@ c --request--> b
 
 A characteristic of request-mode inputs is that the user must identify which device is to provide the input.
 
-This means that we ignore any other information from other input devices other the one specified.
+This means that we **ignore** any other information from other input devices other the one specified.
 
-Request mode is useful for situations in which the program guides the user, but *not* useful in applications where the user controls the flow of a program, like in a game, where most buttons can be pressed at any time.
+Request mode is useful for situations in which the program guides the user
+- like when filling up a form, 
+- in a tutorial,
+- or in a text based game
+
+But *not* useful in applications where the user controls the flow of a program, 
+- like in a game, where most buttons can be pressed at any time.
+- or graphic design software, where the user can use multiple different tools at any time
 
 ---
 
@@ -231,11 +276,12 @@ Can handle these other interactions
 
 ```mermaid
 graph LR;
-a[trigger]
+a[device]
 b[measure]
 c[event queue]
 d[program]
 
+a --input--> b
 a --trigger--> b --measure--> c --event--> d
 d --await--> c
 ```
@@ -244,7 +290,7 @@ In event mode, each input device has its own trigger and each is running a measu
 
 In our model, the application can either periodically check the event queue for new events, or it can wait until an event is placed in the queue. And then it can choose whether or not to use said event
 
-> For example, in a text input for a program, the application could look at the event queue and choose to ignore all non keyboard events
+This is called `polling` or `querying` the event queue respectively
 
 ---
 
@@ -252,7 +298,7 @@ In our model, the application can either periodically check the event queue for 
 
 Another approach is to associate a function called a `callback` with a specific type of event.
 
-For example, *mouse events* like moving the mouse, or clicking a button, can be associated wit ha function that handles those events
+For example, *mouse events* like moving the mouse, or clicking a button, can be associated with a function that handles those events
 
 ```javascript
 canvas.addEventListener('mousemove', function(event) {
@@ -268,20 +314,25 @@ And from the perspective of the window system, these events are queried regularl
 
 ## Clients and Servers
 
-Because we're using WebGL, the `server model` is used. Where a *primary* concern is the ability to function in a world of *distributed computing and networks*
+When we use WebGL, we follow a client–server model.
+- The client is the application code (your JavaScript program).
+- The server is the graphics system (the WebGL implementation inside the browser).
 
-This model was popularized by the `X window system`, where even today, we still use the terminology invented for it
-
-However today, servers are usually the graphics system itself, and the client is the application
+This way of thinking comes from the X Window System, which popularized the terminology. Even though everything runs on the same machine, the logical separation still applies.
 
 ```mermaid
 graph LR;
-a[client/web browser]
-b[server/webGL]
-a --request--> b --response--> a
+a[Client / JS Application]
+b[Server / WebGL + GPU]
+a --"draw line request"--> b
+b --"rendered result"--> a
 ```
 
-Where the client requests the server to do something, like drawing a line, and the server responds by doing it
+---
+layout: center
+---
+
+# Event-driven programming
 
 ---
 
@@ -290,22 +341,22 @@ Where the client requests the server to do something, like drawing a line, and t
 Because WebGL is a rendering API, not an input API, we use HTML and JavaScript for the interactive sections.
 
 An event, in this context, is classified by its
-- type
-- target
+- type, the kind of event
+- target, the object that generates or receives the event
 
-Where the target is an object, like a `button`, or a physical device, like a `mouse`
+```javascript
+canvas.addEventListener('mousemove', function(event) {
+});
+```
 
-And the type is a string, like `click` generated by the button, or `mousemove` generated by the mouse
-
-Where each event has a *name* that usually begins with `on`, like `onclick` or `onmousemove`
-
-With device independent events, like `onclick` being able to be generated by a mouse, a keyboard, or a touch screen, or a button
+- Where the target is an object, like a `canvas`, or a physical device, like a `mouse`
+- And the type is a string, like `mousemove` generated by the button, or `mousemove` generated by the mouse
 
 ---
 
 ## Programming event-driven input
 
-An example of an event that we have already created a handler for is 
+Another example of an event that we have already created a handler for is 
 
 ```javascript
 window.onload = init;
@@ -313,8 +364,14 @@ window.onload = init;
 
 Where:
 1. the window is the target
-2. the load is the type
-3. the init is the handler/callback function
+2. the load is the type, defined by `onload`
+3. the init is a handler/callback function
+
+---
+layout: center
+---
+
+# Programming
 
 ---
 
@@ -333,6 +390,8 @@ First we need to add a button to our HTML file
 
 This button will generate an event each time that we click on it. But that event isn't handled and simply goes into the event queue, then is ignored
 
+> note that buttons generate the `click` event by default
+
 ---
 
 ## Programming event-driven input
@@ -342,6 +401,11 @@ First we need to get a reference to the button in our JavaScript code
 `box.js`
 ```javascript
 var button = document.getElementById("someId");
+
+```
+
+Then register an event listener for the `click` event, which will call a callback function each time the button is clicked
+```javascript
 button.addEventListener("click", function() {
     // handle the click event
 });
@@ -371,7 +435,7 @@ uTheta += direction * 0.1;
 
 Then we can change the direction variable each time the button is clicked
 
-`box.js`
+`in the callback function`
 ```javascript
 button.addEventListener("click", function() {
     direction *= -1; // reverse the direction
@@ -383,7 +447,7 @@ button.addEventListener("click", function() {
 ## Summary
 
 ```mermaid
-flowchart LR;
+flowchart TD;
 a[button pressed]
 b[event queue]
 c[event listener]
@@ -407,11 +471,8 @@ subgraph rendering
     g --> e
 end
 
-d --change direction--> rendering
-
+interaction --direction update--> rendering
 ```
-
-Where after the button is pressed, and handled by the event listener, it updates the direction variable which is then rendered
 
 ---
 
@@ -431,3 +492,17 @@ button.addEventListener("mousemove", function() {
 ```
 
 Where if the mouse moves over the button, it will also change the direction of rotation
+
+---
+
+## Summary
+- there are two main models for input devices
+    - physical
+    - logical
+- WebGL only handles rendering, events are handled by the browser
+- events are the main mechanism for interaction
+    - each event has a type
+    - each event has a target
+- these events are processed either through *request mode* or *event mode*
+- we register events with `addEventListener`
+- events go into an `event queue` and are processed by `listeners`
