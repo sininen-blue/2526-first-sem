@@ -8,35 +8,39 @@ const files = readdirSync(subjectDir);
 const builtDays = [];
 
 for (const file of files) {
-	const fullPath = path.join(subjectDir, file);
-	if (!file.endsWith(".md") || !statSync(fullPath).isFile()) continue;
+  const fullPath = path.join(subjectDir, file);
+  if (!file.endsWith(".md") || !statSync(fullPath).isFile()) continue;
 
-	const baseName = path.basename(file, ".md");   // e.g. "day_1"
-	const basePath = `/${baseName}/`;              // for routing
-	const outDir = path.join("dist", baseName);    // e.g. dist/day_1
+  const baseName = path.basename(file, ".md"); // e.g. "day_1"
+  const basePath = `/${baseName}/`; // for routing
+  const outDir = path.join("dist", baseName); // e.g. dist/day_1
 
-	console.log(`\n📦 Building ${baseName} -> ${outDir} (base=${basePath})`);
-	execSync(`npx slidev build "${file}" --base ${basePath} --out ${outDir}`, {
-		stdio: "inherit"
-	});
+  console.log(`\n📦 Building ${baseName} -> ${outDir} (base=${basePath})`);
+  execSync(`npx slidev build "${file}" --base ${basePath} --out ${outDir}`, {
+    stdio: "inherit",
+  });
 
-	builtDays.push(baseName);
+  builtDays.push(baseName);
 }
 
 const titleDict = {
-	day_04: "Loops and guess and check",
-	day_05: "Binary",
-	day_06: "Approximation",
-	day_07: "Bisection search",
-	day_08: "Decomposition and abstraction",
-	day_09: "Functions as objects",
-	day_10: "Tuples and lists"
-}
+  day_04: "Loops and guess and check",
+  day_05: "Binary",
+  day_06: "Approximation",
+  day_07: "Bisection search",
+  day_08: "Decomposition and abstraction",
+  day_09: "Functions as objects",
+  day_10: "Tuples and lists",
+  day_11: "Mutability",
+};
 
 // --- generate index.html ---
 const links = builtDays
-	.map((day) => `<li><a href="./${day}/">Day ${day.split("_")[1]} - ${titleDict[day]}</a></li>`)
-	.join("\n");
+  .map(
+    (day) =>
+      `<li><a href="./${day}/">Day ${day.split("_")[1]} - ${titleDict[day]}</a></li>`,
+  )
+  .join("\n");
 
 const indexHtml = `
 <!DOCTYPE html>
