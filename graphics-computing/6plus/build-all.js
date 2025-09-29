@@ -8,51 +8,58 @@ const files = readdirSync(subjectDir);
 const builtDays = [];
 
 for (const file of files) {
-	const fullPath = path.join(subjectDir, file);
-	if (!file.endsWith(".md") || !statSync(fullPath).isFile()) continue;
+  const fullPath = path.join(subjectDir, file);
+  if (!file.endsWith(".md") || !statSync(fullPath).isFile()) continue;
 
-	const baseName = path.basename(file, ".md");   // e.g. "day_1"
-	const basePath = `/${baseName}/`;              // for routing
-	const outDir = path.join("dist", baseName);    // e.g. dist/day_1
+  const baseName = path.basename(file, ".md"); // e.g. "day_1"
+  const basePath = `/${baseName}/`; // for routing
+  const outDir = path.join("dist", baseName); // e.g. dist/day_1
 
-	console.log(`\n📦 Building ${baseName} -> ${outDir} (base=${basePath})`);
-	execSync(`npx slidev build "${file}" --base ${basePath} --out ${outDir}`, {
-		stdio: "inherit"
-	});
+  console.log(`\n📦 Building ${baseName} -> ${outDir} (base=${basePath})`);
+  execSync(`npx slidev build "${file}" --base ${basePath} --out ${outDir}`, {
+    stdio: "inherit",
+  });
 
-	builtDays.push(baseName);
+  builtDays.push(baseName);
 }
 
 const titleDict = {
-	day_06: "Exapanding the gasket",
-	day_07: "animation",
-	day_08: "interaction"
-}
+  day_06: "Exapanding the gasket",
+  day_07: "animation",
+  day_08: "interaction",
+};
 
 const resources = {
-	public_resources: "https://ishortn.ink/graphicsSlides",
-	github: "https://ishortn.ink/graphicsGit",
-}
+  public_resources: "https://ishortn.ink/graphicsSlides",
+  github: "https://ishortn.ink/graphicsGit",
+};
 
 const assignments = {
-	gasket: "https://ishortn.ink/gasketSource",
-	point_rendering: "https://ishortn.ink/graphicsAssignmentSubmit",
-	animation: "https://ishortn.ink/animationAssignmentSubmit",
-}
+  gasket: "https://ishortn.ink/gasketSource",
+  point_rendering: "https://ishortn.ink/graphicsAssignmentSubmit",
+  animation: "https://ishortn.ink/animationAssignmentSubmit",
+  miniCAD: "https://ishortn.ink/graphProject1",
+};
 
 // --- generate index.html ---
 const links = builtDays
-	.map((day) => `<li><a href="./${day}/">Day ${day.split("_")[1]} - ${titleDict[day]}</a></li>`)
-	.join("\n");
+  .map(
+    (day) =>
+      `<li><a href="./${day}/">Day ${day.split("_")[1]} - ${titleDict[day]}</a></li>`,
+  )
+  .join("\n");
 
 const resourcesLinks = Object.entries(resources)
-	.map(([key, url]) => `<li><a href="${url}">${key.replaceAll("_", " ")}</a></li>`)
-	.join("\n");
+  .map(
+    ([key, url]) => `<li><a href="${url}">${key.replaceAll("_", " ")}</a></li>`,
+  )
+  .join("\n");
 
 const assignmentsLinks = Object.entries(assignments)
-	.map(([key, url]) => `<li><a href="${url}">${key.replaceAll("_", " ")}</a></li>`)
-	.join("\n");
-
+  .map(
+    ([key, url]) => `<li><a href="${url}">${key.replaceAll("_", " ")}</a></li>`,
+  )
+  .join("\n");
 
 const indexHtml = `
 <!DOCTYPE html>
