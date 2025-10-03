@@ -27,6 +27,7 @@ const titleDict = {
   day_06: "Exapanding the gasket",
   day_07: "animation",
   day_08: "interaction",
+  day_09: "Math",
 };
 
 const resources = {
