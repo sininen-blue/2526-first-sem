@@ -20,7 +20,7 @@ By understanding the function of all the pins, we can learn how the CPU interact
 
 ## CPU Pins
 
-The cpu pins can be grouped into 3 main categories:
+The CPU pins can be grouped into 3 main categories:
 - Address pins,
 - Data pins, and
 - Control pins
@@ -33,7 +33,7 @@ These pins are connected to similar pins on the memory and I/O devices through a
 
 ### Example
 
-For a cpu to fetch and run an instruction from memory, it needs to:
+For a CPU to fetch and run an instruction from memory, it needs to:
 1. *Put* the memory address of that instruction *on its address pins*
 2. *Assert\** one or more *control lines* to inform the memory that it wants to read a word
 3. The memory *replies* by *putting* the requested word on the *CPU's data pins*
@@ -105,7 +105,7 @@ And each has its own requirements and properties
 
 ## System Bus
 
-Early computers had a single external bus, usually called a *system bus*. It consisted of 50-100 parallel copper wires etched into the motherboard, with conenctors for I/O
+Early computers had a single external bus, usually called a *system bus*. It consisted of 50-100 parallel copper wires etched into the motherboard, with connectors for I/O
 
 <img class="mx-auto w-3/4" src="./images/day_08/fig2.png" alt="System Bus">
 
@@ -119,7 +119,7 @@ Designers of the CPU can use whatever bus they want inside. But for external bus
 
 These protocols are a set of well-defined rules, both logically and electrically, that all devices on the bus must follow to be able to communicate.
 
-Though some busses, especiallly for smaller embedded systems, are custom designed for a specific application since they don't need to deal with compatibility.
+Though some buses, especially for smaller embedded systems, are custom designed for a specific application since they don't need to deal with compatibility.
 
 ---
 layout: two-cols
@@ -127,7 +127,7 @@ layout: two-cols
 
 ## Bus Protocols
 
-The world would be a better place if all but one dissapeared and we all used the same one. However, that's unlikely to ever happen.
+The world would be a better place if all but one disappeared, and we all used the same one. However, that's unlikely to ever happen.
 
 Too much money is involved in the design and manufacture of these systems for companies to give up their proprietary designs.
 
@@ -219,7 +219,7 @@ layout: two-cols
 
 This led to many designs where the CPU had significantly more complicated architectures, due to the designers not initially starting with a wide enough bus.
 
-In this example, the 8088 CPU had a 20-bit address bus for 1MB of memory, but the 80286 wanted 16MB of memory so four more bus lines were added.
+In this example, the 8088 CPU had a 20-bit address bus for 1 MB of memory, but the 80286 wanted 16 MB of memory so four more bus lines were added.
 
 And because of backwards compatibility, the original 20 lines were kept, leading to a more complex design.
 
@@ -243,7 +243,7 @@ The first one is possible (but difficult) and leads to more *bus skew*. An effec
 
 Another problem with speeding up the bus is *backward compatibility*. Old boards designed for slower buses will not work with faster ones.
 
-The second one is the usual approach, but usually leads to a *multiplexd bus* because super wide buses are expensive. And so the data lines are shared for both address and data, but at different times
+The second one is the usual approach, but usually leads to a *multiplexed bus* because super wide buses are expensive. And so the data lines are shared for both address and data, but at different times
 
 This leads to narrower bus widths (and costs) but a slower system.
 
@@ -264,7 +264,7 @@ Each type runs on bus cycles, and they can be of any length
 
 A synchronous bus runs on a crystal that usually runs between 5 - 133 MHz with all activities running in sync with the clock
 
-In our example, we'll be using a 100 MHz clock, which gives a bus cycle time of 10 ns. We'll also assme that reading from memory takes 15 nsec from the time the address is stable
+In our example, we'll be using a 100 MHz clock, which gives a bus cycle time of 10 ns. We'll also assume that reading from memory takes 15 ns from the time the address is stable
 
 <img class="mx-auto w-1/2" src="./images/day_08/fig5.png" alt="Synchronous Bus">
 
@@ -391,7 +391,7 @@ This lead to the development of asynchronous buses, where instead of a master cl
 
 <img class="mx-auto w-3/4" src="./images/day_08/fig7.png" alt="Asynchronous Bus">
 
-1. Where to read data, it would assert the address and control lines as usual, the assert the $\overline{MSYN}$ line
+1. Where to read data, it would assert the address and control lines as usual, then assert the $\overline{MSYN}$ line
 2. And once the data is ready, the memory would assert $\overline{SSYN}$ to inform the CPU that the data is ready
 3. The PC then deasserts $\overline{MSYN}$ and the other control line to inform the memory that it has accepted the data
 4. The $\overline{SSYN}$ would then react and deassert itself
@@ -416,7 +416,7 @@ This is faster, but because of how much easier synchronous buses are to design m
 
 We have assumed only one bus master so far.
 
-But in reality, there are often multiple bus masters, such as the I/O and the coprocessors controller.
+But in reality, there are often multiple bus masters, such as the I/O and the coprocessors' controller.
 
 And the question "What happens if two or more devices all want to become bus master at the same time?" is called *bus arbitration*
 
@@ -432,7 +432,7 @@ In a centralized system, a single bus determines who goes next, and it's mostly 
 
 It contains a single wired-OR that can be used for one or more devices to request at any time, then it grants the bus to one of them through the grant line.
 
-And each device checks if they were the ones to send a request, and if not, they send it to the next one, until it finds the one that sent the request. This is called *daisy chaining*
+And each device checks if they were the ones to send a request, and if not, they send it to the next one, until it finds the one that sent the request. This is called *daisy-chaining*
 
 This means that the device closest to the CPU has the highest priority, and the one furthest away has the lowest
 
@@ -440,7 +440,7 @@ This means that the device closest to the CPU has the highest priority, and the 
 
 ## Centralized Arbitration
 
-To get around implicit priorities, some systems use multiple priority levels, and if multiple priority levels are requested, the arbiter issuse a grant only on the highest priority level.
+To get around implicit priorities, some systems use multiple priority levels, and if multiple priority levels are requested, the arbiter issues a grant only on the highest priority level.
 
 <img class="mx-auto w-3/4" src="./images/day_08/fig9.png" alt="Centralized Arbitration with Priorities">
 
@@ -454,7 +454,7 @@ Decentralized arbitration is also possible
 
 One way of doing this uses 3 lines, with the first one being a wired-OR line representing the *bus request* line, the second one being another wired-OR line called *busy*, which is asserted by the current bus master.
 
-And the third line is a daisy chained line that's tied to the power supply and is used as the bus arbiter
+And the third line is a daisy-chained line that's tied to the power supply and is used as the bus arbiter
 
 <img class="mx-auto w-3/4" src="./images/day_08/fig10.png" alt="Distributed Arbitration">
 
