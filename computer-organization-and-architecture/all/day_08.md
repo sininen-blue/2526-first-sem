@@ -50,20 +50,6 @@ What's important to understand is that the CPU communicates with the memory and 
 
 ---
 
-## CPU performance
-
-The number of address pins and the number of data pins on a CPU chip are key factors in determining the performance of a CPU.
-
-A chip with $m$ address pins can only address up to $2^m$ memory locations. And a chip with $n$ data pins can only read or write $n$ bits of data at a time.
-
-This is why 32-bit CPUs are limited to 4 GB of memory, because they have 32 address pins, and $2^{32} = 4,294,967,296$ bytes = 4 GB.
-
-Where a CPU with 8 data pins will take four operations to read a 32-bit word, a 32 data pin CPU can read it in one.
-
-So a 32 data pin CPU is faster, but signicantly more expensive to manufacture.
-
----
-
 ## Control pins
 
 In addition to address and data pins, each CPU has some control pins that regulate flow and timing of data.
@@ -80,7 +66,7 @@ But other control pins vary between CPU architectures, though they are usually g
 3. Bus arbitration
 4. Coprocessor signaling
 5. Status
-6. Miscellanenous
+6. Miscellaneous
 
 ---
 layout: two-cols
@@ -97,7 +83,7 @@ layout: two-cols
 
 ::right::
 
-<img class="mx-auto w-3/4" src="./images/day_08/fig1.png" alt="Control Pins">
+<img class="mx-auto w-3/4 mt-12" src="./images/day_08/fig1.png" alt="Control Pins">
 
 ---
 layout: center
@@ -109,7 +95,7 @@ layout: center
 
 ## Buses
 
-An electrical pathway betweenmultiple devices, usually categorized by their functiona. They can be used internally inside the CPU to transport data to and from the CPU.
+An electrical pathway between multiple devices, usually categorized by their function. They can be used internally inside the CPU to transport data to and from the CPU.
 
 Or they can be external, connecting to memory or I/O devices.
 
@@ -170,13 +156,11 @@ Some popular bus protocols include:
 
 How buses work can be described in terms of a Master/Slave relationship.
 
-Active buses (masters) can intitiate bus transfers whereas passive (slaves) buses wait for requests.
+Active buses (masters) can initiate bus transfers whereas passive (slaves) buses wait for requests.
 
-WAhen the CPU orders a disk controller to read or write, the CPU is acting as themaster and the disk controller is the slave.
+When the CPU orders a disk controller to read or write, the CPU is acting as the master and the disk controller is the slave.
 
 But later, the disk controller may act as the master when it commands the memory to accept the words it is reading from disk
-
-There are several combinations of master and slave relationships possible, with the only rule being that memory can never be a master
 
 <small class="text-right float-right w-1/2">As a note on terminology, master/slave is being replaced with more neutral terms like controller/target or initiator/responder. But master/slave is still widely used in technical documentation</small>
 
@@ -184,9 +168,11 @@ There are several combinations of master and slave relationships possible, with 
 
 ## Bus Relationships
 
-<img class="mx-auto w-3/4" src="./images/day_08/fig3.png" alt="Bus Relationships">
+There are several combinations of master and slave relationships possible, with the only rule being that memory can never be a master
 
-Usually the binary signals that these devices output are too weak to power a bus, which is why most bus masters are connected to the bus by a circuit called a `bus
+<img class="mx-auto w-1/2 mt-4" src="./images/day_08/fig3.png" alt="Bus Relationships">
+
+And usually the binary signals that these devices output are too weak to power a bus, which is why most bus masters are connected to the bus by a circuit called a `bus
 driver`, which is essentially a digital amplifier.
 
 Similarly, bus slaves are usually connected to the bus by a `bus receiver`
@@ -205,7 +191,7 @@ But for our purposes, we only need to understand a few basic design choices that
 
 Primarily the width, the clocking, the arbitration, and the operation
 
-And each of these hve a substantial impact on the speed and bandwidth of the bus.
+And each of these have a substantial impact on the speed and bandwidth of the bus.
 
 ---
 layout: two-cols
@@ -217,13 +203,13 @@ The most obvious design parameter. More address lines a bus has, the more memory
 
 If a bus has $n$ address lines, it can address $2^n$ memory locations.
 
-However, larger buses need more wires, which both increase the cost, make it take up more physical spaec, and require bigger connectors.
+However, larger buses need more wires, which both increase the cost, make it take up more physical space, and require bigger connectors.
 
 A system with a 64-line address bus and $2^32$ bytes of memory will cost more than one with a 32-line address bus and $2^32$ bytes of memory.
 
 ::right::
 
-<img class="mx-auto w-3/4" src="./images/day_08/fig4.png" alt="Bus Width">
+<img class="mx-auto" src="./images/day_08/fig4.png" alt="Bus Width">
 
 ---
 layout: two-cols
@@ -231,7 +217,7 @@ layout: two-cols
 
 ## Bus Width
 
-This led to many designs where the CPU had significantly more complicated architercturse, due to the designers not initially starting with a wide enough bus.
+This led to many designs where the CPU had significantly more complicated architectures, due to the designers not initially starting with a wide enough bus.
 
 In this example, the 8088 CPU had a 20-bit address bus for 1MB of memory, but the 80286 wanted 16MB of memory so four more bus lines were added.
 
@@ -241,7 +227,7 @@ And was then repeated once more with the 80386
 
 ::right::
 
-<img class="mx-auto w-3/4" src="./images/day_08/fig4.png" alt="Bus Width">
+<img class="mx-auto" src="./images/day_08/fig4.png" alt="Bus Width">
 
 ---
 
@@ -265,9 +251,9 @@ This leads to narrower bus widths (and costs) but a slower system.
 
 ## Bus Clocking
 
-Buses can be divided into two disctinct categories depending on their clocking
+Buses can be divided into two distinct categories depending on their clocking
 
-- A synchronous bus has a line driven by a crystal ascillator
+- A synchronous bus has a line driven by a crystal oscillator
 - A asynchronous bus has no clock line
 
 Each type runs on bus cycles, and they can be of any length
@@ -280,27 +266,228 @@ A synchronous bus runs on a crystal that usually runs between 5 - 133 MHz with a
 
 In our example, we'll be using a 100 MHz clock, which gives a bus cycle time of 10 ns. We'll also assme that reading from memory takes 15 nsec from the time the address is stable
 
-<img class="mx-auto w-3/4" src="./images/day_08/fig5.png" alt="Synchronous Bus">
+<img class="mx-auto w-1/2" src="./images/day_08/fig5.png" alt="Synchronous Bus">
 
 This means that it takes 3 bus cycles to read a word from memory
+
+---
+layout: two-cols
+---
+
+## Synchronous
+
+In our example (100Mhz clock, 10ns cycle time, 15ns memory read time)
+
+1. The first cycle starts at the rising edge of $T_1$
+2. The third one ends at the rising edge of $T_4$
+
+Also note that the electrical signals don't change instantaneously, they take some time to propagate down the wires. Assume this takes 1 ns
+
+
+::right::
+
+<img class="mx-auto" src="./images/day_08/fig5.png" alt="Synchronous Bus">
+
+---
+layout: two-cols
+---
+
+## Synchronous
+
+Order of operations in this bus
+
+1. At the start of $T_1$, the CPU initiates a memory read
+2. During the first half of $T_1$, the address the CPU wants to read is placed on the address bus
+
+<small>This is shown as two lines because it's not a single value, where the shaded sections are not important</small>
+
+Note how the data line isn't significant until $T_3$
+
+::right::
+
+<img class="mx-auto" src="./images/day_08/fig5.png" alt="Synchronous Bus">
+
+---
+layout: two-cols
+---
+
+## Synchronous
+
+Order of operations in this bus
+
+3. After the address line is stable, $\overline{MREQ}$ and $\overline{RD}$ are asserted
+
+$\overline{MREQ}$ means memory is being accessed, and $\overline{RD}$ means it's a write operation (Because they're negated).
+
+Since our memory takes 15 ns to read, it can't provide the requested data during $T_2$.
+
+4. So the $\overline{WAIT}$ line is asserted at the start of $T_2$
+
+In our example, one clock cycle is in the $WAIT$ state because the memory is too slow
+
+::right::
+
+<img class="mx-auto" src="./images/day_08/fig5.png" alt="Synchronous Bus">
+
+
+---
+layout: two-cols
+---
+
+## Synchronous
+
+Order of operations in this bus
+
+5. At the start of $T_3$, $\overline{WAIT}$ is deasserted, because the bus controller is sure that the memory has the data
+
+6. During the first half of $T_3$, the memory places the requested data on the data bus
+
+7. On the falling edge of $T_3$, the CPU strobes (reads) the data lines and stores it in a register
+
+8. The CPU then deasserts $\overline{MREQ}$ and $\overline{RD}$, and the bus cycle is complete
+
+::right::
+
+<img class="mx-auto" src="./images/day_08/fig5.png" alt="Synchronous Bus">
+
 
 ---
 
 ## Synchronous
 
+This timing chart shows the signals max and min times each operation would take, and is created by the BUS designers to be used by system designers
+
+<img class="mx-auto w-1/2" src="./images/day_08/fig6.png" alt="Synchronous Bus Timing Chart">
+
+And with this information, we can say that at the worst case, it takes $25 - 4 - 2 = 19$ ns to read a word from memory
+
+Where 10ns would mean responding on $T_3$ the same way 19ns would. But 20ns would mean responding on $T_4$
+
 ---
 
 ## Asynchronous
 
+Synchronous buses are easier to work with, but they need to work in multiples of the bus clock cycle time.
+
+For example, if the CPU and memory are able to complete a transfer in 3.1 cycles, they would have to wait until the 4th cycle to complete it.
+
+Worse is that once a bus cycle is chosen, and things are built to use it, future improvements become difficult.
+
+For example, imagine if new memories with an access time of 8 ns were invented instead of 15. This would mean it would take only 2 bus cycles to read a word, removing wait time
+
+But if even newer memories with 4 ns access times were invented, it would still take 2 bus cycles because the minimum is 2 cycles
+
 ---
 
-## Bus Arbitration
+## Asynchronous
+
+This lead to the development of asynchronous buses, where instead of a master clock, it types everything with the signals $\overline{MSYN}$ and $\overline{SSYN}$. Meaning Master and Slave Synchronize respectively
+
+<img class="mx-auto w-3/4" src="./images/day_08/fig7.png" alt="Asynchronous Bus">
 
 ---
 
-## Bus Operatoin
+## Asynchronous
+
+<img class="mx-auto w-3/4" src="./images/day_08/fig7.png" alt="Asynchronous Bus">
+
+1. Where to read data, it would assert the address and control lines as usual, the assert the $\overline{MSYN}$ line
+2. And once the data is ready, the memory would assert $\overline{SSYN}$ to inform the CPU that the data is ready
+3. The PC then deasserts $\overline{MSYN}$ and the other control line to inform the memory that it has accepted the data
+4. The $\overline{SSYN}$ would then react and deassert itself
 
 ---
+
+## Asynchronous
+
+This is called a **full handshake**
+
+Which consists of:
+1. $\overline{MSYN}$ is asserted
+2. $\overline{SSYN}$ is asserted in response
+3. $\overline{MSYN}$ is deasserted in response
+4. $\overline{SSYN}$ is deasserted in response
+
+This is faster, but because of how much easier synchronous buses are to design many Pcs still run in that system.
+
+---
+
+# Bus Arbitration
+
+We have assumed only one bus master so far.
+
+But in reality, there are often multiple bus masters, such as the I/O and the coprocessors controller.
+
+And the question "What happens if two or more devices all want to become bus master at the same time?" is called *bus arbitration*
+
+---
+
+## Centralized Arbitration
+
+Bus arbitration can be done in two ways, centralized or distributed.
+
+In a centralized system, a single bus determines who goes next, and it's mostly implemented into the CPU.
+
+<img class="mx-auto w-3/4" src="./images/day_08/fig8.png" alt="Centralized Arbitration">
+
+It contains a single wired-OR that can be used for one or more devices to request at any time, then it grants the bus to one of them through the grant line.
+
+And each device checks if they were the ones to send a request, and if not, they send it to the next one, until it finds the one that sent the request. This is called *daisy chaining*
+
+This means that the device closest to the CPU has the highest priority, and the one furthest away has the lowest
+
+---
+
+## Centralized Arbitration
+
+To get around implicit priorities, some systems use multiple priority levels, and if multiple priority levels are requested, the arbiter issuse a grant only on the highest priority level.
+
+<img class="mx-auto w-3/4" src="./images/day_08/fig9.png" alt="Centralized Arbitration with Priorities">
+
+Some arbiters also have a third line called the acknowledgment line, Where the device that was granted the bus asserts this line to inform the arbiter that it has accepted the grant. Which frees up the request line for other devices to use. Essentially making requests non-blocking
+
+---
+
+## Distributed Arbitration
+
+Decentralized arbitration is also possible
+
+One way of doing this uses 3 lines, with the first one being a wired-OR line representing the *bus request* line, the second one being another wired-OR line called *busy*, which is asserted by the current bus master.
+
+And the third line is a daisy chained line that's tied to the power supply and is used as the bus arbiter
+
+<img class="mx-auto w-3/4" src="./images/day_08/fig10.png" alt="Distributed Arbitration">
+
+To acquire the bus, a device asserts the request line, then waits for the arbitration line to reach it, then it asserts the busy line to inform other devices that it has acquired the bus
+
+Where the leftmost device has the highest priority, and the rightmost device has the lowest. It's cheaper, faster, and not subject to arbiter failure, but less flexible.
+
+---
+
+# Bus Operation
+Other Operations on the bus
+
+The only operation we've discussed so far is reading from memory. There exists other types of operations and bus cycles.
+
+For example, fetching an entire cache line
+
+<img class="mx-auto w-1/2" src="./images/day_08/fig11.png" alt="Cache Line Fetch">
+
+By putting the word count at the start of the line, and the addition of a $\overline{BLOCK}$ control line, the CPU can fetch an entire cache line in 6 bus cycles instead of 12
+
+---
+
+## Bus Operation
+
+Multiprocessor systems often need to have a read-modify-write cycle, where a CPU reads a word from memory, modifies it, then writes it back without releasing the bus.
+
+And another kind of bus cycle is for handling interrupts
+
+<img class="mx-auto w-3/4" src="./images/day_08/fig12.png" alt="Interrupt Acknowledge">
+
+Where devices send to the interrupt controller, which then sends an interrupt request to the CPU, and the controller decides which device gets to interrupt the CPU next
+
+
 
 
 
