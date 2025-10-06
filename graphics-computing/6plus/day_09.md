@@ -669,7 +669,7 @@ And once we do start using these formulas (mostly for clipping), we'll have more
 - directed line segments with magnitude and direction
 - same direction and magnitude are identical, regardless of position
 
-## Vector operations
+## Vector operations *
 - scalar multiplication: changes magnitude, same direction
 - vector addition: head-to-tail rule
 - vector inversion: multiply by -1, leads to zero vector
@@ -699,7 +699,7 @@ And once we do start using these formulas (mostly for clipping), we'll have more
 - Convex hull: smallest convex set containing all points
 - expressed using affine sums with non-negative coefficients
 
-## Dot Product
+## Dot Product *
 - measures alignment of two vectors
 - $u \cdot v = |u| |v| \cos \theta$
 - algebraic form: $u \cdot v = u_x v_x + u_y v_y + ... + u_n v_n$
@@ -707,7 +707,7 @@ And once we do start using these formulas (mostly for clipping), we'll have more
 
 ---
 
-## Cross Product
+## Cross Product *
 - defined only in 3D
 - produces a vector perpendicular to two input vectors
 
