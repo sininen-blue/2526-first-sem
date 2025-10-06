@@ -375,7 +375,7 @@ In affine space, the addition of two vectors, multiplication of a vector by a sc
 
 But the addition of two points and the multiplication of a point by a scalar are not 
 
-So we in affine space, there is an operation defined as the affine sum
+So in affine space, there is an operation defined as the **affine sum**
 
 Where for any point $Q$, vector $v$, and scalar $\alpha$
 
@@ -386,6 +386,8 @@ $$
 Describes all points on the line from $Q$ in the direction of $v$
 
 ---
+layout: two-cols
+---
 
 ## Affine sums
 
@@ -394,8 +396,6 @@ And because we can always find a point $R$ such that
 $$
 v = R - Q;
 $$
-
-(point - point = vector)
 
 We can rewrite the affine sum as
 
@@ -406,6 +406,14 @@ P &= Q + \alpha (R-Q) \\
 &= \alpha R + (1 - \alpha) Q
 \end{align*}
 $$
+
+::right::
+
+Read as: There exists a point $P$ which is an addition of the point $Q$ and vector defined by the points $R$ and $Q$ scaled by the scalar $\alpha$
+
+or
+
+There exists a point $P$ which is the point $R$ scaled by $\alpha$ and the point $Q$ scaled by $(1 - \alpha)$
 
 ---
 layout: two-cols
@@ -432,17 +440,306 @@ $$
 
 ---
 
+# Convexity
+in the context of affine sums
+
+If you recall, a **convex** object is one for which any point lying on the line segment connecting any two points belonging to the object also belongs to the object.
+
+Essentially, given any two points of an object, any points on the line between those two points must be **inside** the object
+
+We can use affine sums to give us a mathematical way of convexity
+
+Given that the affine sum where $0 \leq \alpha \leq 1$ describes all points on the line segment between points $Q$ and $R$. We can extend that to include objects defined by n points $P_1, P_2, ..., P_n$
+
+Where this sum is only valid if $\alpha_1 + \alpha_2 + ... + \alpha_n = 1$
+
+---
+layout: two-cols
+---
+
 ## Convexity
+
+Concretely, this means that by calculating the affine sum of a number of points, we can determine if a point is inside the **convex hull** of those points
+
+As long as the additional condition
+
+$$
+\alpha_i \geq 0, \space i =  1, 2, ..., n,
+$$
+
+is met.
+
+The convex hull being the smallest convex object that contains all the points
+
+::right::
+
+<img class="mx-auto w-3/4" src="./images/day_09/fig12.png" alt="convexity">
+
+This is useful once we start designing curves and surfaces, however, for now, just understand that this is a property of affine sums in abstract
+
+---
+layout: two-cols-header
+---
+
+# Dot and Cross Products
+Vector angle relationships
+
+Many geometric concepts relating the *orientation between two vectors* are in terms of the **dot** and **cross** products
+
+This is useful in graphics primarily in determining angles between vectors, and in determining normals to surfaces.
+
+Specifically, the dot product is useful in determining how much two vectors point in the same direction, and the cross product is useful in determining a vector that is perpendicular to two other vectors
+
+Or in an example, the dot product is useful in determining how much light hits a surface, and the cross product is useful in determining the normal to a surface for lighting calculations
+$
+---
+
+## Dot Product
+
+The dot product, (inner angle) is a measure of how much two vectors point in the same direction
+
+Where if 
+
+$$
+u \cdot v = 0
+$$
+
+Then the vectors are orthogonal (perpendicular) in euclidean space
+
+and if
+
+$$
+u \cdot v = 1
+$$
+
+Then the vectors point in the same direction (assuming they are unit vectors)
+
+---
+layout: two-cols
+---
+
+## Dot product
+
+It's calculated as the product of the magnitudes of the two vectors and the cosine of the angle between them
+
+$$
+\cos \theta = \frac{u \cdot v}{|u| |v|} \\
+\text{or} \\
+u \cdot v = |u| |v| \cos \theta \\
+$$
+
+<small>Where $\theta$ is the angle between the two vectors</small>
+
+Algebraically, the dot product can also be calculated as
+
+$$
+u \cdot v = u_x v_x + u_y v_y + ... + u_n v_n
+$$
+
+::right::
+
+<img class="mx-auto w-3/4" src="./images/day_09/fig13.png" alt="dot product">
+
+
+---
+layout: two-cols
+---
+
+## Cross Product
+
+A cross product, (outer angle) produces a vector perpendicular to both.
+
+Which means, unlike the dot product which is defined for any *n*-dimensional space, the cross product is only defined in three-dimensional space
+
+$$
+w = u \times v
+$$
+
+this gives us the vectors $u$, $v$, and $w$ which are all mutually orthogonal, and where $w$ is perpendicular to both $u$ and $v$
+
+::right::
+<img class="mx-auto w-3/4" src="./images/day_09/fig14.png" alt="cross product">
 
 ---
 
-## Dot and Cross Products
+## Cross Product
+
+Note that the $\times$ symbol is used to denote the cross product, and is not multiplication
+
+so 
+$$
+w_x = u_y v_z - u_z v_y \\ 
+w_y = u_z v_x - u_x v_z \\
+w_z = u_x v_y - u_y v_x
+$$
+
+But it can also be calculated geometrically as 
+
+$$
+w = u \times v = |u| |v| \sin \theta n
+$$
+
+
+---
+
+# Planes
+
+An extension of the parametric line
+
+A plane in an affine space can be defined as a direct extension of the parametric line
+
+We know that three points not on the same line determines a unique plane
+
+Now imagine three points $P$, $Q$, and $R$ in affine space. The line segment that joins $P$ and $Q$ is the set of points of the form
+
+$$
+S(\alpha) = \alpha P + (1 - \alpha) Q, \space 0 \leq \alpha \leq 1
+$$
+
+<small>(from affine sums)</small>
+
+---
+layout: two-cols
+---
+
+## Planes
+
+Now imagine an abritrary point on the line and form a line segment from this point to the point $R$
+
+And using a second parameters $\beta$, we can describe the points along this line as
+
+$$
+T(\beta) = \beta S + (1 - \beta) R, \space 0 \leq \beta \leq 1
+$$
+
+::right::
+<img class="mx-auto w-3/4" src="./images/day_09/fig15.png" alt="plane">
 
 ---
 
 ## Planes
 
+And if we remove the restrictions on the range of $\alpha$ and $\beta$ and combine the equations, we get one form of the equation of the plane
+
+$$
+T(\alpha, \beta) = \beta[\alpha P + (1- \alpha)Q] + (1 - \beta) R
+$$
+
+Then rearranging gives us
+
+$$
+T(\alpha, \beta) = \alpha \beta P + (1 - \alpha)(Q - P) + (1 - \beta)(R - P)
+$$
+
+And since $Q-P$ and $R-P$ are vectors, we can rewrite this as
+
+$$
+T(\alpha, \beta) = P_0 + \alpha u + \beta v
+$$
+
+Which is the parametric form of a plane, where $P_0$ is an arbitrary point on the plane, and $u$ and $v$ are two non-parallel vectors lying on the plane
+
 ---
+
+## Planes
+
+Don't worry, we won't be working with these formulas directly, but it's important to understand that these formulas exist and that they are derived from the same operations we've been discussing
+
+And once we do start using these formulas (mostly for clipping), we'll have more concrete examples
+
+---
+
+# This is the End of the slides for now, summary
+
+## Math foundations
+- scalars, points, and vectors
+- abstract definitions (math) vs implementations (code)
+
+## Scalars
+- real numbers with standard arithmetic operations
+
+## Points
+- locations in space, no size or shape
+
+---
+
+# Summary (cont)
+
+## Vectors
+- directed line segments with magnitude and direction
+- same direction and magnitude are identical, regardless of position
+
+## Vector operations
+- scalar multiplication: changes magnitude, same direction
+- vector addition: head-to-tail rule
+- vector inversion: multiply by -1, leads to zero vector
+- point-vector addition: displaces a point by a vector
+- point-point subtraction: gives vector from one point to another
+
+---
+
+# Summary (cont)
+
+## Spaces
+- scalar field: set of scalars with addition and multiplication
+- vector space: vectors and scalars with addition and scalar multiplication
+- euclidean space: adds measurement (vector length, and angles)
+
+## Affine sums
+- combination of points and vectors with coefficients summing to 1
+- $P = \alpha R + (1 - \alpha) Q$ gives a line segment between Q and R
+- extended to multiple points for convex combinations
+
+---
+
+# Summary (cont)
+
+## Convexity
+- a set is convex if line segments between any two points remain inside the set
+- Convex hull: smallest convex set containing all points
+- expressed using affine sums with non-negative coefficients
+
+## Dot Product
+- measures alignment of two vectors
+- $u \cdot v = |u| |v| \cos \theta$
+- algebraic form: $u \cdot v = u_x v_x + u_y v_y + ... + u_n v_n$
+- applications: angles, projections, lighting
+
+---
+
+## Cross Product
+- defined only in 3D
+- produces a vector perpendicular to two input vectors
+
+$$
+w = u \times v, \space
+\left\{
+\begin{align*}
+w_x = u_y v_z - u_z v_y \\
+w_y = u_z v_x - u_x v_z \\
+w_z = u_x v_y - u_y v_x
+\end{align*}
+\right\}
+$$
+- applications: normals, surface orientation
+
+---
+
+# Summary (cont)
+
+## Planes
+- extensions of lines into 2D **span**
+- defined by 3 non-collinear points
+- parametric form: $T(\alpha, \beta) = P_0 + \alpha u + \beta v$
+- basis for clipping, intersections, geometry
+
+---
+
+# Ignore everything after this
+
+---
+
+
 
 # Three Dimensional Primitives
 

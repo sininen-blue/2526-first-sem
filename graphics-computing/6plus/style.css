@@ -3,6 +3,10 @@
 }
 
 .slidev-layout {
+	strong {
+		font-size: 1.5rem;
+		color: #ff4081;
+	}
 	p {
 		font-size: 1.5rem;
 	}
