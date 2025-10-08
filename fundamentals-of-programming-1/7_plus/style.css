@@ -7,6 +7,10 @@
 		font-size: 1.5rem;
 	}
 
+	strong {
+		color: #ff4081;
+	}
+
 	.col-left {
 		padding-right: 1rem;
 	}
