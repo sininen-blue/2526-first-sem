@@ -120,7 +120,9 @@ Then it asks the user to input a name twice, and writes each name to the file, f
 
 Finally, it closes the file handle, which is important to ensure that all data is written to the file and resources are freed.
 
-Closing the file handle is *important*
+Note that 
+1. Closing the file handle is *important*
+2. Writing to a file in `"w"` mode *overwrites* the file if it already exists
 
 ---
 
@@ -129,11 +131,11 @@ Closing the file handle is *important*
 We can ensure that we don't forget to close a file by opening it with a `with` statement.
 
 ```python
-with open(file_name) as name_handle:
+with open(file_name, mode) as name_handle:
     code_block_here
 ```
 
-This `open`s the file, assigns it to the `name_handle` variable, and then runs the code block.
+This `open`s the file, `mode` determines the open mode of that file,  assigns it to the `name_handle` variable, and then runs the code block.
 
 When the code block is done, it automatically closes the file handle for us once it's no longer in the `with` block.
 
@@ -149,13 +151,15 @@ with open("students", "r") as student_handle:
         print(x)
 ```
 
-This reads the file as multiple lines because when we wrote the file we included a ____ character
+This reads (denoted by the `"r"`) the file as multiple lines because when we wrote the file we included a ____ character
 
+---
+layout: two-cols
 ---
 
 ## Read
 
-Note in normal convention, you would usually use *line*
+Note in normal convention, you would usually use *line* instead of *x*
 
 ```python
 for line in student_handle:
@@ -163,6 +167,71 @@ for line in student_handle:
 ```
 
 Because a file handle, by default, is an iterable that yields each line in the file.
+
+::right::
+
+But often you'll end up using `readlines()` as getting all the lines is more convenient
+
+```python
+with open("students", "r") as student_handle:
+    lines = student_handle.readlines()
+    print(lines)
+```
+
+---
+
+## Update and Delete
+
+There are a few ways of updating and deleting data in a file, the simplest way is to read the file, modify the data in memory, and then write it back to the file.
+
+Essentially replacing the entire file with a new version
+
+```python
+lines = []
+with open("students", "r") as student_handle:
+    lines = student_handle.readlines()
+
+lines.append(input("Enter new name:  "))
+
+with open("students", "w") as student_handle:
+    student_handle.writelines(lines)
+```
+
+Where `writelines` writes a list of strings to the file.
+
+---
+
+## Delete
+
+To delete a line, we can read the file, remove the line from the list, and then write it back.
+
+```python
+lines = []
+with open("students", "r") as student_handle:
+    lines = student_handle.readlines()
+
+lines.remove(input("Enter name to delete:  "))
+
+with open("students", "w") as student_handle:
+    student_handle.writelines(lines)
+```
+
+Note that `[list object].remove()` removes the first occurrence of the specified value.
+
+---
+
+# Summary
+
+Crud Operations
+- create - `opent("file.txt", "w")`
+- read - `open("file.txt", "r")`
+- update = `readlines()` -> modify -> `writelines()`
+- delete = `readlines()` -> modify -> `writelines()`
+
+Files
+- Files let programs store data permanently on disk
+- Always close the file, or use `with`
+- "w" overwrites, "a" appends, "r" reads
 
 ---
 
