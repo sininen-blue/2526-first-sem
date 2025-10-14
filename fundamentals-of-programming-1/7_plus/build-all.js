@@ -32,6 +32,7 @@ const titleDict = {
   day_09: "Functions as objects",
   day_10: "Tuples and lists",
   day_11: "Mutability",
+  day_12: "File Handling",
 };
 
 // --- generate index.html ---

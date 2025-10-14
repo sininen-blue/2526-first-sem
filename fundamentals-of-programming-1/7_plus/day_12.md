@@ -139,6 +139,8 @@ This `open`s the file, `mode` determines the open mode of that file,  assigns it
 
 When the code block is done, it automatically closes the file handle for us once it's no longer in the `with` block.
 
+Also note that when doing a `write()` operation, the value provided must be a string.
+
 ---
 
 ## Read
@@ -154,8 +156,6 @@ with open("students", "r") as student_handle:
 This reads (denoted by the `"r"`) the file as multiple lines because when we wrote the file we included a ____ character
 
 ---
-layout: two-cols
----
 
 ## Read
 
@@ -168,8 +168,6 @@ for line in student_handle:
 
 Because a file handle, by default, is an iterable that yields each line in the file.
 
-::right::
-
 But often you'll end up using `readlines()` as getting all the lines is more convenient
 
 ```python
@@ -177,6 +175,8 @@ with open("students", "r") as student_handle:
     lines = student_handle.readlines()
     print(lines)
 ```
+
+`readlines()` returns a list of strings, where each string is a line in the file.
 
 ---
 
@@ -237,12 +237,9 @@ Files
 
 # Exercise
 
-Submission link here
+You can find this in your codechum
 
-- Filename: **lastname_firstname.py**
-- Deadline: **Before the end** of this class
-
-Write a program that first stores the first 10 Fibonacci numbers, to a file named `primes.txt`
+Write a program that first stores the first 10 Fibonacci numbers, to a file named `numbers.txt`
 
 Each number should be on a separate line, and then the program should read the numbers from the file and print them.
 
