@@ -39,7 +39,7 @@ Directions with a magnitude and no fixed position. In computer graphics, this is
 
 And because vectors have no fixed position, vectors are identical if they have the same direction and magnitude
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig1.png" alt="Vector Example">
+<img class="mx-auto w-1/4 rounded" src="./images/day_09/fig1.png" alt="Vector Example">
 
 ---
 
@@ -47,7 +47,7 @@ And because vectors have no fixed position, vectors are identical if they have t
 
 Scalar multiplication allows you to take a vector, multiply it by a scalar, and get a new vector with the same direction but a different magnitude
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig2.png" alt="Vector Example">
+<img class="mx-auto w-1/4 rounded" src="./images/day_09/fig2.png" alt="Vector Example">
 
 We write that as $B = 2A$
 
@@ -57,7 +57,7 @@ We write that as $B = 2A$
 
 Vector addition allows you to take two vectors and add them together to get a new vector using the head-to-tail rule
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig3.png" alt="Vector Example">
+<img class="mx-auto w-1/4 rounded" src="./images/day_09/fig3.png" alt="Vector Example">
 
 Where we connect the head of the vector $A$ to the tail of vector $C$ which gets us a vector $D$
 
@@ -69,7 +69,7 @@ This is the sum and written as $D = A + C$
 
 We can also invert a vector by multiplying it with the scalar $-1$
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig4.png" alt="Vector Example">
+<img class="mx-auto w-1/4 rounded" src="./images/day_09/fig4.png" alt="Vector Example">
 
 And from that inverse, we can get a *zero vector* by using the head-to-tail rule and adding the inverse to the original vector
 
@@ -85,7 +85,7 @@ But there *is* an operation for point-to-vector ($P + V$) called point-vector ad
 
 This takes a point and a vector and produces a new point
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig5.png" alt="Vector Example">
+<img class="mx-auto w-1/5 rounded" src="./images/day_09/fig5.png" alt="Vector Example">
 
 Denoted as $P = Q + v$ where $v$ displaces $Q$ to the new location $P$
 
@@ -119,7 +119,7 @@ I repeat, vectors don't need to have a position and can exist outside a coordina
 
 ## Coordinate Free Geometry
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig6.png" alt="Coordinate system">
+<img class="mx-auto w-1/4 rounded" src="./images/day_09/fig6.png" alt="Coordinate system">
 
 In this example, we have a coordinate system defined by two axes, an origin, and a simple geometric object, a box
 
@@ -139,7 +139,7 @@ However, the relationships between the points remain
 
 The lower-left point is still two units away from the lower-right point and two units away from the upper-left point
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig7.png" alt="Coordinate system">
+<img class="mx-auto w-1/4 rounded" src="./images/day_09/fig7.png" alt="Coordinate system">
 
 It's still a square
 
@@ -312,7 +312,7 @@ $$
 
 Where the point $P$ is the result of displacing point $Q$ by vector $v$
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig8.png" alt="ponit point subtraaction">
+<img class="mx-auto w-1/2 rounded" src="./images/day_09/fig8.png" alt="ponit point subtraaction">
 
 ---
 
@@ -320,7 +320,7 @@ Where the point $P$ is the result of displacing point $Q$ by vector $v$
 
 And because $P - Q$ is a vector, this allows us to use the head-to-tail rule to visualize two points being subtracted
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig9.png" alt="point subtraction vector">
+<img class="mx-auto w-1/3 rounded" src="./images/day_09/fig9.png" alt="point subtraction vector">
 
 Where
 
@@ -361,7 +361,7 @@ Given this formula, and the rules set by an affine space, we can see that this f
 
 ::right::
 
-<img class="mx-auto w-1/2" src="./images/day_09/fig10.png" alt="line">
+<img class="mx-auto w-1/2 rounded" src="./images/day_09/fig10.png" alt="line">
 
 This is called the parametric form of the line $(P, P\alpha)$, because by varying the *parameter* $\alpha$, we can get all the points on the line defined by point $P_0$ and direction $d$
 
@@ -435,7 +435,7 @@ $$
 
 ::right::
 
-<img class="mx-auto w-3/4" src="./images/day_09/fig11.png" alt="affine sum">
+<img class="mx-auto w-3/4 rounded" src="./images/day_09/fig11.png" alt="affine sum">
 
 
 ---
@@ -473,7 +473,7 @@ The convex hull being the smallest convex object that contains all the points
 
 ::right::
 
-<img class="mx-auto w-3/4" src="./images/day_09/fig12.png" alt="convexity">
+<img class="mx-auto w-3/4 rounded" src="./images/day_09/fig12.png" alt="convexity">
 
 This is useful once we start designing curves and surfaces, however, for now, just understand that this is a property of affine sums in abstract
 
@@ -538,7 +538,7 @@ $$
 
 ::right::
 
-<img class="mx-auto w-3/4" src="./images/day_09/fig13.png" alt="dot product">
+<img class="mx-auto w-3/4 rounded" src="./images/day_09/fig13.png" alt="dot product">
 
 
 ---
@@ -558,7 +558,7 @@ $$
 this gives us the vectors $u$, $v$, and $w$ which are all mutually orthogonal, and where $w$ is perpendicular to both $u$ and $v$
 
 ::right::
-<img class="mx-auto w-3/4" src="./images/day_09/fig14.png" alt="cross product">
+<img class="mx-auto w-3/4 rounded" src="./images/day_09/fig14.png" alt="cross product">
 
 ---
 
@@ -613,7 +613,7 @@ T(\beta) = \beta S + (1 - \beta) R, \space 0 \leq \beta \leq 1
 $$
 
 ::right::
-<img class="mx-auto w-3/4" src="./images/day_09/fig15.png" alt="plane">
+<img class="mx-auto w-3/4 rounded" src="./images/day_09/fig15.png" alt="plane">
 
 ---
 
@@ -732,58 +732,4 @@ $$
 - defined by 3 non-collinear points
 - parametric form: $T(\alpha, \beta) = P_0 + \alpha u + \beta v$
 - basis for clipping, intersections, geometry
-
----
-
-# Ignore everything after this
-
----
-
-
-
-# Three Dimensional Primitives
-
----
-
-# Coordinate Systems and Frames
-
----
-
-## Basis Vectors
-
----
-
-## Origin
-
----
-
-## Representations
-
----
-
-## Changing Coordinate Systems
-
----
-
-## Example: changing representations
-
----
-
-## Homogeneous Coordinates
-
----
-
-## Example: Change in frames
-
----
-
-## Working with Representations
-
----
-
-# Frames in WebGL
-
----
-
-# Matrix and Vector Types
 
