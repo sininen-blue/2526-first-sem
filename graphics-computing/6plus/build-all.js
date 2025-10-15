@@ -95,7 +95,7 @@ ${resourcesLinks}
 </section>
 
 <section>
-<h2>Assignments</h2>
+<h2>Assignment Submit Folders</h2>
 <ul>
 ${assignmentsLinks}
 </ul>
