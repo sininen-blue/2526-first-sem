@@ -28,6 +28,7 @@ const titleDict = {
   day_07: "animation",
   day_08: "interaction",
   day_09: "Math",
+  day_10: "More Math",
 };
 
 const resources = {
