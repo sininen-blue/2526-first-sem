@@ -33,6 +33,7 @@ const titleDict = {
   day_10: "Tuples and lists",
   day_11: "Mutability",
   day_12: "File Handling",
+  day_13: "Semi Finals",
 };
 
 // --- generate index.html ---
