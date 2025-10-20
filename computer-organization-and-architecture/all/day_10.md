@@ -72,12 +72,43 @@ It holds:
 <img class="mx-auto rounded w-3/4" src="./images/day_10/fig3.png" alt="Mic-1 Control Store">
 
 ---
+layout: two-cols
+---
 
 ## Operation Sequence
 
-At the start of each cycle
+<img class="mx-auto rounded mt-4 w-95 " src="./images/day_10/fig4.png" alt="Mic-1 Operation Sequence">
 
-<img class="mx-auto rounded w-1/3" src="./images/day_10/fig4.png" alt="Mic-1 Operation Sequence">
+::right::
 
-MIR is loaded from the word 
+<img class="mx-auto rounded" src="./images/day_10/fig5.png" alt="Mic-1 Control Store">
 
+---
+layout: two-cols
+---
+
+## Summary
+
+1. MPC holds data
+2. **Load time**
+3. MIR is loaded
+4. **Propagate time**
+5. ALU function is chosen
+6. C bus loaded
+7. Memory operation is loaded
+8. B bus is loaded
+10. **Settle time**
+9. ALU operation
+
+::right::
+
+10. N and Z are saved
+11. **Propagate time**
+12. C bus is loaded
+13. MPC is loaded again
+
+### In parallel
+
+1. Data reaches MIR
+2. Address is sent to the MPC
+3. JAM bits is evaluated
