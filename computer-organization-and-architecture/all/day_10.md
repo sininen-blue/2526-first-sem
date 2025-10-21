@@ -7,6 +7,24 @@ exportFilename: 9  microarchitecture
 
 ---
 
+## Memory operation
+- two ways to communicate with memory
+- why 2
+- hack to convert word address to data
+- conversion to byte to word data 
+
+---
+
+## Microinstructions
+
+- signals
+- reads at end of cycle
+- k + 2
+- no read and writes at the same time
+- decoder
+
+---
+
 ## Microinstruction Control: The Mic-1
 
 > How the machine decides which control signals should be enabled on each cycle
