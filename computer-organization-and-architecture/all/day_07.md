@@ -1,5 +1,6 @@
 ---
 theme: default
+title: 7 Memory Chips
 exportFilename: 7 Memory Chips
 ---
 

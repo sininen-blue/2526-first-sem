@@ -1,9 +1,9 @@
 ---
-title: Introduction to Microarchitecture
-exportFilename: 9  microarchitecture
+title: Microinstruction Control
+exportFilename: 10  microinstruction control
 ---
 
-# Microinstruction Constrol: The Mic-1
+# Microinstruction Control: The Mic-1
 
 ---
 
