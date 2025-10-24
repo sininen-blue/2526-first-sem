@@ -558,15 +558,49 @@ Mechanically, this is equivalent to `git checkout -- <file>` which is the older 
 
 Remotes are versions of your project that are hosted on the internet or network somewhere. They are the exact same as your local repository, but they are hosted on a server.
 
-## Adding
+you can find what remotes you have configured by using the `git remote` command.
 
-## Fetching and Pulling
+```bash
+git remote
+```
 
-## Pushing
+And adding `-v` will show you the URLs of the remotes
 
-## Renaming
+```bash
+git remote -v
+```
+
+You can add a new remote using the `git remote add` command followed by the name of the remote and the URL.
+
+```bash
+git remote add other <repository-url>
+```
+
+and fetch the data from that repository using
+
+```bash
+git fetch other
+```
+
+Note that this doesn't change your working directory or current branch, it just downloads the data from the remote repository.
+
+to get the changes from the remote repository and merge them into your current branch, you can use the `git pull` command.
+
+```bash
+git pull other main
+```
+Read as, pull the changes from the `main` branch of the `other` remote and merge them into the current branch.
+
+And finally, you can push your changes to the remote repository using the `git push` command.
+
+```bash
+git push origin main
+```
+
+---
 
 # Branches
 
+This is gits killer feature, and one that you'll be expected to use in almost every project.
 
-
+Primarily, it's useful for isolating work on different features or bug fixes without affecting the main codebase, or going back to previous versions of the codebase by going to a previous commit and branching off from there.
