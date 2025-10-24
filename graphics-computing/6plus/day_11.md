@@ -230,4 +230,14 @@ void main()
 }
 ```
 
-worksheet
+# todo  primitives
+
+---
+
+affine transformations
+
+translation
+
+rotation'
+
+scaling
