@@ -11,7 +11,7 @@ exportFilename: 11 cube
 
 We now have *most* of the conceptual knowledge required to build a three-dimensional graphical application. 
 
-<img class="mx-auto rounded w-3/4" src="./images/day_11/fig1.png" alt="Colored Cube">
+<img class="mx-auto rounded w-1/4" src="./images/day_11/fig1.png" alt="Colored Cube">
 
 The goal is to create a rotating colored cube
 
@@ -21,7 +21,7 @@ The goal is to create a rotating colored cube
 
 ---
 
-## 1 Define the Cube's Vertices
+## Define the Cube's Vertices
 
 While we can represent a cube like two-dimensional shapes, simply as a set of vertices in an array
 
@@ -31,22 +31,27 @@ In WebGL, this is typically done through using **vertex arrays**
 
 ---
 
-## 1 Define the Cube's Vertices
+## Define the Cube's Vertices
 
 A cube is one of the simplest three-dimensional object we might need to model and display.
 
-A CSG system would consider it as a single primitive, and a hardware process would define it as 8 vertices
+A CSG system would consider it as a **single primitive**, and a hardware process would define it as **8 vertices**
 
 Because we use a *surface-based* model, we can approach the cube as a set of 6 planes, sometimes called *facets*, that comprises its faces.
 
-A carefully designed data structure should support both a high-level **application specification** of a cube and a low-level model needed for implementation.
+A carefully designed data structure should support both a **high-level** application specification of a cube and a **low-level** model needed for implementation.
 
 ---
+layout: two-cols-header
+---
 
-## 1 Define the Cube's Vertices
+## Define the Cube's Vertices
 
-We first start by assuming that the vertices of a cube are available in an array of vertices
+We first start by assuming that the vertices of a cube are available in an **array of vertices**. Either in a vector 3 format, or in vector 4 to factor in the *homogenous coordinates**
 
+Though with `MV.js` there is no difference as it automatically adds the homogeneous coordinate on the `vec3` data type.
+
+::left::
 ```javascript
 var vertices = [
     vec3(-0.5, -0.5, 0.5),
@@ -60,8 +65,7 @@ var vertices = [
 ];
 ```
 
-or 
-
+::right::
 ```javascript
 var vertices = [
     vec4(-0.5, -0.5, 0.5, 1.0),
@@ -75,17 +79,84 @@ var vertices = [
 ];
 ```
 
-Though with `MV.js` there is no difference as it automatically adds the homogeneous coordinate on the `vec3` data type.
+---
 
+## Homogenous coordinates
+
+When representing a vector in 3 dimensions, there will always be confusing on whether or not it's a point or a vector
+
+Consider what happens when we move from a coordinate system, just basis vectors. To a frame with an origin point.
+
+We would define a point as
+$$
+P = P_0 + xv_1 +yv_2 + zv_3
+$$
+
+Where $x, y, z$ are the components of the point. The problem is that's *really close* the same representation of a vector. And if you read it as purely the representation, it's **exactly** the same
+
+So given $x, y, z$, without added context, it can be read as both a point at $x, y, z$ or a vector from the origin to the location $x, y, z$
+
+---
+layout: two-cols
+---
+
+## Homogenous coordinates
+
+To avoid this, we simply use a 4 dimensional representation for both points and vectors 
+
+and so $P$ can be represented purely from its components as
+
+$$
+P = 
+\begin{matrix}
+    \alpha_1 \\ 
+    \alpha_2 \\ 
+    \alpha_3 \\ 
+    1
+\end{matrix}
+$$
+
+Whereas a vector would be represented as 
+
+$$
+v = 
+\begin{matrix}
+    \beta_1 \\ 
+    \beta_2 \\ 
+    \beta_3 \\ 
+    0
+\end{matrix}
+$$
+
+::right::
+
+This **preserves** already existing transformations, though with **16** scalars instead of 9. But it changes how a translation function (which is usually represented as a 4×4 matrix in homogeneous coordinates) interacts with the object.
+
+A point, with a **4th scalar of 1**, will be affected by a translation. While a vector, with a **4th scalar of 0**, will not
+
+Are we sending points or vectors?
+
+```javascript
+var vertices = [
+    vec4(-0.5, -0.5, 0.5, 1.0),
+    vec4(-0.5, 0.5, 0.5, 1.0),
+    vec4( 0.5, 0.5, 0.5, 1.0),
+    vec4( 0.5, -0.5, 0.5, 1.0),
+    vec4(-0.5, -0.5, -0.5, 1.0),
+    vec4(-0.5, 0.5, -0.5, 1.0),
+    vec4( 0.5, 0.5, -0.5, 1.0),
+    vec4( 0.5, -0.5, -0.5, 1.0)
+];
+```
 ---
 
 ## Inward or outward pointing faces
 
 The order in which we define our vertices matters.
 
-We used the order 0, 3, 2, 1 for the first face
+We used the order **0, 3, 2, 1** for the first face
 
-And 1, 0, 3, 2 would be the same because the final vertex position in a polygon specification is linked back to the first
+And **1, 0, 3, 2** would be the same because the final vertex position in a polygon specification is linked back to the first
 
 But the order 0, 1, 2, 3 is different
 
@@ -113,11 +184,15 @@ or
 var faces = new Array(24)
 ```
 
-where vertices[i] would contain the x, y, z coordinates of the ith vertex in the list.
+---
 
-Both of these methods work but they fail to capture the essence of the cubes **topology**, only the geometry
+## Data structure for object representation
 
-If we think of the cube as a polyhedron, a 3d figure with flat polygonal faces, we have an object that has 6 faces
+where vertices[i] would contain the x, y, z coordinates of the $i$th vertex in the list.
+
+Both of these methods *work* but they fail to capture the essence of the cubes **topology**, only the *geometry*
+
+If we think of the cube as a *polyhedron*, a 3d figure with flat polygonal faces, we have an object that has 6 faces
 
 - Each of those faces are quadrilaterals that meet at vertices
 - each vertex is shared by 3 faces
@@ -126,13 +201,19 @@ If we think of the cube as a polyhedron, a 3d figure with flat polygonal faces, 
 
 These statements describe the topology of a cube
 
-all are true, regardless of the location of the vertices, meaning that they're true regardless of the geometry of the object.
+> A topologist is a person who cannot tell the difference between a coffee mug and a donut
+
+---
+
+## Topology vs Geometry
+
+all are true, **regardless of the location** of the vertices, meaning that they're true regardless of the geometry of the object.
 
 By separating the topology from the geometry, we can create a more flexible and reusable data structure.
 
 We can create this kind of system by defining a *cube* that's *composed* of six faces, where each face consists of four ordered vertices, and each vertex can be specified indirectly through its index
 
-<img class="mx-auto rounded w-3/4" src="./images/day_11/fig2.png" alt="Cube Data Structure">
+<img class="mx-auto rounded w-1/2" src="./images/day_11/fig2.png" alt="Cube Data Structure">
 
 One major advantage of this approach is that each geometric location appears only once, instead of being repeated for each face.
 
@@ -156,6 +237,10 @@ function colorCube()
 }
 ```
 
+---
+
+## Colored cube
+
 and by setting up a `vertexColor` array to hold some colors
 
 ```javascript
@@ -171,6 +256,9 @@ var vertexColors = [
 ];
 ```
 
+---
+## Colored cube
+
 Then finally define the `quad` function to push the vertices and colors into the appropriate arrays
 
 ```javascript
@@ -184,60 +272,4 @@ function quad(a, b, c, d)
 }
 ```
 
----
 
-## Color interpolation
-
-A vertex is simply a point, only coloring that point would make for a very boring square.
-
-An easy way of using the color data of a vertex is to *interpolate* the colors across the surface of the polygon.
-
-It's based on the `barycentric coordinates` of a point within a polygon.
-
-Consider a triangle defined by three vertices, each with a different color.
-
-<img class="mx-auto rounded w-3/4" src="./images/day_11/fig3.png" alt="Color Interpolation">
-
-We can use linear interpolation to compute the color of any point within the triangle based on its position relative to the vertices.
-
-## Displaying the Cube
-
-displaying the cube is essentially the same as displaying a two-dimensional shape.
-
-with the minor change that our vertices are now three-dimensional.
-
-```glsl
-in vec4 aPosition;
-in vec4 aColor;
-out vec4 vColor;
-
-void main()
-{
-    vColor = aColor;
-    gl_Position = 0.5*aPosition;
-}
-```
-
-this shrinks down the cube to half its size to fit within the canonical view volume.
-
-```glsl
-in vec4 vColor;
-out vec4fColor;
-
-void main()
-{
-    fColor = vColor;
-}
-```
-
-# todo  primitives
-
----
-
-affine transformations
-
-translation
-
-rotation'
-
-scaling
