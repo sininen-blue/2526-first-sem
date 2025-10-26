@@ -1,19 +1,16 @@
 {
-  "name": "day-5",
+  "name": "7_plus",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build",
+    "build": "node build-all.js",
     "dev": "slidev --open",
-    "export": "slidev export --dark --with-clicks"
+    "export": "slidev export"
   },
   "dependencies": {
     "@slidev/cli": "^52.1.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "vue": "^3.5.18"
-  },
-  "devDependencies": {
-    "playwright-chromium": "^1.54.2"
   }
 }

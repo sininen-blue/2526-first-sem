@@ -1,0 +1,14 @@
+.slidev-layout {
+	strong {
+		font-size: 1.125rem;
+		color: #ff4081;
+	}
+
+	.col-left {
+		padding-right: 1rem;
+	}
+
+	.col-right {
+		padding-left: 1rem;
+	}
+}
