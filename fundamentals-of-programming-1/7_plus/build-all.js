@@ -34,6 +34,7 @@ const titleDict = {
   day_11: "Mutability",
   day_12: "File Handling",
   day_13: "Semi Finals",
+  day_14: "Git and Github",
 };
 
 // --- generate index.html ---
