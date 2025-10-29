@@ -933,4 +933,272 @@ layout: center
 # Merging
 And finally, the last piece of the puzzle
 
-We'll do this next meeting
+---
+
+## Merging
+
+Let's go through a simple example of that you might see in the real world
+
+<img class="bg-white p-4 mx-auto rounded w-1/2" src="./images/day_14/fig17.png" alt="git merge branches">
+
+In this example, we are in our master branch, and on our 3rd commit, then we realized that we needed to work a buy, let's say that bug was tagged #04.
+
+---
+
+## Merging
+
+To fix this bug without losing any data, you decided to branch off from commit 3
+
+```
+$ git checkout -b bug04
+Switched to a new branch "bug04"
+```
+
+Note that the `-b` command simply creates the branch and switches to it in one command.
+
+<img class="bg-white p-4 mx-auto rounded w-1/3" src="./images/day_14/fig18.png" alt="git bug fix branch">
+
+---
+layout: two-cols
+---
+
+## Merging
+
+Then you work on the bug a bit, test it, do some commits. After all of that, the `bug04` branch is now ahead by a bit
+
+<img class="bg-white p-4 mx-auto rounded w-1/2" src="./images/day_14/fig19.png" alt="git bug fix branch ahead">
+
+But! You get a call about an **emergency fix** that needs to be done **right now**. 
+
+With Git, you don't need to push your changes that may or may not be finished in the `bug04` branch. 
+
+::right::
+You can just 
+1. switch back to `master`, 
+2. make a new branch to make sure the fix is isolated `git checkout -b hotfix`
+3. work on the fix, and
+4. commit it
+
+<img class="bg-white p-4 mx-auto rounded w-1/2" src="./images/day_14/fig20.png" alt="git hotfix branch">
+
+---
+layout: two-cols
+---
+
+## Merging
+
+After that we can finally do our first **merge**. Assuming you've run your tests and everything is working, we merge our `hotfix` branch back into `master`.
+
+```
+$ git checkout master
+$ git merge hotfix
+```
+
+You'll notice the phrase "*fast-forward*" in the output, that's because the commit in `hotfix` is directly ahead of `master`. 
+
+So Git simply moves the `master` pointer forward to point to the same commit as `hotfix`
+
+::right::
+Now master has all the changes from `hotfix`
+
+<img class="bg-white p-4 mx-auto rounded w-3/4" src="./images/day_14/fig21.png" alt="git hotfix merged into master">
+
+And finally, just delete the `hotfix` branch
+
+```
+git branch -d hotfix
+```
+
+Since it's no longer needed
+
+---
+
+## Back to bug04
+
+Since we finished fixing that bug, we can now **go back** and continue editing the `bug04` branch. Finishing the bugfix there.
+
+```
+git checkout bug04
+```
+
+<img class="bg-white p-4 mx-auto rounded w-1/3" src="./images/day_14/fig22.png" alt="git continue bug04 branch">
+
+It's worth noting that the things we worked on in the `hotfix` branch are **not** in the `bug04` branch yet. 
+
+---
+
+## Decision
+
+We have 2 choices
+1. we can merge `master` into `bug04` to get the changes, this is usually called **pulling in** the changes, or
+2. we can wait until `bug04` is finished, then **merge** it into `master` which does have the changes from `hotfix`
+
+Let's say you have finished the bug fix at `bug04` and now we want to merge it into `master`
+
+```
+$ git checkout master
+$ git merge bug04
+```
+
+You'll notice that this time we don't have the "fast-forward" message, because the `bug04` branch has diverged from `master`.
+
+---
+
+## Merging from diverged branches
+
+The way git manages this, is that it does a **three-way merge** between the two branch tips and their *common ancestor*.
+
+<img class="bg-white p-4 mx-auto rounded w-3/4" src="./images/day_14/fig23.png" alt="git three way merge">
+
+---
+
+## Merging from diverged branches
+
+So instead of moving the branch pointer forward, git makes a **new** snapshot that combines all 3
+
+<img class="bg-white p-4 mx-auto rounded w-1/2" src="./images/day_14/fig24.png" alt="git three way merge result">
+
+This is called a **merge commit** since it merges the histories of both branches together.
+
+Now your work in `bug04` is safely in `master`, along with the emergency fix from `hotfix`.
+
+So we can close the issue, and delete the `bug04` branch
+
+---
+
+## Conflicts
+
+But that's the ideal case, when each branch **modified different** parts of the codebase and never touched each other.
+
+But what if, when you were working on `bug04` you touched a function, and in `hotfix` you also touched that **same function** but with different changes?
+
+When you try to merge `bug04` into `master`, Git will detect that and will be **unable to automatically merge them**.
+
+```
+$ git merge bug04
+Auto-merging main.py
+CONFLICT (content): Merge conflict in main.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Git **pauses** the merge process while waiting for you to resolve the conflict.
+
+---
+
+## Conflicts
+
+Merge conflicts are often where people get stuck when using Git for the first time. But at it's core, it's a very simple concept
+
+Your main decision here is simply, do you want to
+1. keep the changes from `bug04`
+2. keep the changes from `hotfix`
+3. or make a new change that combines both
+
+Most of the time, you'll just be picking one of the two changes and discarding the other.
+
+---
+
+## Conflicts
+
+If you type the `git status` command, you'll see something like this
+
+```
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+    both modified:   main.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+So all the files that have **merge conflicts** are listed under "Unmerged paths".
+
+---
+
+## Conflicts
+
+Opening the file with conflicts, you'll see something like this
+
+```python
+def important_function():
+    <<<<<<< HEAD
+    print("This is the hotfix change")
+    =======
+    print("This is the bug04 change")
+    >>>>>>> bug04
+```
+
+This is the standard Git conflict marker format.
+
+On the top of the `===`, you'll see that it's from `HEAD` 
+
+Which is the current branch, in this case `master` which has the `hotfix` changes.
+
+Below you'll see the changes from the branch being merged in `bug04`.
+
+---
+
+## Conflicts
+
+All you have to do is erase the parts you don't want, and the conflict markers 
+
+```python
+def important_function():
+    print("This is the hotfix change")
+```
+
+In this case, we decided to keep the `hotfix` changes and discard the `bug04` changes.
+
+But we could also make a custom change like so
+
+```python
+def important_function():
+    print("This a fix that solves all problems")
+```
+
+---
+layout: center
+---
+
+# Conflicts
+
+Notice that all you did was edit the file like normal. 
+
+Which means the next step, after **modifying** a file, is _________
+
+---
+
+## Conflicts
+
+using the git status command you'll see
+
+```
+$ git status
+On branch master
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+Changes to be committed:
+  modified:   main.py
+```
+
+And after committing, the merge is complete!
+
+To be helpful to your future self and other developers, make sure to write a **meaningful** commit message that **describes how you resolved the conflict**. (which decision you decided to take)
+
+---
+
+# That was all you needed to know to use git
+The three stages, branches, merges, and remotes
+
+---
+
+# Branch Management
+How to actually use Git in real projects
+
+---
+
