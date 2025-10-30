@@ -1191,14 +1191,68 @@ And after committing, the merge is complete!
 To be helpful to your future self and other developers, make sure to write a **meaningful** commit message that **describes how you resolved the conflict**. (which decision you decided to take)
 
 ---
+layout: center
+---
 
 # That was all you needed to know to use git
 The three stages, branches, merges, and remotes
 
+---
+layout: center
 ---
 
 # Branch Management
 How to actually use Git in real projects
 
 ---
+layout: two-cols
+---
 
+## Organization is important
+
+Again, in a clean room, it's easy to find things
+
+One simple way to organize branches is the **long running branches** workflow
+
+Simply have 2 branches for the main codebase, and a bunch of other branches for features and bug fixes
+
+<img class="bg-white p-4 mx-auto rounded w-3/4" src="./images/day_14/fig25.png" alt="git long running branches">
+
+::right::
+
+- `Master` is where the code is always stable and ready for production, 
+
+- `Develop` is where the latest development changes are, and
+
+- `Topic` is where you add new features or bug fixes
+
+This means that
+1. there's always something stable to go back to
+2. a branch where we things that *should* be in the next release is
+3. and isolated branches for new features and bug fixes
+
+---
+layout: two-cols
+---
+
+## Topic branches
+
+For simple, solo projects, you might not need that level of organization. Something like the topic branch approach is good enough. 
+
+<img class="bg-white p-4 mx-auto rounded w-3/4" src="./images/day_14/fig26.png" alt="git topic branches">
+
+::right::
+
+simply just make branches every time you want to add a new feature or fix a bug. 
+
+Then, once it's done and tested, merge it back into `main` or `master`.
+
+Then add a branch to branches if you get another idea or bug.
+
+This means that it's really easy to **isolate** work, and if something goes wrong, you can simply **delete the branch and start over** without affecting the main codebase.
+
+---
+layout: center
+---
+
+# It's finally over
