@@ -941,7 +941,9 @@ Let's go through a simple example of that you might see in the real world
 
 <img class="bg-white p-4 mx-auto rounded w-1/2" src="./images/day_14/fig17.png" alt="git merge branches">
 
-In this example, we are in our master branch, and on our 3rd commit, then we realized that we needed to work a buy, let's say that bug was tagged #04.
+In this example, we are in our master branch, and on our 3rd commit, then we realized that we needed to on a bug, 
+
+For demonstration, assume that bug was tagged #04 on their issue tracker.
 
 ---
 
@@ -958,6 +960,8 @@ Note that the `-b` command simply creates the branch and switches to it in one c
 
 <img class="bg-white p-4 mx-auto rounded w-1/3" src="./images/day_14/fig18.png" alt="git bug fix branch">
 
+What are the two commands you can do to achieve this without the `-b` flag?
+
 ---
 layout: two-cols
 ---
@@ -968,7 +972,7 @@ Then you work on the bug a bit, test it, do some commits. After all of that, the
 
 <img class="bg-white p-4 mx-auto rounded w-1/2" src="./images/day_14/fig19.png" alt="git bug fix branch ahead">
 
-But! You get a call about an **emergency fix** that needs to be done **right now**. 
+But! You get a call about an **emergency fix** that needs to be done **right now**.
 
 With Git, you don't need to push your changes that may or may not be finished in the `bug04` branch. 
 
