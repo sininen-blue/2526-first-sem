@@ -28,6 +28,8 @@ const titleDict = {
   day_08: "CPU and Buses",
   day_09: "Microarchitecture",
   day_10: "Microinstruction Control",
+  day_11: "stacks",
+  day_12: "IJVM",
 };
 
 // --- generate index.html ---
