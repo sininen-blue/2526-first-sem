@@ -35,6 +35,8 @@ const titleDict = {
   day_12: "File Handling",
   day_13: "Semi Finals",
   day_14: "Git and Github",
+  day_15: "Classes",
+  day_16: "Tkinter",
 };
 
 // --- generate index.html ---
