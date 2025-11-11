@@ -221,5 +221,39 @@ greeting: .asciz "hellow world!\n"
 ```
 
 ---
+layout: center
+---
+
+# Exercise
+
+
+---
 
 ## Reverse engineering hello world
+
+We'll be doing this together
+
+Looking at sample code and understanding what it does, the process on how you would do this, and writing a modification to it
+
+primarily, hello world, then recursion
+
+---
+
+## Making a program
+
+Using what you've learned 
+
+Create a program that is the equivalent of this Python code:
+
+```Python
+n = 5
+result = 1
+i = 0
+while i < n: 
+    result += i
+    i += 1
+```
+
+What is the value of `i` and `result` at the end of the program?
+
+
