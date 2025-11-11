@@ -30,6 +30,7 @@ const titleDict = {
   day_10: "Microinstruction Control",
   day_11: "stacks",
   day_12: "IJVM",
+  day_12: "Arm Assembly",
 };
 
 // --- generate index.html ---
